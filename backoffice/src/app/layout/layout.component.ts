@@ -6,6 +6,7 @@ import {MatDivider} from '@angular/material/divider';
 import {RouterOutlet} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatIconButton} from '@angular/material/button';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -23,12 +24,13 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 })
 export class LayoutComponent {
   public uiStateService = inject(UiStateService);
+  private document = inject(DOCUMENT);
   private authService = inject(AuthService);
 
   constructor() {
     effect(() => {
       const isDark = this.uiStateService.currentTheme() === 'dark';
-      document.body.classList.toggle('dark', isDark);
+      this.document.documentElement.classList.toggle('dark', isDark);
     });
   }
 
