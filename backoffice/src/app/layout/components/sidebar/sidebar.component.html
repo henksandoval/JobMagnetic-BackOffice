@@ -1,0 +1,35 @@
+<!--
+  El <aside> reacciona al estado 'collapsed' para cambiar su ancho.
+  Tiene un z-index alto para que el menú flotante funcione.
+-->
+<aside
+  class="relative z-30 flex h-full flex-col bg-white dark:bg-slate-800 shadow-lg transition-all duration-300"
+  [class.w-64]="!uiStateService.sidenavIsCollapsed()"
+  [class.w-20]="uiStateService.sidenavIsCollapsed()">
+
+  <!--
+    AQUÍ ESTÁ TU CABECERA RESTAURADA
+    Ahora vive dentro del componente al que pertenece.
+  -->
+  <div class="flex h-16 flex-shrink-0 items-center justify-between border-b px-4 dark:border-slate-700">
+    <!-- El título solo se muestra si el menú no está colapsado -->
+    @if (!uiStateService.sidenavIsCollapsed()) {
+      <span class="text-xl font-bold text-slate-700 dark:text-slate-200">Admin Panel</span>
+    }
+
+    <!-- Este botón ahora controla la visibilidad completa del sidebar -->
+    <button mat-icon-button (click)="uiStateService.toggleSidenavVisibility()">
+      <mat-icon>visibility_off</mat-icon>
+    </button>
+  </div>
+
+  <!-- Contenedor del Menú con su propio scroll si es necesario -->
+  <div class="flex-1 overflow-y-auto">
+    <app-sidenav-menu></app-sidenav-menu>
+  </div>
+
+  <!-- Pie del Sidebar (opcional) -->
+  <div class="border-t p-2 dark:border-slate-700">
+    <!-- ... info de usuario o lo que necesites ... -->
+  </div>
+</aside>

@@ -7,6 +7,7 @@ import {RouterOutlet} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import { DOCUMENT } from '@angular/common';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-layout',
@@ -18,7 +19,8 @@ import { DOCUMENT } from '@angular/common';
     MatMenuItem,
     MatButton,
     MatIconButton,
-    MatMenuTrigger
+    MatMenuTrigger,
+    SidebarComponent
   ],
   templateUrl: './layout.component.html',
 })
