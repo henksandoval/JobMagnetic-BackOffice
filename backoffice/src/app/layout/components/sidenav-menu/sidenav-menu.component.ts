@@ -18,8 +18,7 @@ import {NgIf} from '@angular/common';
     MatNavList,
     MatTooltip
   ],
-  templateUrl: './sidenav-menu.component.html',
-  styleUrl: './sidenav-menu.component.scss'
+  templateUrl: './sidenav-menu.component.html'
 })
 
 export class SidenavMenuComponent {

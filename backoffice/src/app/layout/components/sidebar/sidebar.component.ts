@@ -11,8 +11,7 @@ import {MatIcon} from '@angular/material/icon';
     MatIcon,
     SidenavMenuComponent
   ],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent {
   public uiStateService = inject(UiStateService);
