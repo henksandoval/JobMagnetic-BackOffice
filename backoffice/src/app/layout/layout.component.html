@@ -23,7 +23,7 @@
         @if (currentUser?.avatar) {
           <img [src]="currentUser!.avatar" [alt]="currentUser!.name" class="user-avatar">
         } @else {
-          <img src="https://via.placeholder.com/32x32" alt="User Avatar" class="user-avatar">
+          <img src="https://via.placeholder.com/32x32" alt="UserModel Avatar" class="user-avatar">
         }
         <span>{{ currentUser?.name || 'Usuario Demo' }}</span>
         <mat-icon>arrow_drop_down</mat-icon>

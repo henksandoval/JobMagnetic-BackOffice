@@ -1,6 +1,6 @@
 import {effect, Injectable, signal} from '@angular/core';
-import {StorageKey} from '../../constants/storage-key';
-import {Theme} from '../../constants/theme';
+import {StorageKey} from '@core/constants/storage-key';
+import {Theme} from '@core/constants/theme';
 
 @Injectable({
   providedIn: 'root'

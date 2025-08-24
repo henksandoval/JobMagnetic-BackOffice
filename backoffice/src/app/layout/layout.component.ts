@@ -1,6 +1,6 @@
 import {Component, effect, inject} from '@angular/core';
 import {AuthService} from '@core/services/auth/auth.service';
-import {UiStateService} from '@core/services/ui-state-service/ui-state.service';
+import {UiStateService} from './services/ui-state/ui-state.service';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatDivider} from '@angular/material/divider';
 import {RouterOutlet} from '@angular/router';

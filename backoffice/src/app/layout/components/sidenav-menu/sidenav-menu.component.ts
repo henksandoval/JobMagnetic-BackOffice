@@ -1,6 +1,6 @@
 import {Component, effect, inject} from '@angular/core';
-import {UiStateService} from '@core/services/ui-state-service/ui-state.service';
-import {NavigationService} from '@core/services/navigation/navigation.service';
+import {UiStateService} from '../../services/ui-state/ui-state.service';
+import {NavigationService} from '../../services/navigation/navigation.service';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
