@@ -1,4 +1,4 @@
-<nav class="navigation-list " [class.collapsed]="collapsed">
+<nav class="navigation-list" [class.collapsed]="collapsed">
   @for (item of navigationService.menuItems(); track item.route) {
     @if (item.children && item.children.length > 0) {
       @if (!collapsed) {
@@ -27,7 +27,7 @@
           <div flyout-trigger>
             <app-menu-item [icon]="item.icon" variant="icon-only"></app-menu-item>
           </div>
-          <div flyout-content>
+          <ng-template flyout-content>
             <app-floating-panel [title]="item.label">
               @for (child of item.children; track child.route) {
                 <app-menu-item
@@ -38,7 +38,7 @@
                 ></app-menu-item>
               }
             </app-floating-panel>
-          </div>
+          </ng-template>
         </app-flyout>
       }
     } @else {
