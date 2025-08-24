@@ -1,32 +1,40 @@
-import {Component, effect, inject} from '@angular/core';
-import {UiStateService} from '../../services/ui-state/ui-state.service';
-import {NavigationService} from '../../services/navigation/navigation.service';
-import {MatListItem, MatNavList} from '@angular/material/list';
-import {MatIcon} from '@angular/material/icon';
-import {MatTooltip} from '@angular/material/tooltip';
+import { Component, effect, inject } from '@angular/core';
+import { UiStateService } from '../../services/ui-state/ui-state.service';
+import { NavigationService } from '../../services/navigation/navigation.service';
+import { NavLinkComponent } from '../../../shared/components/molecules/nav-link/nav-link.component';
+import { FloatingPanelComponent } from '../../../shared/components/atoms/floating-panel/floating-panel.component';
+import {MatListItem} from '@angular/material/list';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgIf} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidenav-menu',
+  standalone: true,
   imports: [
-    NgIf,
+    NavLinkComponent,
+    FloatingPanelComponent,
+    MatListItem,
     RouterLink,
     RouterLinkActive,
-    MatListItem,
     MatIcon,
-    MatNavList,
-    MatTooltip
+    NgIf
   ],
-  templateUrl: './sidenav-menu.component.html'
+  templateUrl: './sidenav-menu.component.html',
+  styles: `
+    :host {
+      display: block;
+      width: 100%;
+    }
+  `
 })
-
 export class SidenavMenuComponent {
   navigationService = inject(NavigationService);
   uiStateService = inject(UiStateService);
   collapsed = false;
-
-  floatingMenuTop = 0;
+  floatingMenuX = 0;
+  floatingMenuY = 0;
+  isFloatingPanelVisible = true;
   private hideTimeout?: number;
 
   constructor() {
@@ -45,9 +53,9 @@ export class SidenavMenuComponent {
     if (this.collapsed) {
       const target = event.currentTarget as HTMLElement;
       const rect = target.getBoundingClientRect();
-      this.floatingMenuTop = rect.top;
+      this.floatingMenuY = rect.top;
+      this.floatingMenuX = rect.right;
 
-      // Mostrar el menú
       this.showFloatingMenu();
     }
   }
@@ -61,7 +69,7 @@ export class SidenavMenuComponent {
 
   hideFloatingMenuDelayed(): void {
     this.hideTimeout = window.setTimeout(() => {
-      // El CSS se encargará de ocultar el menú
-    }, 150);
+      this.isFloatingPanelVisible = false;
+    }, 300);
   }
 }

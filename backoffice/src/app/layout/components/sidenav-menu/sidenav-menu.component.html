@@ -1,23 +1,15 @@
-<mat-nav-list class="navigation-list" [class.collapsed]="collapsed">
+<nav class="navigation-list" [class.collapsed]="collapsed">
   @for (item of navigationService.menuItems(); track item.route) {
     @if (item.children && item.children.length > 0) {
       @if (!collapsed) {
         <div class="nav-group mx-3 mb-2">
-          <a
-            mat-list-item
-            (click)="toggleSubmenu(item.route)"
-            class="nav-item parent-item flex items-center py-4 px-5 my-1 rounded-xl no-underline text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200"
-            [class.active-parent]="navigationService.isMenuExpanded(item.route)"
-          >
-            <mat-icon matListItemIcon class="mr-4 text-zinc-500 dark:text-zinc-400 text-xl">{{ item.icon }}</mat-icon>
-            <span matListItemTitle class="text-md font-medium">{{ item.label }}</span>
-            <mat-icon
-              class="expand-icon absolute right-4 text-zinc-500 transition-transform duration-300 ease-in-out"
-              [class.rotate-180]="navigationService.isMenuExpanded(item.route)"
-              [fontIcon]="navigationService.isMenuExpanded(item.route) ? 'expand_less' : 'expand_more'"
-            >
-            </mat-icon>
-          </a>
+          <app-nav-link
+            [label]="item.label"
+            [icon]="item.icon"
+            [isParent]="true"
+            [isExpanded]="navigationService.isMenuExpanded(item.route)"
+            (toggled)="toggleSubmenu(item.route)"
+          ></app-nav-link>
           @if (navigationService.isMenuExpanded(item.route)) {
             <div class="submenu mt-1 mb-2 ml-4 pl-4 border-l border-zinc-200 dark:border-zinc-700">
               @for (child of item.children; track child.route) {
@@ -39,64 +31,37 @@
         </div>
       } @else {
         <div
-          class="nav-item-with-floating-menu group relative"
+          class="group relative"
           (mouseenter)="updateFloatingMenuPosition($event)"
           (mouseleave)="hideFloatingMenuDelayed()"
         >
-          <a
-            mat-list-item
-            class="nav-item parent-item flex items-center justify-center w-12 h-12 mx-auto my-2 rounded-xl no-underline text-zinc-700 dark:text-zinc-300 hover:bg-black/10 dark:hover:bg-slate-700 transition-colors duration-200"
-          >
-            <mat-icon matListItemIcon class="m-0 text-xl text-zinc-500 dark:text-zinc-400">{{ item.icon }}</mat-icon>
-          </a>
-          <div
-            class="floating-submenu fixed left-16 min-w-[220px] z-[9999] p-2
-                   bg-white border border-zinc-200 rounded-lg shadow-xl
-                   opacity-0 invisible pointer-events-none -translate-x-3
-                   transition-all duration-250 ease-in-out
-                   group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-x-0
-                   <!-- ✨ FIX #3: LA CORRECCIÓN CLAVE - Usar el mismo color de fondo que el sidebar -->
-                   dark:bg-slate-800 dark:border-slate-700"
-            [style.top.px]="floatingMenuTop"
-            (mouseenter)="showFloatingMenu()"
-            (mouseleave)="hideFloatingMenuDelayed()"
-          >
-            <div class="submenu-header px-4 pt-3 pb-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{{ item.label }}</div>
-            @for (child of item.children; track child.route) {
-              <a
-                [routerLink]="child.route"
-                routerLinkActive="active-link"
-                class="floating-menu-item flex items-center py-3 px-4 my-1 rounded-md no-underline text-zinc-700 dark:text-zinc-300
-                       hover:bg-black/5 dark:hover:bg-slate-700/70
-                       transition-colors duration-200
-                       <!-- ✨ FIX #5: Añadir los mismos estilos para el link activo aquí -->
-                       [&.active-link]:bg-purple-100 dark:[&.active-link]:bg-purple-900/60
-                       [&.active-link]:text-purple-700 dark:[&.active-link]:text-purple-300
-                       [&.active-link]:font-semibold"
-              >
-                <mat-icon *ngIf="child.icon" class="mr-4 text-lg text-zinc-500 dark:text-zinc-400 group-hover:dark:hover:text-purple-400">{{ child.icon }}</mat-icon>
-                <span class="text-sm">{{ child.label }}</span>
-              </a>
-            }
-          </div>
+          <app-nav-link [icon]="item.icon" [isCollapsed]="true"></app-nav-link>
+          @if (isFloatingPanelVisible) {
+            <app-floating-panel
+              [title]="item.label"
+              (mouseenter)="showFloatingMenu()"
+              (mouseleave)="hideFloatingMenuDelayed()"
+            >
+              @for (child of item.children; track child.route) {
+                <app-nav-link
+                  [route]="child.route"
+                  [label]="child.label"
+                  [icon]="child.icon"
+                  variant="floating"
+                ></app-nav-link>
+              }
+
+            </app-floating-panel>
+          }
         </div>
       }
     } @else {
-      <a
-        mat-list-item
-        [routerLink]="item.route"
-        routerLinkActive="active-link"
-        class="nav-item flex items-center py-4 px-5 mx-3 my-1 rounded-xl no-underline text-zinc-700 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200
-               [&.active-link]:bg-purple-100 dark:[&.active-link]:bg-purple-900/60
-               [&.active-link]:text-purple-700 dark:[&.active-link]:text-purple-300
-               [&.active-link]:font-semibold"
-        [class.justify-center]="collapsed"
-        [matTooltip]="collapsed ? item.label : null"
-        matTooltipPosition="right"
-      >
-        <mat-icon matListItemIcon class="text-xl text-zinc-500 dark:text-zinc-400" [class.m-0]="collapsed" [class.mr-4]="!collapsed">{{ item.icon }}</mat-icon>
-        <span matListItemTitle *ngIf="!collapsed" class="text-sm font-medium">{{ item.label }}</span>
-      </a>
+      <app-nav-link
+        [route]="item.route"
+        [label]="item.label"
+        [icon]="item.icon"
+        [isCollapsed]="collapsed"
+      ></app-nav-link>
     }
   }
-</mat-nav-list>
+</nav>

@@ -1,19 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatTooltip } from '@angular/material/tooltip';
-import { IconComponent } from '../../../atoms/icon/icon.component';
+import {IconComponent} from '../../atoms/icon/icon.component';
 
 @Component({
   selector: 'app-nav-link',
   standalone: true,
   imports: [
     NgClass,
-    NgIf,
     RouterLink,
     RouterLinkActive,
     MatTooltip,
-    IconComponent // <-- Usando nuestro átomo
+    IconComponent
   ],
   templateUrl: './nav-link.component.html',
   styleUrl: './nav-link.component.scss'
