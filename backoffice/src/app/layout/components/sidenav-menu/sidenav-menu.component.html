@@ -1,4 +1,4 @@
-<nav class="navigation-list" [class.collapsed]="collapsed">
+<nav class="navigation-list " [class.collapsed]="collapsed">
   @for (item of navigationService.menuItems(); track item.route) {
     @if (item.children && item.children.length > 0) {
       @if (!collapsed) {
@@ -31,18 +31,10 @@
         </div>
       } @else {
         <div
-          class="group relative"
-          (mouseenter)="updateFloatingMenuPosition($event)"
-          (mouseleave)="hideFloatingMenuDelayed()"
+          class="group relative menu-item-wrapper"
         >
           <app-nav-link [icon]="item.icon" [isCollapsed]="true"></app-nav-link>
-          <app-floating-panel
-            [title]="item.label"
-            [positionX]="floatingMenuX"
-            [positionY]="floatingMenuY"
-            (mouseenter)="showFloatingMenu()"
-            (mouseleave)="hideFloatingMenuDelayed()"
-          >
+          <app-floating-panel [title]="item.label">
             @for (child of item.children; track child.route) {
               <app-nav-link
                 [route]="child.route"

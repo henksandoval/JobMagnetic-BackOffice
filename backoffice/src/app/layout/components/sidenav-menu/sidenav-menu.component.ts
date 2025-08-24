@@ -26,16 +26,27 @@ import {MatIcon} from '@angular/material/icon';
       display: block;
       width: 100%;
     }
+
+    .menu-item-wrapper::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      width: 12px;
+      background: transparent;
+      display: none;
+    }
+
+    .menu-item-wrapper:hover::after {
+      display: block;
+    }
   `
 })
 export class SidenavMenuComponent {
   navigationService = inject(NavigationService);
   uiStateService = inject(UiStateService);
   collapsed = false;
-  floatingMenuX = 0;
-  floatingMenuY = 0;
-  isFloatingPanelVisible = true;
-  private hideTimeout?: number;
 
   constructor() {
     effect(() => {
@@ -47,25 +58,5 @@ export class SidenavMenuComponent {
     if (!this.collapsed) {
       this.navigationService.toggleMenuExpansion(route);
     }
-  }
-
-  updateFloatingMenuPosition(event: MouseEvent): void {
-    if (this.collapsed) {
-      const target = event.currentTarget as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      this.floatingMenuY = rect.top;
-      this.floatingMenuX = rect.right;
-    }
-  }
-
-  showFloatingMenu(): void {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = undefined;
-    }
-  }
-
-  hideFloatingMenuDelayed(): void {
-    this.hideTimeout = window.setTimeout(() => {}, 150);
   }
 }
