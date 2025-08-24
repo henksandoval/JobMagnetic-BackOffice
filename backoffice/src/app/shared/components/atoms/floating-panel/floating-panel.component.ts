@@ -1,19 +1,10 @@
 import {Component, Input} from '@angular/core';
-import {NgIf} from "@angular/common"; // Importa NgIf por si acaso
 
 @Component({
   selector: 'app-floating-panel',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   template: `
-    <!--
-      CAMBIOS IMPORTANTES AQUÍ:
-      1. Se cambia 'fixed' por 'absolute'.
-      2. Se elimina el binding de [style] para top y left.
-      3. Se añaden clases de Tailwind para posicionar: 'top-0' y 'left-full'.
-         'left-full' es lo mismo que 'left: 100%'.
-      4. Se mantiene el 'translate' para el offsetX.
-    -->
     <div
       [style.transform]="'translate(' + offsetX + 'px, ' + offsetY + 'px)'"
       class="floating-panel absolute top-0 left-full min-w-[220px] z-[9999] p-2
@@ -40,9 +31,6 @@ import {NgIf} from "@angular/common"; // Importa NgIf por si acaso
 })
 export class FloatingPanelComponent {
   @Input() title?: string;
-  // ¡YA NO NECESITAMOS ESTOS INPUTS!
-  // @Input() positionX: number = 0;
-  // @Input() positionY: number = 0;
   @Input() offsetX: number = 12;
   @Input() offsetY: number = 0;
 }
