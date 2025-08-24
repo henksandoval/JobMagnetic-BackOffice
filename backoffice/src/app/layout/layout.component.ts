@@ -5,13 +5,15 @@ import {RouterOutlet} from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 @Component({
   selector: 'app-layout',
   imports: [
     RouterOutlet,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   templateUrl: './layout.component.html',
 })
