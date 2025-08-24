@@ -3,10 +3,8 @@ import { UiStateService } from '../../services/ui-state/ui-state.service';
 import { NavigationService } from '../../services/navigation/navigation.service';
 import { NavLinkComponent } from '../../../shared/components/molecules/nav-link/nav-link.component';
 import { FloatingPanelComponent } from '../../../shared/components/atoms/floating-panel/floating-panel.component';
-import {MatListItem} from '@angular/material/list';
-import {RouterLink, RouterLinkActive} from '@angular/router';
-import {NgIf} from '@angular/common';
-import {MatIcon} from '@angular/material/icon';
+import {MenuItemComponent} from '../../../shared/components/molecules/menu-item/menu-item.component';
+import {IconComponent} from '../../../shared/components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-sidenav-menu',
@@ -14,11 +12,8 @@ import {MatIcon} from '@angular/material/icon';
   imports: [
     NavLinkComponent,
     FloatingPanelComponent,
-    MatListItem,
-    RouterLink,
-    RouterLinkActive,
-    MatIcon,
-    NgIf
+    MenuItemComponent,
+    IconComponent
   ],
   templateUrl: './sidenav-menu.component.html',
   styleUrls: ['./sidenav-menu.component.scss']

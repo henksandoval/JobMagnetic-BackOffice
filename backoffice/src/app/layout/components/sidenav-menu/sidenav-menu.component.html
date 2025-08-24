@@ -3,28 +3,21 @@
     @if (item.children && item.children.length > 0) {
       @if (!collapsed) {
         <div class="nav-group mx-3 mb-2">
-          <app-nav-link
-            [label]="item.label"
-            [icon]="item.icon"
-            [isParent]="true"
-            [isExpanded]="navigationService.isMenuExpanded(item.route)"
-            (toggled)="toggleSubmenu(item.route)"
-          ></app-nav-link>
+          <button (click)="toggleSubmenu(item.route)" class="w-full text-left relative">
+            <app-menu-item [label]="item.label" [icon]="item.icon"></app-menu-item>
+            <div class="absolute right-4 top-0 bottom-0 flex items-center transition-transform duration-300" [class.rotate-180]="navigationService.isMenuExpanded(item.route)">
+              <app-icon [iconName]="navigationService.isMenuExpanded(item.route) ? 'expand_less' : 'expand_more'" size="md" color="subtle"></app-icon>
+            </div>
+          </button>
           @if (navigationService.isMenuExpanded(item.route)) {
-            <div class="submenu mt-1 mb-2 ml-4 pl-4 border-l border-zinc-200 dark:border-zinc-700">
+            <div class="submenu mt-1 mb-2">
               @for (child of item.children; track child.route) {
-                <a
-                  mat-list-item
-                  [routerLink]="child.route"
-                  routerLinkActive="active-link"
-                  class="nav-item child-item flex items-center py-3 px-4 my-1 rounded-lg no-underline text-zinc-600 dark:text-zinc-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200
-                         [&.active-link]:bg-purple-100 dark:[&.active-link]:bg-purple-900/60
-                         [&.active-link]:text-purple-700 dark:[&.active-link]:text-purple-300
-                         [&.active-link]:font-semibold"
-                >
-                  <mat-icon *ngIf="child.icon" matListItemIcon class="mr-4 text-xl">{{ child.icon }}</mat-icon>
-                  <span matListItemTitle class="text-sm">{{ child.label }}</span>
-                </a>
+                <app-menu-item
+                  [route]="child.route"
+                  [label]="child.label"
+                  [icon]="child.icon"
+                  variant="child"
+                ></app-menu-item>
               }
             </div>
           }
