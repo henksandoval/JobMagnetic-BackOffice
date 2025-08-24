@@ -1,26 +1,17 @@
 import {Component, effect, inject} from '@angular/core';
 import {AuthService} from '@core/services/auth/auth.service';
 import {UiStateService} from './services/ui-state/ui-state.service';
-import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {MatDivider} from '@angular/material/divider';
 import {RouterOutlet} from '@angular/router';
-import {MatIcon} from '@angular/material/icon';
-import {MatButton, MatIconButton} from '@angular/material/button';
 import { DOCUMENT } from '@angular/common';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {HeaderComponent} from './components/header/header.component';
 
 @Component({
   selector: 'app-layout',
   imports: [
     RouterOutlet,
-    MatMenu,
-    MatDivider,
-    MatIcon,
-    MatMenuItem,
-    MatButton,
-    MatIconButton,
-    MatMenuTrigger,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   templateUrl: './layout.component.html',
 })
