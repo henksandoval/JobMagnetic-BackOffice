@@ -24,12 +24,9 @@
         </div>
       } @else {
         <app-flyout>
-          <!-- 1. El Disparador: Un app-menu-item en modo icono. -->
           <div flyout-trigger>
             <app-menu-item [icon]="item.icon" variant="icon-only"></app-menu-item>
           </div>
-
-          <!-- 2. El Contenido: Nuestro panel flotante con sus items. -->
           <div flyout-content>
             <app-floating-panel [title]="item.label">
               @for (child of item.children; track child.route) {

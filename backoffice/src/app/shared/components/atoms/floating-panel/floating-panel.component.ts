@@ -18,12 +18,7 @@ import {Component, Input} from '@angular/core';
       }
       <ng-content></ng-content>
     </div>
-  `,
-  styles: [`
-    :host {
-      display: block;
-    }
-  `]
+  `
 })
 export class FloatingPanelComponent {
   @Input() title?: string;

@@ -2,7 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { UiStateService } from '../../services/ui-state/ui-state.service';
 import { NavigationService } from '../../services/navigation/navigation.service';
 import { FloatingPanelComponent } from '../../../shared/components/atoms/floating-panel/floating-panel.component';
-import {MenuItemComponent} from '../../../shared/components/molecules/menu-item/menu-item.component';
+import {MenuItemComponent} from './components/menu-item/menu-item.component';
 import {IconComponent} from '../../../shared/components/atoms/icon/icon.component';
 import {FlyoutComponent} from '../../../shared/components/molecules/flyout/flyout.component';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -17,8 +17,7 @@ import {MatTooltip} from '@angular/material/tooltip';
     FlyoutComponent,
     MatTooltip
   ],
-  templateUrl: './sidenav-menu.component.html',
-  styleUrls: ['./sidenav-menu.component.scss']
+  templateUrl: './sidenav-menu.component.html'
 })
 export class SidenavMenuComponent {
   navigationService = inject(NavigationService);
