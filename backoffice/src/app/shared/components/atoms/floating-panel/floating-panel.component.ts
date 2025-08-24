@@ -6,6 +6,9 @@ import {Component, Input} from '@angular/core';
   imports: [],
   template: `
     <div
+      [style.left.px]="positionX"
+      [style.top.px]="positionY"
+      [style.transform]="'translate(' + offsetX + 'px, ' + offsetY + 'px)'"
       class="floating-panel fixed min-w-[220px] z-[9999] p-2
          bg-white border border-zinc-200 rounded-lg shadow-xl
          dark:bg-slate-800 dark:border-slate-700
@@ -27,21 +30,15 @@ import {Component, Input} from '@angular/core';
   `,
   styles: `
     :host {
-      // El host en sí no necesita ser visible, ya que el panel flotante se posiciona de forma fija.
-      // Pero lo definimos como 'contents' para que no interfiera en el layout.
       display: contents;
-    }
-
-    // Apuntamos directamente a la clase dentro de nuestro componente para aplicar los estilos.
-    // Esto es importante porque el :host no tiene las clases 'group-hover'.
-    .floating-panel {
-      // Si necesitas añadir algún estilo CSS que no sea de Tailwind, puedes hacerlo aquí.
-      // Por ejemplo, si quieres asegurarte de que el panel siempre tenga un \`left\` inicial.
-      left: 4.5rem; // (16px * 4) + (16px * 0.5) = 72px, que es el ancho del sidebar colapsado.
     }
   `
 })
 export class FloatingPanelComponent {
   /** Título opcional que se muestra en la cabecera del panel. */
   @Input() title?: string;
+  @Input() positionX: number = 0;
+  @Input() positionY: number = 0;
+  @Input() offsetX: number = 12;
+  @Input() offsetY: number = 0;
 }

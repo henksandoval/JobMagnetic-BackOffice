@@ -55,8 +55,6 @@ export class SidenavMenuComponent {
       const rect = target.getBoundingClientRect();
       this.floatingMenuY = rect.top;
       this.floatingMenuX = rect.right;
-
-      this.showFloatingMenu();
     }
   }
 
@@ -68,8 +66,6 @@ export class SidenavMenuComponent {
   }
 
   hideFloatingMenuDelayed(): void {
-    this.hideTimeout = window.setTimeout(() => {
-      this.isFloatingPanelVisible = false;
-    }, 300);
+    this.hideTimeout = window.setTimeout(() => {}, 150);
   }
 }

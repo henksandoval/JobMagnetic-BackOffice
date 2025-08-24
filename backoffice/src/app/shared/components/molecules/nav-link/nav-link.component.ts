@@ -18,38 +18,27 @@ import {IconComponent} from '../../atoms/icon/icon.component';
   styleUrl: './nav-link.component.scss'
 })
 export class NavLinkComponent {
-  // --- Entradas de Datos ---
   @Input() route?: string;
   @Input() label?: string;
   @Input() icon?: string;
-
-  // --- Entradas de Estado y Variante ---
   @Input() isParent = false;
   @Input() isExpanded = false;
   @Input() isCollapsed = false;
   @Input() variant: 'default' | 'child' | 'floating' = 'default';
-
-  // --- Salidas de Eventos ---
   @Output() toggled = new EventEmitter<void>();
 
-  // --- Getters para Lógica de Template ---
-
-  /** Determina si el enlace debe usar routerLink o ser un botón. */
   get isRouterLink(): boolean {
     return !!this.route && !this.isParent;
   }
 
-  /** Determina si el enlace es un botón que dispara un evento de toggle. */
   get isToggleButton(): boolean {
     return this.isParent && !this.isCollapsed;
   }
 
-  /** Determina si es un ancla "muerta" (solo visual, para el modo colapsado). */
   get isPlaceholder(): boolean {
     return this.isParent && this.isCollapsed;
   }
 
-  /** Gestiona las clases del contenedor principal del enlace. */
   get linkClasses() {
     return {
       // Estilos base compartidos por todos
@@ -78,7 +67,6 @@ export class NavLinkComponent {
     };
   }
 
-  /** Gestiona las clases del icono. */
   get iconContainerClasses() {
     return {
       'm-0': this.isCollapsed,

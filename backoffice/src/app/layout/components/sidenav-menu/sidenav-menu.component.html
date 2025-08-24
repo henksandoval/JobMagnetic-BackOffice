@@ -36,23 +36,22 @@
           (mouseleave)="hideFloatingMenuDelayed()"
         >
           <app-nav-link [icon]="item.icon" [isCollapsed]="true"></app-nav-link>
-          @if (isFloatingPanelVisible) {
-            <app-floating-panel
-              [title]="item.label"
-              (mouseenter)="showFloatingMenu()"
-              (mouseleave)="hideFloatingMenuDelayed()"
-            >
-              @for (child of item.children; track child.route) {
-                <app-nav-link
-                  [route]="child.route"
-                  [label]="child.label"
-                  [icon]="child.icon"
-                  variant="floating"
-                ></app-nav-link>
-              }
-
-            </app-floating-panel>
-          }
+          <app-floating-panel
+            [title]="item.label"
+            [positionX]="floatingMenuX"
+            [positionY]="floatingMenuY"
+            (mouseenter)="showFloatingMenu()"
+            (mouseleave)="hideFloatingMenuDelayed()"
+          >
+            @for (child of item.children; track child.route) {
+              <app-nav-link
+                [route]="child.route"
+                [label]="child.label"
+                [icon]="child.icon"
+                variant="floating"
+              ></app-nav-link>
+            }
+          </app-floating-panel>
         </div>
       }
     } @else {
