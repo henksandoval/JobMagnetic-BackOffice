@@ -21,27 +21,7 @@ import {MatIcon} from '@angular/material/icon';
     NgIf
   ],
   templateUrl: './sidenav-menu.component.html',
-  styles: `
-    :host {
-      display: block;
-      width: 100%;
-    }
-
-    .menu-item-wrapper::after {
-      content: '';
-      position: absolute;
-      left: 100%;
-      top: 0;
-      bottom: 0;
-      width: 12px;
-      background: transparent;
-      display: none;
-    }
-
-    .menu-item-wrapper:hover::after {
-      display: block;
-    }
-  `
+  styleUrls: ['./sidenav-menu.component.scss']
 })
 export class SidenavMenuComponent {
   navigationService = inject(NavigationService);
