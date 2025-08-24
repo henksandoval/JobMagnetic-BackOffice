@@ -6,13 +6,9 @@ import {Component, Input} from '@angular/core';
   imports: [],
   template: `
     <div
-      [style.transform]="'translate(' + offsetX + 'px, ' + offsetY + 'px)'"
-      class="floating-panel absolute top-0 left-full min-w-[220px] z-[9999] p-2
+      class="floating-panel min-w-[220px] p-2
              bg-white border border-zinc-200 rounded-lg shadow-xl
-             dark:bg-slate-800 dark:border-slate-700
-             opacity-0 invisible pointer-events-none -translate-x-3
-             transition-all duration-250 ease-in-out
-             group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-x-0"
+             dark:bg-slate-800 dark:border-slate-700"
     >
       @if (title) {
         <header
@@ -23,14 +19,12 @@ import {Component, Input} from '@angular/core';
       <ng-content></ng-content>
     </div>
   `,
-  styles: `
+  styles: [`
     :host {
-      display: contents;
+      display: block;
     }
-  `
+  `]
 })
 export class FloatingPanelComponent {
   @Input() title?: string;
-  @Input() offsetX: number = 12;
-  @Input() offsetY: number = 0;
 }

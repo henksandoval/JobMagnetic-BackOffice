@@ -23,29 +23,36 @@
           }
         </div>
       } @else {
-        <div
-          class="group relative menu-item-wrapper"
-        >
-          <app-nav-link [icon]="item.icon" [isCollapsed]="true"></app-nav-link>
-          <app-floating-panel [title]="item.label">
-            @for (child of item.children; track child.route) {
-              <app-nav-link
-                [route]="child.route"
-                [label]="child.label"
-                [icon]="child.icon"
-                variant="floating"
-              ></app-nav-link>
-            }
-          </app-floating-panel>
-        </div>
+        <app-flyout>
+          <!-- 1. El Disparador: Un app-menu-item en modo icono. -->
+          <div flyout-trigger>
+            <app-menu-item [icon]="item.icon" variant="icon-only"></app-menu-item>
+          </div>
+
+          <!-- 2. El Contenido: Nuestro panel flotante con sus items. -->
+          <div flyout-content>
+            <app-floating-panel [title]="item.label">
+              @for (child of item.children; track child.route) {
+                <app-menu-item
+                  [route]="child.route"
+                  [label]="child.label"
+                  [icon]="child.icon"
+                  variant="floating"
+                ></app-menu-item>
+              }
+            </app-floating-panel>
+          </div>
+        </app-flyout>
       }
     } @else {
-      <app-nav-link
+      <app-menu-item
         [route]="item.route"
         [label]="item.label"
         [icon]="item.icon"
-        [isCollapsed]="collapsed"
-      ></app-nav-link>
+        [variant]="collapsed ? 'icon-only' : 'default'"
+        [matTooltip]="collapsed ? item.label : null"
+        matTooltipPosition="right"
+      ></app-menu-item>
     }
   }
 </nav>
