@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+// Importaciones de tipos y servicio.
+import {
+  FormDataService,
+  Country,
+  SubscriptionOption,
+  SubscriptionType,
+  UserProfileForm,
+} from '../../services/data/data.service';
 
 // --- Importaciones de Angular Material ---
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea auto-ajustable
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-form',
@@ -33,197 +42,100 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
     MatSlideToggleModule,
     TextFieldModule,
   ],
-  template: `
-    <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Perfil de Usuario</h2>
-      <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-          <!-- Campo: Nombre Completo (Input de texto) -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Nombre Completo</mat-label>
-            <input matInput formControlName="fullName" placeholder="Ej. Juan Pérez" />
-            <mat-icon matSuffix>person</mat-icon>
-            @if (fullName?.errors?.['required'] && (fullName.touched || fullName.dirty)) {
-              <mat-error>El nombre es requerido.</mat-error>
-            }
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Correo Electrónico</mat-label>
-            <input matInput formControlName="email" placeholder="ejemplo@correo.com" type="email" />
-            <mat-icon matSuffix>email</mat-icon>
-            @if (email?.errors?.['required'] && (email.touched || email.dirty)) {
-              <mat-error>El correo es requerido.</mat-error>
-            }
-            @if (email?.errors?.['email'] && !email.errors?.['required'] && (email.touched || email.dirty)) {
-              <mat-error>Por favor, introduce un correo válido.</mat-error>
-            }
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>País de Residencia</mat-label>
-            <mat-select formControlName="country">
-              @for (country of countries; track country.code) {
-                <mat-option [value]="country.code">{{ country.name }}</mat-option>
-              }
-            </mat-select>
-            <mat-error>Debes seleccionar un país.</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Fecha de Nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dob" />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error>La fecha de nacimiento es requerida.</mat-error>
-          </mat-form-field>
-          <div class="md:col-span-2">
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Biografía</mat-label>
-              <textarea
-                matInput
-                formControlName="bio"
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="5"
-                placeholder="Cuéntanos un poco sobre ti..."
-              ></textarea>
-            </mat-form-field>
-          </div>
-          <div class="flex flex-col">
-            <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300"
-              >Tipo de Suscripción</label
-            >
-            <mat-radio-group formControlName="subscriptionType" class="flex flex-col sm:flex-row gap-4">
-              @for (sub of subscriptionTypes; track sub) {
-                <mat-radio-button [value]="sub.value">{{ sub.label }}</mat-radio-button>
-              }
-            </mat-radio-group>
-          </div>
-          <div class="flex flex-col justify-center gap-4">
-            <mat-checkbox formControlName="wantsNewsletter" color="primary">
-              Deseo recibir el boletín informativo
-            </mat-checkbox>
-            <mat-slide-toggle formControlName="pushNotifications" color="primary">
-              Activar notificaciones push
-            </mat-slide-toggle>
-          </div>
-        </div>
-        <div class="mt-8">
-          <mat-checkbox formControlName="agreesToTerms" color="primary" class="text-sm">
-            He leído y acepto los términos y condiciones de servicio.
-          </mat-checkbox>
-          @if (agreesToTerms?.errors?.['required'] && (agreesToTerms.touched || agreesToTerms.dirty)) {
-            <p class="text-red-500 text-xs mt-1">Debes aceptar los términos para continuar.</p>
-          }
-        </div>
-        <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <button type="button" mat-stroked-button (click)="resetForm()">Limpiar Formulario</button>
-          <button type="submit" mat-flat-button color="primary" [disabled]="userProfileForm.invalid">
-            Guardar Perfil
-          </button>
-        </div>
-      </form>
-    </div>
-  `,
-  styles: [
-    `
-      /*
-     * Hacemos que el componente ocupe todo el ancho disponible.
-     * El padding y el layout principal vienen del layout superior (showcase.component).
-    */
-      :host {
-        display: block;
-        width: 100%;
-      }
-
-      /*
-     * Tailwind puede tener conflictos con los estilos por defecto de los form-fields de Material.
-     * Esta regla asegura que el form-field se comporte correctamente dentro de un contenedor flex o grid.
-    */
-      mat-form-field {
-        width: 100%;
-      }
-    `,
-  ],
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  // Reemplazamos FormGroup no tipado por uno tipado
+  // Inyección de dependencias moderna y limpia con inject()
+  private fb = inject(FormBuilder);
+  private formDataService = inject(FormDataService);
+
+  // Usamos el tipado del servicio.
   userProfileForm!: FormGroup<{
     fullName: FormControl<string>;
     email: FormControl<string>;
     country: FormControl<string | null>;
     dob: FormControl<Date | null>;
     bio: FormControl<string>;
-    subscriptionType: FormControl<'free' | 'premium' | 'enterprise'>;
+    subscriptionType: FormControl<SubscriptionType>;
     wantsNewsletter: FormControl<boolean>;
     pushNotifications: FormControl<boolean>;
     agreesToTerms: FormControl<boolean>;
   }>;
 
-  countries = [
-    { name: 'España', code: 'ES' },
-    { name: 'México', code: 'MX' },
-    { name: 'Argentina', code: 'AR' },
-    { name: 'Colombia', code: 'CO' },
-    { name: 'Estados Unidos', code: 'US' },
-  ];
+  // Los datos ahora vienen del servicio.
+  countries: Country[] = [];
+  subscriptionTypes: SubscriptionOption[] = [];
 
-  subscriptionTypes = [
-    { label: 'Gratis', value: 'free' },
-    { label: 'Premium', value: 'premium' },
-    { label: 'Empresarial', value: 'enterprise' },
-  ];
-
-  constructor(private fb: FormBuilder) {}
+  private initialState!: UserProfileForm; // Para un reset inteligente
 
   ngOnInit(): void {
-    this.userProfileForm = this.fb.group({
-      fullName: this.fb.nonNullable.control('', { validators: [Validators.required] }),
-      email: this.fb.nonNullable.control('', { validators: [Validators.required, Validators.email] }),
-      country: this.fb.control<string | null>(null, { validators: [Validators.required] }),
-      dob: this.fb.control<Date | null>(null, { validators: [Validators.required] }),
+    this.loadData();
+
+    // Definimos la estructura y valores iniciales
+    const formDefinition = {
+      fullName: this.fb.nonNullable.control('', [Validators.required]),
+      email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
+      country: this.fb.control<string | null>(null, [Validators.required]),
+      dob: this.fb.control<Date | null>(null, [Validators.required]),
       bio: this.fb.nonNullable.control(''),
-      subscriptionType: this.fb.nonNullable.control<'free' | 'premium' | 'enterprise'>('free', {
-        validators: [Validators.required],
-      }),
+      subscriptionType: this.fb.nonNullable.control<SubscriptionType>('free', [Validators.required]),
       wantsNewsletter: this.fb.nonNullable.control(true),
       pushNotifications: this.fb.nonNullable.control(false),
-      agreesToTerms: this.fb.nonNullable.control(false, { validators: [Validators.requiredTrue] }),
-    });
+      agreesToTerms: this.fb.nonNullable.control(false, [Validators.requiredTrue]),
+    };
+
+    this.userProfileForm = this.fb.group(formDefinition);
+
+    // Guardamos el estado inicial para el reset.
+    this.initialState = this.userProfileForm.getRawValue();
   }
 
-  // Getters para simplificar el template (evita llamadas repetidas y problemas de null)
+  private loadData(): void {
+    this.formDataService.getCountries().subscribe((data) => (this.countries = data));
+    this.formDataService.getSubscriptionTypes().subscribe((data) => (this.subscriptionTypes = data));
+  }
+
+  // Getters para simplificar el template y mejorar la legibilidad.
   get fullName() {
     return this.userProfileForm.controls.fullName;
   }
   get email() {
     return this.userProfileForm.controls.email;
   }
+  get country() {
+    return this.userProfileForm.controls.country;
+  }
+  get dob() {
+    return this.userProfileForm.controls.dob;
+  }
   get agreesToTerms() {
     return this.userProfileForm.controls.agreesToTerms;
   }
-  // ...otros getters opcionales si se requieren...
 
   onSubmit(): void {
     if (this.userProfileForm.invalid) {
-      // Marcar todos los campos como "tocados" para mostrar los errores
       this.userProfileForm.markAllAsTouched();
       return;
     }
-    console.log('Formulario Enviado:', this.userProfileForm.value);
-    alert('¡Perfil guardado con éxito! Revisa la consola para ver los datos.');
+
+    // Delegamos el guardado al servicio.
+    this.formDataService.saveProfile(this.userProfileForm.getRawValue()).subscribe({
+      next: (response) => {
+        if (response.success) {
+          alert('¡Perfil guardado con éxito! Revisa la consola para ver los datos.');
+          this.userProfileForm.markAsPristine(); // Marcar como no modificado
+        }
+      },
+      error: (err) => {
+        console.error('Error al guardar el perfil:', err);
+        alert('Hubo un error al guardar. Inténtalo de nuevo.');
+      },
+    });
   }
 
   resetForm(): void {
-    this.userProfileForm.reset({
-      fullName: '',
-      email: '',
-      country: null,
-      dob: null,
-      bio: '',
-      subscriptionType: 'free',
-      wantsNewsletter: true,
-      pushNotifications: false,
-      agreesToTerms: false,
-    });
+    // Reseteamos al estado inicial guardado, no a uno vacío.
+    this.userProfileForm.reset(this.initialState);
   }
 }
