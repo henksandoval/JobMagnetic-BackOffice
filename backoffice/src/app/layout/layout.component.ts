@@ -6,10 +6,11 @@ import { DOCUMENT } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, SidebarComponent, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, SidebarComponent, HeaderComponent, FooterComponent, BreadcrumbComponent],
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
@@ -24,7 +25,7 @@ export class LayoutComponent {
     });
   }
 
-  // Getter para acceder al usuario actual
+  // Getter para acceder al usuario currente
   get currentUser() {
     return this.authService.currentUser();
   }

@@ -1,0 +1,12 @@
+.breadcrumb {
+  @apply mb-2;
+}
+
+.breadcrumb-nav {
+  @apply sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-white/70 supports-[backdrop-filter]:dark:bg-slate-800/70;
+  transition: box-shadow 0.2s;
+}
+
+.breadcrumb-pill {
+  @apply transition-colors duration-150 cursor-pointer select-none whitespace-nowrap;
+}
