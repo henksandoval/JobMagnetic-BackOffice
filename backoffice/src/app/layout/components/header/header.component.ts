@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { UiStateService } from '../../services/ui-state/ui-state.service';
-import { IconComponent } from '../../../shared/components/atoms/icon/icon.component';
+import { IconComponent } from '@shared/components/atoms/icon/icon.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 

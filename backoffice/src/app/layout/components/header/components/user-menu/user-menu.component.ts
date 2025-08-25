@@ -3,7 +3,7 @@ import { AuthService } from '@core/services/auth/auth.service';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatDivider } from '@angular/material/divider';
 import { MatButton } from '@angular/material/button';
-import { IconComponent } from '../../../../../shared/components/atoms/icon/icon.component';
+import { IconComponent } from '@shared/components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-user-menu',

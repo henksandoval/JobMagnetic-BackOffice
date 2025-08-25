@@ -1,8 +1,8 @@
 import { Component, effect, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
-import { UiStateService } from '../../../../services/ui-state/ui-state.service';
-import { IconComponent } from '../../../../../shared/components/atoms/icon/icon.component';
+import { UiStateService } from '@layout/services/ui-state/ui-state.service';
+import { IconComponent } from '@shared/components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-theme-toggle',
