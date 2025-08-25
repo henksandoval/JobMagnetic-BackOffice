@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+
+@import "tailwindcss";
+@include mat.core();
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #1e293b;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 10px;
+    border: 1px solid #1e293b;
+
+    &:hover {
+      background-color: #64748b;
+    }
+  }
+}
