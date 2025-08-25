@@ -1,179 +1,58 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from '../../models/menu-item.model';
+import { AppRoute } from 'src/app/core/models/app-route.model';
+import { LayoutComponent } from '@layout/layout.component'; // Ajusta la ruta a tu modelo
 
 @Injectable({
   providedIn: 'root',
 })
 export class NavigationService {
-  menuItems = signal<MenuItem[]>([
-    {
-      route: '/dashboard',
-      label: $localize`:@@navigation.dashboard:Dashboard`,
-      icon: 'dashboard',
-    },
-    {
-      route: '/users',
-      label: $localize`:@@navigation.users:Usuarios`,
-      icon: 'people',
-      children: [
-        {
-          route: '/users/list',
-          label: $localize`:@@navigation.users.list:Lista de Usuarios`,
-          icon: 'list',
-        },
-        {
-          route: '/users/create',
-          label: $localize`:@@navigation.users.create:Crear Usuario`,
-          icon: 'person_add',
-        },
-        {
-          route: '/users/roles',
-          label: $localize`:@@navigation.users.roles:Roles y Permisos`,
-          icon: 'admin_panel_settings',
-        },
-      ],
-    },
-    {
-      route: '/products',
-      label: $localize`:@@navigation.products:Productos`,
-      icon: 'inventory',
-      children: [
-        {
-          route: '/products/catalog',
-          label: $localize`:@@navigation.products.catalog:Catálogo`,
-          icon: 'category',
-        },
-        {
-          route: '/products/inventory',
-          label: $localize`:@@navigation.products.inventory:Inventario`,
-          icon: 'warehouse',
-        },
-        {
-          route: '/products/suppliers',
-          label: $localize`:@@navigation.products.suppliers:Proveedores`,
-          icon: 'local_shipping',
-        },
-      ],
-    },
-    {
-      route: '/sales',
-      label: $localize`:@@navigation.sales:Ventas`,
-      icon: 'shopping_cart',
-      children: [
-        {
-          route: '/sales/orders',
-          label: $localize`:@@navigation.sales.orders:Órdenes`,
-          icon: 'receipt',
-        },
-        {
-          route: '/sales/customers',
-          label: $localize`:@@navigation.sales.customers:Clientes`,
-          icon: 'group',
-        },
-        {
-          route: '/sales/invoices',
-          label: $localize`:@@navigation.sales.invoices:Facturas`,
-          icon: 'description',
-        },
-      ],
-    },
-    {
-      route: '/analytics',
-      label: $localize`:@@navigation.analytics:Analytics`,
-      icon: 'analytics',
-      children: [
-        {
-          route: '/analytics/reports',
-          label: $localize`:@@navigation.analytics.reports:Reportes`,
-          icon: 'assessment',
-        },
-        {
-          route: '/analytics/charts',
-          label: $localize`:@@navigation.analytics.charts:Gráficos`,
-          icon: 'bar_chart',
-        },
-        {
-          route: '/analytics/kpis',
-          label: $localize`:@@navigation.analytics.kpis:KPIs`,
-          icon: 'trending_up',
-        },
-      ],
-    },
-    {
-      route: '/finance',
-      label: $localize`:@@navigation.finance:Finanzas`,
-      icon: 'account_balance',
-      children: [
-        {
-          route: '/finance/accounting',
-          label: $localize`:@@navigation.finance.accounting:Contabilidad`,
-          icon: 'calculate',
-        },
-        {
-          route: '/finance/budgets',
-          label: $localize`:@@navigation.finance.budgets:Presupuestos`,
-          icon: 'savings',
-        },
-        {
-          route: '/finance/expenses',
-          label: $localize`:@@navigation.finance.expenses:Gastos`,
-          icon: 'credit_card',
-        },
-      ],
-    },
-    {
-      route: '/support',
-      label: $localize`:@@navigation.support:Soporte`,
-      icon: 'support_agent',
-      children: [
-        {
-          route: '/support/tickets',
-          label: $localize`:@@navigation.support.tickets:Tickets`,
-          icon: 'confirmation_number',
-        },
-        {
-          route: '/support/chat',
-          label: $localize`:@@navigation.support.chat:Chat en Vivo`,
-          icon: 'chat',
-        },
-        {
-          route: '/support/knowledge',
-          label: $localize`:@@navigation.support.knowledge:Base de Conocimientos`,
-          icon: 'help',
-        },
-      ],
-    },
-    {
-      route: '/settings',
-      label: $localize`:@@navigation.settings:Configuración`,
-      icon: 'settings',
-      children: [
-        {
-          route: '/settings/general',
-          label: $localize`:@@navigation.settings.general:General`,
-          icon: 'tune',
-        },
-        {
-          route: '/settings/security',
-          label: $localize`:@@navigation.settings.security:Seguridad`,
-          icon: 'security',
-        },
-        {
-          route: '/settings/notifications',
-          label: $localize`:@@navigation.settings.notifications:Notificaciones`,
-          icon: 'notifications',
-        },
-        {
-          route: '/settings/integrations',
-          label: $localize`:@@navigation.settings.integrations:Integraciones`,
-          icon: 'extension',
-        },
-      ],
-    },
-  ]);
+  // La señal ahora se inicializa vacía y se poblará en el constructor
+  menuItems: WritableSignal<MenuItem[]> = signal<MenuItem[]>([]);
 
+  constructor(private router: Router) {
+    // Obtenemos la configuración de rutas principal (la que tiene LayoutComponent)
+    const layoutRoute = this.router.config.find((r) => r.component === LayoutComponent);
+    if (layoutRoute && layoutRoute.children) {
+      const menu = this.buildMenuFromRoutes(layoutRoute.children as AppRoute[]);
+      this.menuItems.set(menu);
+    }
+  }
+
+  /**
+   * Transforma un array de AppRoute a un array de MenuItem, filtrando las
+   * rutas que no deben aparecer en el menú.
+   * @param routes - Las rutas a procesar.
+   * @param parentPath - El path acumulado del padre, para construir rutas completas.
+   * @returns Un array de MenuItem.
+   */
+  private buildMenuFromRoutes(routes: AppRoute[], parentPath: string = ''): MenuItem[] {
+    return routes
+      .filter((route) => route.data && !route.data.hiddenInMenu) // Solo rutas con 'data' y no ocultas
+      .map((route) => {
+        // Construimos la ruta completa para el routerLink
+        const fullRoute = `${parentPath}/${route.path}`;
+
+        const menuItem: MenuItem = {
+          route: fullRoute,
+          label: route.data!.label,
+          icon: route.data!.icon ?? '',
+        };
+
+        // Si la ruta tiene hijos, los procesamos recursivamente
+        if (route.children) {
+          menuItem.children = this.buildMenuFromRoutes(route.children, fullRoute);
+        }
+
+        return menuItem;
+      });
+  }
+
+  // Las funciones de abajo pueden permanecer casi iguales, ya que operan sobre la señal
   toggleMenuExpansion(route: string): void {
     const items = this.menuItems().map((item) => {
+      // La lógica podría necesitar ajustarse si buscas en hijos también
       if (item.route === route && item.children) {
         return { ...item, expanded: !item.expanded };
       }
@@ -188,6 +67,7 @@ export class NavigationService {
   }
 
   private findMenuItemByRoute(route: string): MenuItem | undefined {
+    // Esta función podría necesitar ser recursiva si quieres encontrar hijos
     return this.menuItems().find((item) => item.route === route);
   }
 }
