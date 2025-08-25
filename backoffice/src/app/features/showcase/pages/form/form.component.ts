@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // --- Importaciones de Angular Material ---
@@ -43,7 +43,7 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             <mat-label>Nombre Completo</mat-label>
             <input matInput formControlName="fullName" placeholder="Ej. Juan Pérez" />
             <mat-icon matSuffix>person</mat-icon>
-            @if (userProfileForm.get('fullName')?.hasError('required')) {
+            @if (fullName?.errors?.['required'] && (fullName.touched || fullName.dirty)) {
               <mat-error>El nombre es requerido.</mat-error>
             }
           </mat-form-field>
@@ -51,10 +51,10 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             <mat-label>Correo Electrónico</mat-label>
             <input matInput formControlName="email" placeholder="ejemplo@correo.com" type="email" />
             <mat-icon matSuffix>email</mat-icon>
-            @if (userProfileForm.get('email')?.hasError('required')) {
+            @if (email?.errors?.['required'] && (email.touched || email.dirty)) {
               <mat-error>El correo es requerido.</mat-error>
             }
-            @if (userProfileForm.get('email')?.hasError('email')) {
+            @if (email?.errors?.['email'] && !email.errors?.['required'] && (email.touched || email.dirty)) {
               <mat-error>Por favor, introduce un correo válido.</mat-error>
             }
           </mat-form-field>
@@ -111,7 +111,7 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
           <mat-checkbox formControlName="agreesToTerms" color="primary" class="text-sm">
             He leído y acepto los términos y condiciones de servicio.
           </mat-checkbox>
-          @if (userProfileForm.get('agreesToTerms')?.hasError('required')) {
+          @if (agreesToTerms?.errors?.['required'] && (agreesToTerms.touched || agreesToTerms.dirty)) {
             <p class="text-red-500 text-xs mt-1">Debes aceptar los términos para continuar.</p>
           }
         </div>
@@ -146,7 +146,18 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
   ],
 })
 export class FormComponent implements OnInit {
-  userProfileForm!: FormGroup;
+  // Reemplazamos FormGroup no tipado por uno tipado
+  userProfileForm!: FormGroup<{
+    fullName: FormControl<string>;
+    email: FormControl<string>;
+    country: FormControl<string | null>;
+    dob: FormControl<Date | null>;
+    bio: FormControl<string>;
+    subscriptionType: FormControl<'free' | 'premium' | 'enterprise'>;
+    wantsNewsletter: FormControl<boolean>;
+    pushNotifications: FormControl<boolean>;
+    agreesToTerms: FormControl<boolean>;
+  }>;
 
   countries = [
     { name: 'España', code: 'ES' },
@@ -166,17 +177,31 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfileForm = this.fb.group({
-      fullName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      country: [null, [Validators.required]],
-      dob: [null, [Validators.required]],
-      bio: [''],
-      subscriptionType: ['free', [Validators.required]],
-      wantsNewsletter: [true],
-      pushNotifications: [false],
-      agreesToTerms: [false, [Validators.requiredTrue]],
+      fullName: this.fb.nonNullable.control('', { validators: [Validators.required] }),
+      email: this.fb.nonNullable.control('', { validators: [Validators.required, Validators.email] }),
+      country: this.fb.control<string | null>(null, { validators: [Validators.required] }),
+      dob: this.fb.control<Date | null>(null, { validators: [Validators.required] }),
+      bio: this.fb.nonNullable.control(''),
+      subscriptionType: this.fb.nonNullable.control<'free' | 'premium' | 'enterprise'>('free', {
+        validators: [Validators.required],
+      }),
+      wantsNewsletter: this.fb.nonNullable.control(true),
+      pushNotifications: this.fb.nonNullable.control(false),
+      agreesToTerms: this.fb.nonNullable.control(false, { validators: [Validators.requiredTrue] }),
     });
   }
+
+  // Getters para simplificar el template (evita llamadas repetidas y problemas de null)
+  get fullName() {
+    return this.userProfileForm.controls.fullName;
+  }
+  get email() {
+    return this.userProfileForm.controls.email;
+  }
+  get agreesToTerms() {
+    return this.userProfileForm.controls.agreesToTerms;
+  }
+  // ...otros getters opcionales si se requieren...
 
   onSubmit(): void {
     if (this.userProfileForm.invalid) {
@@ -190,9 +215,15 @@ export class FormComponent implements OnInit {
 
   resetForm(): void {
     this.userProfileForm.reset({
+      fullName: '',
+      email: '',
+      country: null,
+      dob: null,
+      bio: '',
       subscriptionType: 'free',
       wantsNewsletter: true,
       pushNotifications: false,
+      agreesToTerms: false,
     });
   }
 }
