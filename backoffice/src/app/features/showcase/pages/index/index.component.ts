@@ -6,14 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-showcase-index',
   standalone: true,
-  imports: [
-    RouterModule, // Para usar routerLink
-    MatCardModule,
-    MatIconModule,
-  ],
+  imports: [RouterModule, MatCardModule, MatIconModule],
   template: `
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Tarjeta que enlaza al formulario -->
       <a
         [routerLink]="['form']"
         class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
@@ -26,8 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
           Ejemplo de un formulario reactivo construido con Angular Material y estilizado con Tailwind CSS.
         </p>
       </a>
-
-      <!-- Puedes agregar más tarjetas aquí para otros componentes del showcase -->
       <div class="block p-6 bg-white dark:bg-slate-800/50 rounded-lg shadow-md cursor-not-allowed">
         <div class="flex items-center">
           <mat-icon class="text-gray-400 !h-8 !w-8 text-4xl">table_chart</mat-icon>

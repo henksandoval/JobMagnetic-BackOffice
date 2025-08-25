@@ -1,6 +1,6 @@
 import { LayoutComponent } from '@layout/layout.component';
 import { AppRoute } from '@core/models/app-route.model';
-import { NotFoundComponent } from '@layout/components/not-found/not-found.component'; // Importamos nuestro tipo
+import { NotFoundComponent } from '@layout/components/not-found/not-found.component';
 
 export const routes: AppRoute[] = [
   {
@@ -18,7 +18,6 @@ export const routes: AppRoute[] = [
       },
       {
         path: 'showcase',
-        // Este sigue siendo el componente layout con el <router-outlet>
         loadComponent: () =>
           import('./features/showcase/showcase.component').then((m) => m.ShowcaseComponent),
         data: {
@@ -27,10 +26,10 @@ export const routes: AppRoute[] = [
         },
         children: [
           {
-            path: '', // Corresponde a la URL '/showcase'
+            path: '',
             data: {
-              label: $localize`:@@navigation.showcase.index:Inicio`, // Etiqueta para el menú
-              icon: 'home', // Un ícono apropiado para la página principal de la sección
+              label: $localize`:@@navigation.showcase.index:Inicio`,
+              icon: 'home',
             },
             loadComponent: () =>
               import('./features/showcase/pages/index/index.component').then((m) => m.ShowcaseIndexComponent),

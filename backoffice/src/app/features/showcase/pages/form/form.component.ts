@@ -21,7 +21,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    // --- Módulos de Material ---
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -35,13 +34,9 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
     TextFieldModule,
   ],
   template: `
-    <!-- Contenedor principal del formulario con un título -->
     <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-lg shadow-md">
       <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Perfil de Usuario</h2>
-
-      <!-- El tag <form> utiliza el formGroup y el evento ngSubmit -->
       <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-        <!-- Layout en Grid para un formulario responsive -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
           <!-- Campo: Nombre Completo (Input de texto) -->
           <mat-form-field appearance="outline" class="w-full">
@@ -52,8 +47,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
               <mat-error>El nombre es requerido.</mat-error>
             }
           </mat-form-field>
-
-          <!-- Campo: Email (Input de email) -->
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Correo Electrónico</mat-label>
             <input matInput formControlName="email" placeholder="ejemplo@correo.com" type="email" />
@@ -65,8 +58,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
               <mat-error>Por favor, introduce un correo válido.</mat-error>
             }
           </mat-form-field>
-
-          <!-- Campo: País (Select/Dropdown) -->
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>País de Residencia</mat-label>
             <mat-select formControlName="country">
@@ -76,8 +67,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             </mat-select>
             <mat-error>Debes seleccionar un país.</mat-error>
           </mat-form-field>
-
-          <!-- Campo: Fecha de Nacimiento (Datepicker) -->
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Fecha de Nacimiento</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dob" />
@@ -85,8 +74,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             <mat-datepicker #picker></mat-datepicker>
             <mat-error>La fecha de nacimiento es requerida.</mat-error>
           </mat-form-field>
-
-          <!-- Campo: Biografía (Textarea) -->
           <div class="md:col-span-2">
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Biografía</mat-label>
@@ -101,8 +88,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
               ></textarea>
             </mat-form-field>
           </div>
-
-          <!-- Campo: Tipo de Suscripción (Radio Buttons) -->
           <div class="flex flex-col">
             <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300"
               >Tipo de Suscripción</label
@@ -113,8 +98,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
               }
             </mat-radio-group>
           </div>
-
-          <!-- Campo: Notificaciones (Checkbox y Slide Toggle) -->
           <div class="flex flex-col justify-center gap-4">
             <mat-checkbox formControlName="wantsNewsletter" color="primary">
               Deseo recibir el boletín informativo
@@ -124,8 +107,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             </mat-slide-toggle>
           </div>
         </div>
-
-        <!-- Checkbox de Términos y Condiciones (requerido) -->
         <div class="mt-8">
           <mat-checkbox formControlName="agreesToTerms" color="primary" class="text-sm">
             He leído y acepto los términos y condiciones de servicio.
@@ -134,8 +115,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'; // Para el textarea a
             <p class="text-red-500 text-xs mt-1">Debes aceptar los términos para continuar.</p>
           }
         </div>
-
-        <!-- Botones de Acción -->
         <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
           <button type="button" mat-stroked-button (click)="resetForm()">Limpiar Formulario</button>
           <button type="submit" mat-flat-button color="primary" [disabled]="userProfileForm.invalid">

@@ -19,7 +19,6 @@ import { RouterOutlet } from '@angular/router';
         </p>
       </header>
       <main>
-        <!-- Aquí se renderiza ShowcaseIndexComponent o FormComponent -->
         <router-outlet></router-outlet>
       </main>
     </div>
