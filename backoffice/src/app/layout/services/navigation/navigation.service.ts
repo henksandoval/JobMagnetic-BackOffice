@@ -1,15 +1,15 @@
-import {Injectable, signal} from '@angular/core';
-import {MenuItem} from '../../models/menu-item.model';
+import { Injectable, signal } from '@angular/core';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NavigationService {
   menuItems = signal<MenuItem[]>([
     {
       route: '/dashboard',
       label: $localize`:@@navigation.dashboard:Dashboard`,
-      icon: 'dashboard'
+      icon: 'dashboard',
     },
     {
       route: '/users',
@@ -19,19 +19,19 @@ export class NavigationService {
         {
           route: '/users/list',
           label: $localize`:@@navigation.users.list:Lista de Usuarios`,
-          icon: 'list'
+          icon: 'list',
         },
         {
           route: '/users/create',
           label: $localize`:@@navigation.users.create:Crear Usuario`,
-          icon: 'person_add'
+          icon: 'person_add',
         },
         {
           route: '/users/roles',
           label: $localize`:@@navigation.users.roles:Roles y Permisos`,
-          icon: 'admin_panel_settings'
-        }
-      ]
+          icon: 'admin_panel_settings',
+        },
+      ],
     },
     {
       route: '/products',
@@ -41,19 +41,19 @@ export class NavigationService {
         {
           route: '/products/catalog',
           label: $localize`:@@navigation.products.catalog:Catálogo`,
-          icon: 'category'
+          icon: 'category',
         },
         {
           route: '/products/inventory',
           label: $localize`:@@navigation.products.inventory:Inventario`,
-          icon: 'warehouse'
+          icon: 'warehouse',
         },
         {
           route: '/products/suppliers',
           label: $localize`:@@navigation.products.suppliers:Proveedores`,
-          icon: 'local_shipping'
-        }
-      ]
+          icon: 'local_shipping',
+        },
+      ],
     },
     {
       route: '/sales',
@@ -63,19 +63,19 @@ export class NavigationService {
         {
           route: '/sales/orders',
           label: $localize`:@@navigation.sales.orders:Órdenes`,
-          icon: 'receipt'
+          icon: 'receipt',
         },
         {
           route: '/sales/customers',
           label: $localize`:@@navigation.sales.customers:Clientes`,
-          icon: 'group'
+          icon: 'group',
         },
         {
           route: '/sales/invoices',
           label: $localize`:@@navigation.sales.invoices:Facturas`,
-          icon: 'description'
-        }
-      ]
+          icon: 'description',
+        },
+      ],
     },
     {
       route: '/analytics',
@@ -85,19 +85,19 @@ export class NavigationService {
         {
           route: '/analytics/reports',
           label: $localize`:@@navigation.analytics.reports:Reportes`,
-          icon: 'assessment'
+          icon: 'assessment',
         },
         {
           route: '/analytics/charts',
           label: $localize`:@@navigation.analytics.charts:Gráficos`,
-          icon: 'bar_chart'
+          icon: 'bar_chart',
         },
         {
           route: '/analytics/kpis',
           label: $localize`:@@navigation.analytics.kpis:KPIs`,
-          icon: 'trending_up'
-        }
-      ]
+          icon: 'trending_up',
+        },
+      ],
     },
     {
       route: '/finance',
@@ -107,19 +107,19 @@ export class NavigationService {
         {
           route: '/finance/accounting',
           label: $localize`:@@navigation.finance.accounting:Contabilidad`,
-          icon: 'calculate'
+          icon: 'calculate',
         },
         {
           route: '/finance/budgets',
           label: $localize`:@@navigation.finance.budgets:Presupuestos`,
-          icon: 'savings'
+          icon: 'savings',
         },
         {
           route: '/finance/expenses',
           label: $localize`:@@navigation.finance.expenses:Gastos`,
-          icon: 'credit_card'
-        }
-      ]
+          icon: 'credit_card',
+        },
+      ],
     },
     {
       route: '/support',
@@ -129,19 +129,19 @@ export class NavigationService {
         {
           route: '/support/tickets',
           label: $localize`:@@navigation.support.tickets:Tickets`,
-          icon: 'confirmation_number'
+          icon: 'confirmation_number',
         },
         {
           route: '/support/chat',
           label: $localize`:@@navigation.support.chat:Chat en Vivo`,
-          icon: 'chat'
+          icon: 'chat',
         },
         {
           route: '/support/knowledge',
           label: $localize`:@@navigation.support.knowledge:Base de Conocimientos`,
-          icon: 'help'
-        }
-      ]
+          icon: 'help',
+        },
+      ],
     },
     {
       route: '/settings',
@@ -151,29 +151,29 @@ export class NavigationService {
         {
           route: '/settings/general',
           label: $localize`:@@navigation.settings.general:General`,
-          icon: 'tune'
+          icon: 'tune',
         },
         {
           route: '/settings/security',
           label: $localize`:@@navigation.settings.security:Seguridad`,
-          icon: 'security'
+          icon: 'security',
         },
         {
           route: '/settings/notifications',
           label: $localize`:@@navigation.settings.notifications:Notificaciones`,
-          icon: 'notifications'
+          icon: 'notifications',
         },
         {
           route: '/settings/integrations',
           label: $localize`:@@navigation.settings.integrations:Integraciones`,
-          icon: 'extension'
-        }
-      ]
-    }
+          icon: 'extension',
+        },
+      ],
+    },
   ]);
 
   toggleMenuExpansion(route: string): void {
-    const items = this.menuItems().map(item => {
+    const items = this.menuItems().map((item) => {
       if (item.route === route && item.children) {
         return { ...item, expanded: !item.expanded };
       }
@@ -188,6 +188,6 @@ export class NavigationService {
   }
 
   private findMenuItemByRoute(route: string): MenuItem | undefined {
-    return this.menuItems().find(item => item.route === route);
+    return this.menuItems().find((item) => item.route === route);
   }
 }

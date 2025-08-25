@@ -16,7 +16,7 @@ export type AppIconColor = 'default' | 'subtle' | 'primary';
       align-items: center;
       justify-content: center;
     }
-  `
+  `,
 })
 export class IconComponent {
   @Input({ required: true }) iconName!: string;

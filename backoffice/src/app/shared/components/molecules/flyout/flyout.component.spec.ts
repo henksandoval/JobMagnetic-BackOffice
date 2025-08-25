@@ -8,9 +8,8 @@ describe('FlyoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlyoutComponent]
-    })
-    .compileComponents();
+      imports: [FlyoutComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FlyoutComponent);
     component = fixture.componentInstance;

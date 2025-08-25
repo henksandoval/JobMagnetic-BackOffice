@@ -1,8 +1,8 @@
-import {Component, effect, inject} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {MatIconButton} from '@angular/material/button';
-import {UiStateService} from '../../../../services/ui-state/ui-state.service';
-import {IconComponent} from '../../../../../shared/components/atoms/icon/icon.component';
+import { Component, effect, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { MatIconButton } from '@angular/material/button';
+import { UiStateService } from '../../../../services/ui-state/ui-state.service';
+import { IconComponent } from '../../../../../shared/components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -12,16 +12,16 @@ import {IconComponent} from '../../../../../shared/components/atoms/icon/icon.co
     <button
       mat-icon-button
       [attr.aria-label]="'Cambiar a tema ' + (isDark() ? 'claro' : 'oscuro')"
-      (click)="toggleTheme()">
+      (click)="toggleTheme()"
+    >
       <app-icon [iconName]="isDark() ? 'light_mode' : 'dark_mode'"></app-icon>
     </button>
   `,
 })
 export class ThemeToggleComponent {
   private uiStateService = inject(UiStateService);
-  private document = inject(DOCUMENT);
-
   isDark = this.uiStateService.currentTheme;
+  private document = inject(DOCUMENT);
 
   constructor() {
     effect(() => {

@@ -1,11 +1,14 @@
 @use '@angular/material' as mat;
 
 @import "tailwindcss";
+
 @include mat.core();
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 
 body {
   margin: 0;

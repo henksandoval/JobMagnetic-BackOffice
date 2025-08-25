@@ -1,9 +1,9 @@
-import {Injectable, signal} from '@angular/core';
-import {User} from '../../models/user.model';
-import {Router} from '@angular/router';
+import { Injectable, signal } from '@angular/core';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   // Signal para el estado de autenticación
@@ -25,14 +25,14 @@ export class AuthService {
       // Simulación de validación (en una app real, esto sería una llamada HTTP)
       if (email && password) {
         // Simular delay de red
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Usuario simulado
         const user: User = {
           id: '1',
           email: email,
           name: email.split('@')[0],
-          avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`
+          avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
         };
 
         // Actualizar el estado
@@ -69,6 +69,20 @@ export class AuthService {
   }
 
   /**
+   * Obtener token (para futuras llamadas API)
+   */
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
+  /**
+   * Verificar si el usuario está autenticado (método helper)
+   */
+  checkAuth(): boolean {
+    return this.isAuthenticated();
+  }
+
+  /**
    * Verificar autenticación almacenada
    */
   private checkStoredAuth(): void {
@@ -93,19 +107,5 @@ export class AuthService {
   private clearStoredAuth(): void {
     localStorage.removeItem('auth_user');
     localStorage.removeItem('auth_token');
-  }
-
-  /**
-   * Obtener token (para futuras llamadas API)
-   */
-  getToken(): string | null {
-    return localStorage.getItem('auth_token');
-  }
-
-  /**
-   * Verificar si el usuario está autenticado (método helper)
-   */
-  checkAuth(): boolean {
-    return this.isAuthenticated();
   }
 }

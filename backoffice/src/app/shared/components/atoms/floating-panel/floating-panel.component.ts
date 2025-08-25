@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-floating-panel',
@@ -12,13 +12,14 @@ import {Component, Input} from '@angular/core';
     >
       @if (title) {
         <header
-          class="submenu-header px-4 pt-3 pb-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+          class="submenu-header px-4 pt-3 pb-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider"
+        >
           {{ title }}
         </header>
       }
       <ng-content></ng-content>
     </div>
-  `
+  `,
 })
 export class FloatingPanelComponent {
   @Input() title?: string;

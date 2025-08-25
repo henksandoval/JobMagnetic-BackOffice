@@ -1,25 +1,32 @@
-import { Component, ContentChild, ElementRef, OnDestroy, TemplateRef, ViewContainerRef, ViewChild } from '@angular/core';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  OnDestroy,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-flyout',
   standalone: true,
-  imports: [
-    OverlayModule
-  ],
+  imports: [OverlayModule],
   template: `
     <div #trigger (mouseenter)="onTriggerEnter()" (mouseleave)="onTriggerLeave()">
       <ng-content select="[flyout-trigger]"></ng-content>
     </div>
     <ng-content select="[flyout-content]"></ng-content>
   `,
-  styles: [`
-    :host {
-      display: block;
-    }
-  `]
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
 })
 export class FlyoutComponent implements OnDestroy {
   @ViewChild('trigger', { read: ElementRef, static: true }) private trigger!: ElementRef;
@@ -44,13 +51,18 @@ export class FlyoutComponent implements OnDestroy {
     this.scheduleClose();
   }
 
+  ngOnDestroy(): void {
+    this.close();
+  }
+
   private open(): void {
     if (!this.contentTemplate) {
       console.error('Flyout component was not created');
       return;
     }
 
-    const positionStrategy = this.overlay.position()
+    const positionStrategy = this.overlay
+      .position()
       .flexibleConnectedTo(this.trigger.nativeElement)
       .withPositions([
         {
@@ -59,7 +71,7 @@ export class FlyoutComponent implements OnDestroy {
           overlayX: 'start',
           overlayY: 'top',
           offsetX: 8,
-        }
+        },
       ]);
 
     this.overlayRef = this.overlay.create({ positionStrategy });
@@ -92,13 +104,9 @@ export class FlyoutComponent implements OnDestroy {
 
   private onContentEnter = (): void => {
     this.cancelClose();
-  }
+  };
 
   private onContentLeave = (): void => {
     this.scheduleClose();
-  }
-
-  ngOnDestroy(): void {
-    this.close();
-  }
+  };
 }

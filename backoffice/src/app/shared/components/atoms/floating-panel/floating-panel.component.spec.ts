@@ -8,9 +8,8 @@ describe('FloatingPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FloatingPanelComponent]
-    })
-    .compileComponents();
+      imports: [FloatingPanelComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FloatingPanelComponent);
     component = fixture.componentInstance;

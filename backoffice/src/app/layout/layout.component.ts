@@ -1,20 +1,15 @@
-import {Component, effect, inject} from '@angular/core';
-import {AuthService} from '@core/services/auth/auth.service';
-import {UiStateService} from './services/ui-state/ui-state.service';
-import {RouterOutlet} from '@angular/router';
+import { Component, effect, inject } from '@angular/core';
+import { AuthService } from '@core/services/auth/auth.service';
+import { UiStateService } from './services/ui-state/ui-state.service';
+import { RouterOutlet } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [
-    RouterOutlet,
-    SidebarComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
+  imports: [RouterOutlet, SidebarComponent, HeaderComponent, FooterComponent],
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
@@ -29,6 +24,11 @@ export class LayoutComponent {
     });
   }
 
+  // Getter para acceder al usuario actual
+  get currentUser() {
+    return this.authService.currentUser();
+  }
+
   onProfileClick() {
     console.log('Profile clicked');
     // TODO: Implementar navegación al perfil del usuario
@@ -36,10 +36,5 @@ export class LayoutComponent {
 
   onLogoutClick() {
     this.authService.logout();
-  }
-
-  // Getter para acceder al usuario actual
-  get currentUser() {
-    return this.authService.currentUser();
   }
 }
