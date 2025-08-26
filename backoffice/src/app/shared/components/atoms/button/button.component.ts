@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'; // Necesario para el icono
+import { MatIconModule } from '@angular/material/icon';
 
 type ButtonVariant = 'flat' | 'stroked' | 'raised' | 'icon' | 'fab' | 'mini-fab';
 type ButtonColor = 'primary' | 'accent' | 'warn' | undefined;
@@ -21,7 +21,6 @@ export class ButtonComponent {
   @Output() action = new EventEmitter<void>();
 
   onClick(): void {
-    // Si el botón está deshabilitado, no emitir el evento.
     if (this.disabled) {
       return;
     }

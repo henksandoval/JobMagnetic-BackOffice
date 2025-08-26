@@ -1,7 +1,4 @@
-<!-- Usamos ngSwitch para seleccionar el bloque de HTML correcto basado en el 'variant' -->
 <ng-container [ngSwitch]="variant">
-
-  <!-- Caso para 'flat' -->
   <button
     (click)="onClick()"
     *ngSwitchCase="'flat'"
@@ -11,7 +8,6 @@
     {{ label }}
   </button>
 
-  <!-- Caso para 'stroked' -->
   <button
     (click)="onClick()"
     *ngSwitchCase="'stroked'"
@@ -21,20 +17,15 @@
     {{ label }}
   </button>
 
-  <!-- Caso para 'icon' -->
   <button
     (click)="onClick()"
     *ngSwitchCase="'icon'"
     [color]="color"
     [type]="type"
     mat-icon-button>
-    <!-- Para botones de icono, el label suele ser un mat-icon -->
-    <ng-content></ng-content> <!-- Usamos ng-content para permitir pasar un icono desde fuera -->
+    <ng-content></ng-content>
   </button>
 
-  <!-- ... otros casos para 'fab', 'mini-fab' ... -->
-
-  <!-- Caso por defecto, que será 'raised' -->
   <button
     (click)="onClick()"
     *ngSwitchDefault
@@ -43,5 +34,4 @@
     mat-raised-button>
     {{ label }}
   </button>
-
 </ng-container>
