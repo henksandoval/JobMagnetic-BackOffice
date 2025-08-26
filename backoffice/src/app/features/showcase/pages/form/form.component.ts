@@ -2,8 +2,6 @@ import { Component, computed, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-
-// CAMBIO 1: Importar los tipos necesarios que estaban en el servicio
 import {
   Country,
   FormDataService,
@@ -40,7 +38,6 @@ import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slid
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  // CAMBIO 3: Proporcionar el tipado completo y explícito para el FormGroup.
   userProfileForm!: FormGroup<{
     fullName: FormControl<string>;
     email: FormControl<string>;
@@ -53,7 +50,6 @@ export class FormComponent implements OnInit {
     agreesToTerms: FormControl<boolean>;
   }>;
   isFormInvalid = computed(() => {
-    // Asegurarse de que el formulario exista antes de acceder a sus propiedades
     return !this.userProfileForm || this.userProfileForm.invalid;
   });
   readonly fullNameErrors = { required: 'El nombre es requerido.' };
@@ -67,9 +63,7 @@ export class FormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private formDataService = inject(FormDataService);
   subscriptionTypes = toSignal(this.formDataService.getSubscriptionTypes(), { initialValue: [] });
-  // --- Estado reactivo con Signals ---
   private countriesSource = toSignal(this.formDataService.getCountries(), { initialValue: [] });
-  // CAMBIO 2: Crear un signal 'computed' para transformar los datos para el select.
   countriesForSelect = computed<SelectOption[]>(() =>
     this.countriesSource().map((country: Country) => ({
       value: country.code,
@@ -79,8 +73,6 @@ export class FormComponent implements OnInit {
   private initialState!: UserProfileForm;
 
   ngOnInit(): void {
-    // CAMBIO 4: Usar `fb.group` en lugar de `fb.nonNullable.group` si algunos controles
-    // pueden ser nulos, como 'country' y 'dob'. Esto simplifica la definición.
     const formDefinition = {
       fullName: this.fb.nonNullable.control('', [Validators.required]),
       email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),

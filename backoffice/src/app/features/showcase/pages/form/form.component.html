@@ -3,8 +3,6 @@
 
   <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-
-      <!-- Campo: Nombre Completo -->
       <app-input
         [errors]="fullNameErrors"
         formControlName="fullName"
@@ -13,7 +11,6 @@
         placeholder="Ej. Juan Pérez"
       ></app-input>
 
-      <!-- Campo: Correo Electrónico -->
       <app-input
         [errors]="emailErrors"
         formControlName="email"
@@ -23,7 +20,6 @@
         type="email"
       ></app-input>
 
-      <!-- Campo: País de Residencia (el signal se pasa como input) -->
       <app-select
         [errors]="countryErrors"
         [options]="countriesForSelect()"
@@ -31,14 +27,12 @@
         label="País de Residencia"
       ></app-select>
 
-      <!-- Campo: Fecha de Nacimiento -->
       <app-date-picker
         [errors]="dobErrors"
         formControlName="dob"
         label="Fecha de Nacimiento"
       ></app-date-picker>
 
-      <!-- Campo: Biografía (abarca dos columnas) -->
       <div class="md:col-span-2">
         <app-text-area
           formControlName="bio"
@@ -47,21 +41,18 @@
         ></app-text-area>
       </div>
 
-      <!-- Campo: Tipo de Suscripción -->
       <app-radio-group
         [options]="subscriptionTypes()"
         formControlName="subscriptionType"
         label="Tipo de Suscripción"
       ></app-radio-group>
 
-      <!-- Campos: Opciones Booleanas -->
       <div class="flex flex-col justify-center gap-4">
         <app-checkbox
           formControlName="wantsNewsletter"
           label="Deseo recibir el boletín informativo"
         ></app-checkbox>
 
-        <!-- Asumiendo un app-slide-toggle similar a app-checkbox -->
         <app-slide-toggle
           formControlName="pushNotifications"
           label="Activar notificaciones push"
@@ -69,7 +60,6 @@
       </div>
     </div>
 
-    <!-- Campo: Términos y Condiciones -->
     <div class="mt-8">
       <app-checkbox
         [errors]="termsErrors"
@@ -78,7 +68,6 @@
       ></app-checkbox>
     </div>
 
-    <!-- Botones de Acción -->
     <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
       <app-button
         (action)="resetForm()"
