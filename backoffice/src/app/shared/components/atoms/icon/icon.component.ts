@@ -24,7 +24,6 @@ export class IconComponent {
   @Input() color: AppIconColor = 'default';
   get classes() {
     return {
-      // Mapeo de tamaños
       'text-base': this.size === 'sm',
       'text-lg': this.size === 'md',
       'text-xl': this.size === 'lg',

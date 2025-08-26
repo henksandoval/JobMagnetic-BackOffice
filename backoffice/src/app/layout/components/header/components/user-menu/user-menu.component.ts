@@ -14,14 +14,12 @@ import { IconComponent } from '@shared/components/atoms/icon/icon.component';
 export class UserMenuComponent {
   private authService = inject(AuthService);
 
-  // Getter para acceder al usuario actual
   get currentUser() {
     return this.authService.currentUser();
   }
 
   onProfileClick() {
     console.log('Profile clicked');
-    // TODO: Implementar navegación al perfil del usuario
   }
 
   onLogoutClick() {

@@ -17,14 +17,14 @@
         </context-group>
       </trans-unit>
       <trans-unit id="navigation.showcase.index" datatype="html">
-        <source>Inicio</source>
+        <source>Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="navigation.showcase.form" datatype="html">
-        <source>Formulario</source>
+        <source>Form</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">40</context>

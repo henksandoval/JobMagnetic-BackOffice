@@ -11,7 +11,7 @@ import { IconComponent } from '@shared/components/atoms/icon/icon.component';
   template: `
     <button
       mat-icon-button
-      [attr.aria-label]="'Cambiar a tema ' + (isDark() ? 'claro' : 'oscuro')"
+      [attr.aria-label]="'Switch to ' + (isDark() ? 'light' : 'dark') + ' theme'"
       (click)="toggleTheme()"
     >
       <app-icon [iconName]="isDark() ? 'light_mode' : 'dark_mode'"></app-icon>

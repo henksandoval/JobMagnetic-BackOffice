@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-// Interfaces para un tipado robusto y reutilizable.
 export interface Country {
   name: string;
   code: string;
@@ -13,10 +12,8 @@ export interface SubscriptionOption {
   value: SubscriptionType;
 }
 
-// Type alias para consistencia y evitar "magic strings".
 export type SubscriptionType = 'free' | 'premium' | 'enterprise';
 
-// Forma del formulario, para reutilizar el tipado.
 export interface UserProfileForm {
   fullName: string;
   email: string;
@@ -30,34 +27,31 @@ export interface UserProfileForm {
 }
 
 @Injectable({
-  providedIn: 'root', // Disponible en toda la aplicación
+  providedIn: 'root',
 })
 export class FormDataService {
   getCountries(): Observable<Country[]> {
     const countries: Country[] = [
-      { name: 'España', code: 'ES' },
-      { name: 'México', code: 'MX' },
+      { name: 'Spain', code: 'ES' },
+      { name: 'Mexico', code: 'MX' },
       { name: 'Argentina', code: 'AR' },
       { name: 'Colombia', code: 'CO' },
-      { name: 'Estados Unidos', code: 'US' },
+      { name: 'United States', code: 'US' },
     ];
-    // Simulamos una llamada a API con un 'of' y 'delay'
     return of(countries).pipe(delay(500));
   }
 
   getSubscriptionTypes(): Observable<SubscriptionOption[]> {
     const subscriptionTypes: SubscriptionOption[] = [
-      { label: 'Gratis', value: 'free' },
+      { label: 'Free', value: 'free' },
       { label: 'Premium', value: 'premium' },
-      { label: 'Empresarial', value: 'enterprise' },
+      { label: 'Enterprise', value: 'enterprise' },
     ];
     return of(subscriptionTypes);
   }
 
-  // La lógica de guardado también pertenece al servicio.
   saveProfile(profileData: UserProfileForm): Observable<{ success: boolean }> {
-    console.log('Enviando datos al servidor...', profileData);
-    // Simula una petición HTTP POST
+    console.log('Sending data to server...', profileData);
     return of({ success: true }).pipe(delay(1000));
   }
 }

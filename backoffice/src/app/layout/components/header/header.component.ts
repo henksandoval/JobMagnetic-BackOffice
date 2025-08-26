@@ -12,6 +12,5 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  // Solo necesita el servicio para el botón del menú. El resto está encapsulado.
   public uiStateService = inject(UiStateService);
 }

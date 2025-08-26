@@ -52,12 +52,12 @@ export class FormComponent implements OnInit {
   isFormInvalid = computed(() => {
     return !this.userProfileForm || this.userProfileForm.invalid;
   });
-  readonly fullNameErrors = { required: 'El nombre es requerido.' };
+  readonly fullNameErrors = { required: 'Name is required.' };
   readonly emailErrors = {
-    required: 'El correo es requerido.',
-    email: 'Por favor, introduce un correo válido.',
+    required: 'Email is required.',
+    email: 'Please enter a valid email address.',
   };
-  readonly countryErrors = { required: 'Debes seleccionar un país.' };
+  readonly countryErrors = { required: 'You must select a country.' };
   readonly dobErrors = { required: 'La fecha de nacimiento es requerida.' };
   readonly termsErrors = { requiredTrue: 'Debes aceptar los términos para continuar.' };
   private fb = inject(FormBuilder);

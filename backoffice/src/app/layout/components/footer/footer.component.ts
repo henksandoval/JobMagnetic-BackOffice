@@ -11,14 +11,14 @@ import { RouterLink } from '@angular/router';
     >
       <div class="flex flex-col items-center justify-between gap-y-2 sm:flex-row">
         <div class="text-center sm:text-left">
-          <span>&copy; {{ currentYear }} Admin Panel. Todos los derechos reservados.</span>
+          <span>&copy; {{ currentYear }} Admin Panel. All rights reserved.</span>
         </div>
         <div class="flex items-center gap-x-6">
           <a routerLink="/terms" class="transition-colors hover:text-slate-900 dark:hover:text-white">
-            Términos
+            Terms
           </a>
           <a routerLink="/privacy" class="transition-colors hover:text-slate-900 dark:hover:text-white">
-            Privacidad
+            Privacy
           </a>
           <span class="font-medium text-slate-600 dark:text-slate-300"> v1.0.0 </span>
         </div>

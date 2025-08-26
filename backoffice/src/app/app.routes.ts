@@ -28,7 +28,7 @@ export const routes: AppRoute[] = [
           {
             path: '',
             data: {
-              label: $localize`:@@navigation.showcase.index:Inicio`,
+              label: $localize`:@@navigation.showcase.index:Home`,
               icon: 'home',
             },
             loadComponent: () =>
@@ -37,7 +37,7 @@ export const routes: AppRoute[] = [
           {
             path: 'form',
             data: {
-              label: $localize`:@@navigation.showcase.form:Formulario`,
+              label: $localize`:@@navigation.showcase.form:Form`,
               icon: 'edit_note',
             },
             loadComponent: () =>

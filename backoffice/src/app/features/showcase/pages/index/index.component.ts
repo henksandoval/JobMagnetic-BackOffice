@@ -15,19 +15,19 @@ import { MatIconModule } from '@angular/material/icon';
       >
         <div class="flex items-center">
           <mat-icon class="text-blue-500 !h-8 !w-8 text-4xl">edit_note</mat-icon>
-          <h3 class="ml-4 text-lg font-semibold text-gray-800 dark:text-gray-100">Formularios</h3>
+          <h3 class="ml-4 text-lg font-semibold text-gray-800 dark:text-gray-100">Forms</h3>
         </div>
         <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          Ejemplo de un formulario reactivo construido con Angular Material y estilizado con Tailwind CSS.
+          Example of a reactive form built with Angular Material and styled with Tailwind CSS.
         </p>
       </a>
       <div class="block p-6 bg-white dark:bg-slate-800/50 rounded-lg shadow-md cursor-not-allowed">
         <div class="flex items-center">
           <mat-icon class="text-gray-400 !h-8 !w-8 text-4xl">table_chart</mat-icon>
-          <h3 class="ml-4 text-lg font-semibold text-gray-500 dark:text-gray-400">Tablas (Próximamente)</h3>
+          <h3 class="ml-4 text-lg font-semibold text-gray-500 dark:text-gray-400">Tables (Coming Soon)</h3>
         </div>
         <p class="mt-3 text-sm text-gray-500 dark:text-gray-500">
-          Ejemplo de una tabla de datos con paginación y filtros.
+          Example of a data table with pagination and filters.
         </p>
       </div>
     </div>

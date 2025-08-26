@@ -14,7 +14,6 @@ import { MenuItem } from '../../models/menu-item.model';
 })
 export class BreadcrumbComponent {
   private navigationService = inject(NavigationService);
-  // Computed signal para obtener la jerarquía de breadcrumb
   breadcrumbTrail = computed<MenuItem[]>(() => {
     const url = this.currentUrl();
     function findTrail(items: MenuItem[], parentTrail: MenuItem[] = []): MenuItem[] {
@@ -31,7 +30,6 @@ export class BreadcrumbComponent {
     return findTrail(this.navigationService.menuItems());
   });
   private router = inject(Router);
-  // Signal con la ruta actual
   currentUrl = signal(this.router.url);
 
   constructor() {
