@@ -10,7 +10,7 @@
              tabindex="0">
             <span *ngIf="crumb.icon"
                   class="material-icons text-base opacity-70 group-hover:text-blue-500">{{ crumb.icon }}</span>
-            <span class="truncate">{{ crumb.label }}</span>
+            <span class="truncate" i18n>{{ crumb.label }}</span>
           </a>
           <span class="mx-1 text-gray-400 dark:text-gray-500 text-lg select-none">
             <svg class="inline w-4 h-4 align-middle" fill="none" stroke="currentColor" stroke-width="2"
@@ -20,7 +20,7 @@
         <span *ngIf="last"
               class="breadcrumb-pill flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600 text-white dark:bg-blue-500 dark:text-white font-semibold shadow focus:outline-none focus:ring-2 focus:ring-blue-400">
           <span *ngIf="crumb.icon" class="material-icons text-base opacity-90">{{ crumb.icon }}</span>
-          <span class="truncate">{{ crumb.label }}</span>
+          <span class="truncate" i18n>{{ crumb.label }}</span>
         </span>
       </div>
     </ng-container>

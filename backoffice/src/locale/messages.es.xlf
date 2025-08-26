@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" target-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="navigation.dashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Panel</target>
+      </trans-unit>
+      <trans-unit id="navigation.showcase" datatype="html">
+        <source>Showcase</source>
+        <target>Demostración</target>
+      </trans-unit>
+      <trans-unit id="navigation.showcase.index" datatype="html">
+        <source>Inicio</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="navigation.showcase.form" datatype="html">
+        <source>Formulario</source>
+        <target>Formulario</target>
+      </trans-unit>
+      <trans-unit id="646223455052474777" datatype="html">
+        <source>Total Sales</source>
+        <target>Ventas Totales</target>
+      </trans-unit>
+      <trans-unit id="6762743264882388498" datatype="html">
+        <source>Monthly</source>
+        <target>Mensual</target>
+      </trans-unit>
+      <trans-unit id="1836325341458112664" datatype="html">
+        <source>Revenue</source>
+        <target>Ingresos</target>
+      </trans-unit>
+      <trans-unit id="369679454877964077" datatype="html">
+        <source>Traffic</source>
+        <target>Tráfico</target>
+      </trans-unit>
+      <trans-unit id="966676689249033743" datatype="html">
+        <source>New User</source>
+        <target>Nuevo Usuario</target>
+      </trans-unit>
+      <trans-unit id="7205798792478615678" datatype="html">
+        <source>Weekly Revenue</source>
+        <target>Ingresos Semanales</target>
+      </trans-unit>
+      <trans-unit id="2983413903486635223" datatype="html">
+        <source>Avatar List</source>
+        <target>Lista de Avatares</target>
+      </trans-unit>
+      <trans-unit id="7744292213705278878" datatype="html">
+        <source>User Profile</source>
+        <target>Perfil de Usuario</target>
+      </trans-unit>
+      <trans-unit id="6959497441009812685" datatype="html">
+        <source>Full Name</source>
+        <target>Nombre Completo</target>
+      </trans-unit>
+      <trans-unit id="7767041360183607141" datatype="html">
+        <source>e.g. John Doe</source>
+        <target>Ej. Juan Pérez</target>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <target>Correo Electrónico</target>
+      </trans-unit>
+      <trans-unit id="4277791203116188558" datatype="html">
+        <source>example@email.com</source>
+        <target>ejemplo@correo.com</target>
+      </trans-unit>
+      <trans-unit id="5050732370102091598" datatype="html">
+        <source>Country of Residence</source>
+        <target>País de Residencia</target>
+      </trans-unit>
+      <trans-unit id="7890419814061896884" datatype="html">
+        <source>Date of Birth</source>
+        <target>Fecha de Nacimiento</target>
+      </trans-unit>
+      <trans-unit id="2744569715266946921" datatype="html">
+        <source>Biography</source>
+        <target>Biografía</target>
+      </trans-unit>
+      <trans-unit id="1971905133998936806" datatype="html">
+        <source>Tell us a bit about yourself...</source>
+        <target>Cuéntanos un poco sobre ti...</target>
+      </trans-unit>
+      <trans-unit id="6283784166667907708" datatype="html">
+        <source>Subscription Type</source>
+        <target>Tipo de Suscripción</target>
+      </trans-unit>
+      <trans-unit id="5453831970175905449" datatype="html">
+        <source>I want to receive the newsletter</source>
+        <target>Deseo recibir el boletín informativo</target>
+      </trans-unit>
+      <trans-unit id="7633495317068763162" datatype="html">
+        <source>Enable push notifications</source>
+        <target>Activar notificaciones push</target>
+      </trans-unit>
+      <trans-unit id="2074248942406108028" datatype="html">
+        <source>I have read and accept the terms and conditions of service.</source>
+        <target>He leído y acepto los términos y condiciones de servicio.</target>
+      </trans-unit>
+      <trans-unit id="8700121026680200191" datatype="html">
+        <source>Clear</source>
+        <target>Limpiar</target>
+      </trans-unit>
+      <trans-unit id="70967537922329228" datatype="html">
+        <source>Save Profile</source>
+        <target>Guardar Perfil</target>
+      </trans-unit>
+      <trans-unit id="sidebar.adminPanel" datatype="html">
+        <source>Admin Panel</source>
+        <target>Panel de Administración</target>
+      </trans-unit>
+      <trans-unit id="header.dashboard" datatype="html">
+        <source>Dashboard</source>
+        <target>Panel</target>
+      </trans-unit>
+      <trans-unit id="userMenu.demoUser" datatype="html">
+        <source>Demo User</source>
+        <target>Usuario Demo</target>
+      </trans-unit>
+      <trans-unit id="notFound.works" datatype="html">
+        <source>not-found works!</source>
+        <target>¡Página no encontrada!</target>
+      </trans-unit>
+      <trans-unit id="userMenu.profile" datatype="html">
+        <source>Profile</source>
+        <target>Perfil</target>
+      </trans-unit>
+      <trans-unit id="userMenu.settings" datatype="html">
+        <source>Settings</source>
+        <target>Ajustes</target>
+      </trans-unit>
+      <trans-unit id="userMenu.logout" datatype="html">
+        <source>Logout</source>
+        <target>Cerrar Sesión</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
+

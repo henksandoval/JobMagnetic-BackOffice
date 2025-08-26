@@ -1,5 +1,5 @@
 <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Perfil de Usuario</h2>
+  <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100" i18n>User Profile</h2>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -7,16 +7,16 @@
         [errors]="fullNameErrors"
         formControlName="fullName"
         icon="person"
-        label="Nombre Completo"
-        placeholder="Ej. Juan Pérez"
+        label="Full Name" i18n-label
+        placeholder="e.g. John Doe" i18n-placeholder
       ></app-input>
 
       <app-input
         [errors]="emailErrors"
         formControlName="email"
         icon="email"
-        label="Correo Electrónico"
-        placeholder="ejemplo@correo.com"
+        label="Email" i18n-label
+        placeholder="example@email.com" i18n-placeholder
         type="email"
       ></app-input>
 
@@ -24,38 +24,38 @@
         [errors]="countryErrors"
         [options]="countriesForSelect()"
         formControlName="country"
-        label="País de Residencia"
+        label="Country of Residence" i18n-label
       ></app-select>
 
       <app-date-picker
         [errors]="dobErrors"
         formControlName="dob"
-        label="Fecha de Nacimiento"
+        label="Date of Birth" i18n-label
       ></app-date-picker>
 
       <div class="md:col-span-2">
         <app-text-area
           formControlName="bio"
-          label="Biografía"
-          placeholder="Cuéntanos un poco sobre ti..."
+          label="Biography" i18n-label
+          placeholder="Tell us a bit about yourself..." i18n-placeholder
         ></app-text-area>
       </div>
 
       <app-radio-group
         [options]="subscriptionTypes()"
         formControlName="subscriptionType"
-        label="Tipo de Suscripción"
+        label="Subscription Type" i18n-label
       ></app-radio-group>
 
       <div class="flex flex-col justify-center gap-4">
         <app-checkbox
           formControlName="wantsNewsletter"
-          label="Deseo recibir el boletín informativo"
+          label="I want to receive the newsletter" i18n-label
         ></app-checkbox>
 
         <app-slide-toggle
           formControlName="pushNotifications"
-          label="Activar notificaciones push"
+          label="Enable push notifications" i18n-label
         ></app-slide-toggle>
       </div>
     </div>
@@ -64,20 +64,20 @@
       <app-checkbox
         [errors]="termsErrors"
         formControlName="agreesToTerms"
-        label="He leído y acepto los términos y condiciones de servicio."
+        label="I have read and accept the terms and conditions of service." i18n-label
       ></app-checkbox>
     </div>
 
     <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
       <app-button
         (action)="resetForm()"
-        label="Limpiar"
+        label="Clear" i18n-label
         variant="stroked"
       ></app-button>
       <app-button
         [disabled]="isFormInvalid()"
         color="primary"
-        label="Guardar Perfil"
+        label="Save Profile" i18n-label
         type="submit"
         variant="flat"
       ></app-button>

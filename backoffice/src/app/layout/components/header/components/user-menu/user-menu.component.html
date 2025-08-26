@@ -6,29 +6,29 @@
       <app-icon iconName="person" size="md"></app-icon>
     </div>
   }
-  <span class="hidden md:inline">{{ currentUser?.name || 'Usuario Demo' }}</span>
+  <span class="hidden md:inline" i18n>{{ currentUser?.name || 'Demo User' }}</span>
   <app-icon iconName="arrow_drop_down"></app-icon>
 </button>
 
 <mat-menu #userMenu="matMenu">
   <div class="user-info" disabled mat-menu-item>
     <div class="user-details">
-      <span class="user-name">{{ currentUser?.name || 'Usuario Demo' }}</span>
+      <span class="user-name" i18n>{{ currentUser?.name || 'Demo User' }}</span>
       <span class="user-email">{{ currentUser?.email || 'demo@admin.com' }}</span>
     </div>
   </div>
   <mat-divider></mat-divider>
   <button (click)="onProfileClick()" class="menu-item" mat-menu-item>
     <app-icon iconName="account_circle"></app-icon>
-    <span>Perfil</span>
+    <span i18n>Profile</span>
   </button>
   <button class="menu-item" mat-menu-item>
     <app-icon iconName="settings"></app-icon>
-    <span>Ajustes</span>
+    <span i18n>Settings</span>
   </button>
   <mat-divider></mat-divider>
   <button (click)="onLogoutClick()" class="menu-item" mat-menu-item>
     <app-icon iconName="logout"></app-icon>
-    <span>Cerrar Sesión</span>
+    <span i18n>Logout</span>
   </button>
 </mat-menu>
