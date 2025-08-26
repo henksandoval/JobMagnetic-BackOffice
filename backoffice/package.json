@@ -8,6 +8,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:en": "ng serve --configuration=en --port 5082",
+    "start:es": "ng serve --configuration=es --port 5082",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -15,7 +17,8 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "i18n": "ng extract-i18n"
   },
   "private": true,
   "dependencies": {
