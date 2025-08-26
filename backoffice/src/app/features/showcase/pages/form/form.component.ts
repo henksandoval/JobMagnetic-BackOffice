@@ -1,28 +1,35 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, computed, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 
-// Importaciones de tipos y servicio.
+// CAMBIO 1: Importar los tipos necesarios que estaban en el servicio
 import {
   FormDataService,
+  UserProfileForm,
   Country,
   SubscriptionOption,
   SubscriptionType,
-  UserProfileForm,
 } from '../../services/data/data.service';
+import { SelectOption } from '@shared/components/atoms/select/select.component'; // Asegúrate que la ruta sea correcta
 
-// --- Importaciones de Angular Material ---
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { TextFieldModule } from '@angular/cdk/text-field';
+import { InputComponent } from '@shared/components/atoms/input/input.component';
+import { SelectComponent } from '@shared/components/atoms/select/select.component';
+import { DatePickerComponent } from '@shared/components/atoms/date-picker/date-picker.component';
+import { RadioGroupComponent } from '@shared/components/atoms/radio-group/radio-group.component';
+import { CheckboxComponent } from '@shared/components/atoms/checkbox/checkbox.component';
+import { ButtonComponent } from '@shared/components/atoms/button/button.component';
+import { TextAreaComponent } from '@shared/components/atoms/text-area/text-area.component';
+import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slide-toggle.component';
 
 @Component({
   selector: 'app-form',
@@ -30,27 +37,36 @@ import { TextFieldModule } from '@angular/cdk/text-field';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    TextFieldModule,
+    InputComponent,
+    SelectComponent,
+    DatePickerComponent,
+    RadioGroupComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    TextAreaComponent,
+    SlideToggleComponent,
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  // Inyección de dependencias moderna y limpia con inject()
   private fb = inject(FormBuilder);
   private formDataService = inject(FormDataService);
 
-  // Usamos el tipado del servicio.
+  // --- Estado reactivo con Signals ---
+  private countriesSource = toSignal(this.formDataService.getCountries(), { initialValue: [] });
+  subscriptionTypes = toSignal(this.formDataService.getSubscriptionTypes(), { initialValue: [] });
+
+  // CAMBIO 2: Crear un signal 'computed' para transformar los datos para el select.
+  countriesForSelect = computed<SelectOption[]>(() =>
+    this.countriesSource().map((country: Country) => ({
+      value: country.code,
+      name: country.name,
+    }))
+  );
+
+  // CAMBIO 3: Proporcionar el tipado completo y explícito para el FormGroup.
   userProfileForm!: FormGroup<{
     fullName: FormControl<string>;
     email: FormControl<string>;
@@ -63,16 +79,25 @@ export class FormComponent implements OnInit {
     agreesToTerms: FormControl<boolean>;
   }>;
 
-  // Los datos ahora vienen del servicio.
-  countries: Country[] = [];
-  subscriptionTypes: SubscriptionOption[] = [];
+  isFormInvalid = computed(() => {
+    // Asegurarse de que el formulario exista antes de acceder a sus propiedades
+    return !this.userProfileForm || this.userProfileForm.invalid;
+  });
 
-  private initialState!: UserProfileForm; // Para un reset inteligente
+  private initialState!: UserProfileForm;
+
+  readonly fullNameErrors = { required: 'El nombre es requerido.' };
+  readonly emailErrors = {
+    required: 'El correo es requerido.',
+    email: 'Por favor, introduce un correo válido.',
+  };
+  readonly countryErrors = { required: 'Debes seleccionar un país.' };
+  readonly dobErrors = { required: 'La fecha de nacimiento es requerida.' };
+  readonly termsErrors = { requiredTrue: 'Debes aceptar los términos para continuar.' };
 
   ngOnInit(): void {
-    this.loadData();
-
-    // Definimos la estructura y valores iniciales
+    // CAMBIO 4: Usar `fb.group` en lugar de `fb.nonNullable.group` si algunos controles
+    // pueden ser nulos, como 'country' y 'dob'. Esto simplifica la definición.
     const formDefinition = {
       fullName: this.fb.nonNullable.control('', [Validators.required]),
       email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
@@ -86,56 +111,30 @@ export class FormComponent implements OnInit {
     };
 
     this.userProfileForm = this.fb.group(formDefinition);
-
-    // Guardamos el estado inicial para el reset.
     this.initialState = this.userProfileForm.getRawValue();
   }
 
-  private loadData(): void {
-    this.formDataService.getCountries().subscribe((data) => (this.countries = data));
-    this.formDataService.getSubscriptionTypes().subscribe((data) => (this.subscriptionTypes = data));
-  }
-
-  // Getters para simplificar el template y mejorar la legibilidad.
-  get fullName() {
-    return this.userProfileForm.controls.fullName;
-  }
-  get email() {
-    return this.userProfileForm.controls.email;
-  }
-  get country() {
-    return this.userProfileForm.controls.country;
-  }
-  get dob() {
-    return this.userProfileForm.controls.dob;
-  }
-  get agreesToTerms() {
-    return this.userProfileForm.controls.agreesToTerms;
-  }
-
   onSubmit(): void {
-    if (this.userProfileForm.invalid) {
+    if (this.isFormInvalid()) {
       this.userProfileForm.markAllAsTouched();
       return;
     }
 
-    // Delegamos el guardado al servicio.
     this.formDataService.saveProfile(this.userProfileForm.getRawValue()).subscribe({
       next: (response) => {
         if (response.success) {
-          alert('¡Perfil guardado con éxito! Revisa la consola para ver los datos.');
-          this.userProfileForm.markAsPristine(); // Marcar como no modificado
+          alert('¡Perfil guardado con éxito!');
+          this.userProfileForm.markAsPristine();
         }
       },
       error: (err) => {
         console.error('Error al guardar el perfil:', err);
-        alert('Hubo un error al guardar. Inténtalo de nuevo.');
+        alert('Hubo un error al guardar.');
       },
     });
   }
 
   resetForm(): void {
-    // Reseteamos al estado inicial guardado, no a uno vacío.
     this.userProfileForm.reset(this.initialState);
   }
 }

@@ -1,0 +1,22 @@
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  />
+  @if (icon) {
+    <mat-icon matSuffix>{{ icon }}</mat-icon>
+  }
+
+  @if (control?.invalid && (control?.touched || control?.dirty)) {
+    <mat-error>
+      @for (error of control.errors | keyvalue; track error.key) {
+        @if (errors[error.key]) {
+          <span>{{ errors[error.key] }}</span>
+        }
+      }
+    </mat-error>
+  }
+</mat-form-field>

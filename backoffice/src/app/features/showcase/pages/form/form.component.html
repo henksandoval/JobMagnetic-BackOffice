@@ -4,105 +4,94 @@
   <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
 
-      <!-- Campo: Nombre Completo (Input de texto) -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Nombre Completo</mat-label>
-        <input matInput formControlName="fullName" placeholder="Ej. Juan Pérez" />
-        <mat-icon matSuffix>person</mat-icon>
-        @if (fullName.hasError('required')) {
-          <mat-error>El nombre es requerido.</mat-error>
-        }
-      </mat-form-field>
+      <!-- Campo: Nombre Completo -->
+      <app-input
+        label="Nombre Completo"
+        formControlName="fullName"
+        placeholder="Ej. Juan Pérez"
+        icon="person"
+        [errors]="fullNameErrors"
+      ></app-input>
 
       <!-- Campo: Correo Electrónico -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Correo Electrónico</mat-label>
-        <input matInput formControlName="email" placeholder="ejemplo@correo.com" type="email" />
-        <mat-icon matSuffix>email</mat-icon>
-        @if (email.hasError('required')) {
-          <mat-error>El correo es requerido.</mat-error>
-        } @else if (email.hasError('email')) {
-          <mat-error>Por favor, introduce un correo válido.</mat-error>
-        }
-      </mat-form-field>
+      <app-input
+        label="Correo Electrónico"
+        type="email"
+        formControlName="email"
+        placeholder="ejemplo@correo.com"
+        icon="email"
+        [errors]="emailErrors"
+      ></app-input>
 
-      <!-- Campo: País de Residencia (Select) -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>País de Residencia</mat-label>
-        <mat-select formControlName="country">
-          @for (country of countries; track country.code) {
-            <mat-option [value]="country.code">{{ country.name }}</mat-option>
-          }
-        </mat-select>
-        @if (country.hasError('required')) {
-          <mat-error>Debes seleccionar un país.</mat-error>
-        }
-      </mat-form-field>
+      <!-- Campo: País de Residencia (el signal se pasa como input) -->
+      <app-select
+        label="País de Residencia"
+        formControlName="country"
+        [options]="countriesForSelect()"
+        [errors]="countryErrors"
+      ></app-select>
 
-      <!-- Campo: Fecha de Nacimiento (Datepicker) -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dob" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        @if (dob.hasError('required')) {
-          <mat-error>La fecha de nacimiento es requerida.</mat-error>
-        }
-      </mat-form-field>
+      <!-- Campo: Fecha de Nacimiento -->
+      <app-date-picker
+        label="Fecha de Nacimiento"
+        formControlName="dob"
+        [errors]="dobErrors"
+      ></app-date-picker>
 
-      <!-- Campo: Biografía (Textarea) -->
+      <!-- Campo: Biografía (abarca dos columnas) -->
       <div class="md:col-span-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Biografía</mat-label>
-          <textarea
-            matInput
-            formControlName="bio"
-            cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="3"
-            cdkAutosizeMaxRows="5"
-            placeholder="Cuéntanos un poco sobre ti..."
-          ></textarea>
-        </mat-form-field>
+        <app-text-area
+          label="Biografía"
+          formControlName="bio"
+          placeholder="Cuéntanos un poco sobre ti..."
+        ></app-text-area>
       </div>
 
-      <!-- Campo: Tipo de Suscripción (Radio Group) -->
-      <div class="flex flex-col">
-        <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300">Tipo de Suscripción</label>
-        <mat-radio-group formControlName="subscriptionType" class="flex flex-col sm:flex-row gap-4">
-          @for (sub of subscriptionTypes; track sub.value) {
-            <mat-radio-button [value]="sub.value">{{ sub.label }}</mat-radio-button>
-          }
-        </mat-radio-group>
-      </div>
+      <!-- Campo: Tipo de Suscripción -->
+      <app-radio-group
+        label="Tipo de Suscripción"
+        formControlName="subscriptionType"
+        [options]="subscriptionTypes()"
+      ></app-radio-group>
 
-      <!-- Campos: Opciones Booleanas (Checkbox y Slide-toggle) -->
+      <!-- Campos: Opciones Booleanas -->
       <div class="flex flex-col justify-center gap-4">
-        <mat-checkbox formControlName="wantsNewsletter" color="primary">
-          Deseo recibir el boletín informativo
-        </mat-checkbox>
-        <mat-slide-toggle formControlName="pushNotifications" color="primary">
-          Activar notificaciones push
-        </mat-slide-toggle>
+        <app-checkbox
+          label="Deseo recibir el boletín informativo"
+          formControlName="wantsNewsletter"
+        ></app-checkbox>
+
+        <!-- Asumiendo un app-slide-toggle similar a app-checkbox -->
+        <app-slide-toggle
+          label="Activar notificaciones push"
+          formControlName="pushNotifications"
+        ></app-slide-toggle>
       </div>
     </div>
 
-    <!-- Campo: Términos y Condiciones (Checkbox con validador) -->
+    <!-- Campo: Términos y Condiciones -->
     <div class="mt-8">
-      <mat-checkbox formControlName="agreesToTerms" color="primary" class="text-sm">
-        He leído y acepto los términos y condiciones de servicio.
-      </mat-checkbox>
-      @if (agreesToTerms.hasError('requiredTrue')) {
-        <mat-error class="text-xs mt-1">Debes aceptar los términos para continuar.</mat-error>
-      }
+      <app-checkbox
+        label="He leído y acepto los términos y condiciones de servicio."
+        formControlName="agreesToTerms"
+        [errors]="termsErrors"
+      ></app-checkbox>
     </div>
 
     <!-- Botones de Acción -->
     <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-      <button type="button" mat-stroked-button (click)="resetForm()">Limpiar</button>
-      <button type="submit" mat-flat-button color="primary" [disabled]="userProfileForm.invalid">
-        Guardar Perfil
-      </button>
+      <app-button
+        label="Limpiar"
+        variant="stroked"
+        (action)="resetForm()"
+      ></app-button>
+      <app-button
+        label="Guardar Perfil"
+        type="submit"
+        variant="flat"
+        color="primary"
+        [disabled]="isFormInvalid()"
+      ></app-button>
     </div>
   </form>
 </div>
