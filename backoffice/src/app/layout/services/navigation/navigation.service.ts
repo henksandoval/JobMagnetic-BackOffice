@@ -20,6 +20,23 @@ export class NavigationService {
     }
   }
 
+  // Las funciones de abajo pueden permanecer casi iguales, ya que operan sobre la señal
+  toggleMenuExpansion(route: string): void {
+    const items = this.menuItems().map((item) => {
+      // La lógica podría necesitar ajustarse si buscas en hijos también
+      if (item.route === route && item.children) {
+        return { ...item, expanded: !item.expanded };
+      }
+      return item;
+    });
+    this.menuItems.set(items);
+  }
+
+  isMenuExpanded(route: string): boolean {
+    const item = this.findMenuItemByRoute(route);
+    return item?.expanded || false;
+  }
+
   /**
    * Transforma un array de AppRoute a un array de MenuItem, filtrando las
    * rutas que no deben aparecer en el menú.
@@ -47,23 +64,6 @@ export class NavigationService {
 
         return menuItem;
       });
-  }
-
-  // Las funciones de abajo pueden permanecer casi iguales, ya que operan sobre la señal
-  toggleMenuExpansion(route: string): void {
-    const items = this.menuItems().map((item) => {
-      // La lógica podría necesitar ajustarse si buscas en hijos también
-      if (item.route === route && item.children) {
-        return { ...item, expanded: !item.expanded };
-      }
-      return item;
-    });
-    this.menuItems.set(items);
-  }
-
-  isMenuExpanded(route: string): boolean {
-    const item = this.findMenuItemByRoute(route);
-    return item?.expanded || false;
   }
 
   private findMenuItemByRoute(route: string): MenuItem | undefined {

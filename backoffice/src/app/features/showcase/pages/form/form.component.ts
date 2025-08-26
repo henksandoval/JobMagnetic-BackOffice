@@ -1,29 +1,18 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-} from '@angular/forms';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 
 // CAMBIO 1: Importar los tipos necesarios que estaban en el servicio
 import {
-  FormDataService,
-  UserProfileForm,
   Country,
-  SubscriptionOption,
+  FormDataService,
   SubscriptionType,
+  UserProfileForm,
 } from '../../services/data/data.service';
-import { SelectOption } from '@shared/components/atoms/select/select.component'; // Asegúrate que la ruta sea correcta
-
+import { SelectComponent, SelectOption } from '@shared/components/atoms/select/select.component'; // Asegúrate que la ruta sea correcta
 import { MatNativeDateModule } from '@angular/material/core';
 import { InputComponent } from '@shared/components/atoms/input/input.component';
-import { SelectComponent } from '@shared/components/atoms/select/select.component';
 import { DatePickerComponent } from '@shared/components/atoms/date-picker/date-picker.component';
 import { RadioGroupComponent } from '@shared/components/atoms/radio-group/radio-group.component';
 import { CheckboxComponent } from '@shared/components/atoms/checkbox/checkbox.component';
@@ -51,21 +40,6 @@ import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slid
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  private fb = inject(FormBuilder);
-  private formDataService = inject(FormDataService);
-
-  // --- Estado reactivo con Signals ---
-  private countriesSource = toSignal(this.formDataService.getCountries(), { initialValue: [] });
-  subscriptionTypes = toSignal(this.formDataService.getSubscriptionTypes(), { initialValue: [] });
-
-  // CAMBIO 2: Crear un signal 'computed' para transformar los datos para el select.
-  countriesForSelect = computed<SelectOption[]>(() =>
-    this.countriesSource().map((country: Country) => ({
-      value: country.code,
-      name: country.name,
-    }))
-  );
-
   // CAMBIO 3: Proporcionar el tipado completo y explícito para el FormGroup.
   userProfileForm!: FormGroup<{
     fullName: FormControl<string>;
@@ -78,14 +52,10 @@ export class FormComponent implements OnInit {
     pushNotifications: FormControl<boolean>;
     agreesToTerms: FormControl<boolean>;
   }>;
-
   isFormInvalid = computed(() => {
     // Asegurarse de que el formulario exista antes de acceder a sus propiedades
     return !this.userProfileForm || this.userProfileForm.invalid;
   });
-
-  private initialState!: UserProfileForm;
-
   readonly fullNameErrors = { required: 'El nombre es requerido.' };
   readonly emailErrors = {
     required: 'El correo es requerido.',
@@ -94,6 +64,19 @@ export class FormComponent implements OnInit {
   readonly countryErrors = { required: 'Debes seleccionar un país.' };
   readonly dobErrors = { required: 'La fecha de nacimiento es requerida.' };
   readonly termsErrors = { requiredTrue: 'Debes aceptar los términos para continuar.' };
+  private fb = inject(FormBuilder);
+  private formDataService = inject(FormDataService);
+  subscriptionTypes = toSignal(this.formDataService.getSubscriptionTypes(), { initialValue: [] });
+  // --- Estado reactivo con Signals ---
+  private countriesSource = toSignal(this.formDataService.getCountries(), { initialValue: [] });
+  // CAMBIO 2: Crear un signal 'computed' para transformar los datos para el select.
+  countriesForSelect = computed<SelectOption[]>(() =>
+    this.countriesSource().map((country: Country) => ({
+      value: country.code,
+      name: country.name,
+    }))
+  );
+  private initialState!: UserProfileForm;
 
   ngOnInit(): void {
     // CAMBIO 4: Usar `fb.group` en lugar de `fb.nonNullable.group` si algunos controles

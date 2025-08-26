@@ -22,9 +22,6 @@ export class SlideToggleComponent implements ControlValueAccessor {
   @Input() errors: Record<string, string> = {};
 
   // --- Implementación de ControlValueAccessor ---
-
-  onChange: (value: any) => void = () => {};
-  onTouched: () => void = () => {};
   isDisabled: boolean = false;
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
@@ -34,22 +31,29 @@ export class SlideToggleComponent implements ControlValueAccessor {
     }
   }
 
+  /** Proporciona un acceso fácil al FormControl desde la plantilla. */
+  get control(): FormControl {
+    return this.ngControl?.control as FormControl;
+  }
+
+  onChange: (value: any) => void = () => {};
+
   // Estos métodos son requeridos por la interfaz, pero la vinculación
+
+  onTouched: () => void = () => {};
+
   // [formControl] se encarga de la mayor parte del trabajo por nosotros.
   writeValue(obj: any): void {}
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-  }
-
-  /** Proporciona un acceso fácil al FormControl desde la plantilla. */
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
   }
 }

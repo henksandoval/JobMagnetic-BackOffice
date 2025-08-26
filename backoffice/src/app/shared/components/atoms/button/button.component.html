@@ -3,31 +3,31 @@
 
   <!-- Caso para 'flat' -->
   <button
+    (click)="onClick()"
     *ngSwitchCase="'flat'"
-    mat-flat-button
-    [type]="type"
     [color]="color"
-    (click)="onClick()">
+    [type]="type"
+    mat-flat-button>
     {{ label }}
   </button>
 
   <!-- Caso para 'stroked' -->
   <button
+    (click)="onClick()"
     *ngSwitchCase="'stroked'"
-    mat-stroked-button
-    [type]="type"
     [color]="color"
-    (click)="onClick()">
+    [type]="type"
+    mat-stroked-button>
     {{ label }}
   </button>
 
   <!-- Caso para 'icon' -->
   <button
+    (click)="onClick()"
     *ngSwitchCase="'icon'"
-    mat-icon-button
-    [type]="type"
     [color]="color"
-    (click)="onClick()">
+    [type]="type"
+    mat-icon-button>
     <!-- Para botones de icono, el label suele ser un mat-icon -->
     <ng-content></ng-content> <!-- Usamos ng-content para permitir pasar un icono desde fuera -->
   </button>
@@ -36,11 +36,11 @@
 
   <!-- Caso por defecto, que será 'raised' -->
   <button
+    (click)="onClick()"
     *ngSwitchDefault
-    mat-raised-button
-    [type]="type"
     [color]="color"
-    (click)="onClick()">
+    [type]="type"
+    mat-raised-button>
     {{ label }}
   </button>
 

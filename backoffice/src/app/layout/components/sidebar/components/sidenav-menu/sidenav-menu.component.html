@@ -21,8 +21,7 @@
             </div>
           }
         </div>
-      }
-      @else {
+      } @else {
         <app-flyout>
           <div flyout-trigger>
             <app-menu-item [config]="{ icon: item.icon, variant: 'icon-only' }"></app-menu-item>
@@ -38,8 +37,7 @@
           </ng-template>
         </app-flyout>
       }
-    }
-    @else {
+    } @else {
       <app-menu-item
         [config]="{
           route: item.route,

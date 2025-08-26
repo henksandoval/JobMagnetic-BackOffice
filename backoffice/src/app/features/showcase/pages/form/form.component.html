@@ -1,70 +1,70 @@
 <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-lg shadow-md">
   <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Perfil de Usuario</h2>
 
-  <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
 
       <!-- Campo: Nombre Completo -->
       <app-input
-        label="Nombre Completo"
-        formControlName="fullName"
-        placeholder="Ej. Juan Pérez"
-        icon="person"
         [errors]="fullNameErrors"
+        formControlName="fullName"
+        icon="person"
+        label="Nombre Completo"
+        placeholder="Ej. Juan Pérez"
       ></app-input>
 
       <!-- Campo: Correo Electrónico -->
       <app-input
-        label="Correo Electrónico"
-        type="email"
-        formControlName="email"
-        placeholder="ejemplo@correo.com"
-        icon="email"
         [errors]="emailErrors"
+        formControlName="email"
+        icon="email"
+        label="Correo Electrónico"
+        placeholder="ejemplo@correo.com"
+        type="email"
       ></app-input>
 
       <!-- Campo: País de Residencia (el signal se pasa como input) -->
       <app-select
-        label="País de Residencia"
-        formControlName="country"
-        [options]="countriesForSelect()"
         [errors]="countryErrors"
+        [options]="countriesForSelect()"
+        formControlName="country"
+        label="País de Residencia"
       ></app-select>
 
       <!-- Campo: Fecha de Nacimiento -->
       <app-date-picker
-        label="Fecha de Nacimiento"
-        formControlName="dob"
         [errors]="dobErrors"
+        formControlName="dob"
+        label="Fecha de Nacimiento"
       ></app-date-picker>
 
       <!-- Campo: Biografía (abarca dos columnas) -->
       <div class="md:col-span-2">
         <app-text-area
-          label="Biografía"
           formControlName="bio"
+          label="Biografía"
           placeholder="Cuéntanos un poco sobre ti..."
         ></app-text-area>
       </div>
 
       <!-- Campo: Tipo de Suscripción -->
       <app-radio-group
-        label="Tipo de Suscripción"
-        formControlName="subscriptionType"
         [options]="subscriptionTypes()"
+        formControlName="subscriptionType"
+        label="Tipo de Suscripción"
       ></app-radio-group>
 
       <!-- Campos: Opciones Booleanas -->
       <div class="flex flex-col justify-center gap-4">
         <app-checkbox
-          label="Deseo recibir el boletín informativo"
           formControlName="wantsNewsletter"
+          label="Deseo recibir el boletín informativo"
         ></app-checkbox>
 
         <!-- Asumiendo un app-slide-toggle similar a app-checkbox -->
         <app-slide-toggle
-          label="Activar notificaciones push"
           formControlName="pushNotifications"
+          label="Activar notificaciones push"
         ></app-slide-toggle>
       </div>
     </div>
@@ -72,25 +72,25 @@
     <!-- Campo: Términos y Condiciones -->
     <div class="mt-8">
       <app-checkbox
-        label="He leído y acepto los términos y condiciones de servicio."
-        formControlName="agreesToTerms"
         [errors]="termsErrors"
+        formControlName="agreesToTerms"
+        label="He leído y acepto los términos y condiciones de servicio."
       ></app-checkbox>
     </div>
 
     <!-- Botones de Acción -->
     <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
       <app-button
+        (action)="resetForm()"
         label="Limpiar"
         variant="stroked"
-        (action)="resetForm()"
       ></app-button>
       <app-button
+        [disabled]="isFormInvalid()"
+        color="primary"
         label="Guardar Perfil"
         type="submit"
         variant="flat"
-        color="primary"
-        [disabled]="isFormInvalid()"
       ></app-button>
     </div>
   </form>

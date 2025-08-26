@@ -19,10 +19,6 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() icon: string | null = null;
   @Input() errors: Record<string, string> = {};
-
-  // Propiedades para ControlValueAccessor
-  onChange: (value: any) => void = () => {};
-  onTouched: () => void = () => {};
   value: string | number | null = null;
   isDisabled: boolean = false;
 
@@ -31,6 +27,16 @@ export class InputComponent implements ControlValueAccessor {
       this.ngControl.valueAccessor = this;
     }
   }
+
+  // Helper para acceder al control desde la plantilla.
+  get control(): FormControl {
+    return this.ngControl?.control as FormControl;
+  }
+
+  // Propiedades para ControlValueAccessor
+  onChange: (value: any) => void = () => {};
+
+  onTouched: () => void = () => {};
 
   // Escribe un nuevo valor al elemento.
   writeValue(value: any): void {
@@ -50,10 +56,5 @@ export class InputComponent implements ControlValueAccessor {
   // Función llamada cuando el estado de 'disabled' del control cambia.
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-  }
-
-  // Helper para acceder al control desde la plantilla.
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
   }
 }

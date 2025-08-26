@@ -1,7 +1,7 @@
 <div>
   <mat-slide-toggle
-    [formControl]="control"
-    [color]="color">
+    [color]="color"
+    [formControl]="control">
     {{ label }}
   </mat-slide-toggle>
   @if (control?.invalid && (control?.touched || control?.dirty)) {

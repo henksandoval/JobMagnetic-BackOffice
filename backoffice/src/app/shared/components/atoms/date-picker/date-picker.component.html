@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="w-full">
   <mat-label>{{ label }}</mat-label>
-  <input matInput [matDatepicker]="picker" [formControl]="control" />
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <input [formControl]="control" [matDatepicker]="picker" matInput/>
+  <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 
   @if (control?.invalid && (control?.touched || control?.dirty)) {

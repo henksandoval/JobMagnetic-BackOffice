@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { NavigationService } from '../../services/navigation/navigation.service';
 import { MenuItem } from '../../models/menu-item.model';
@@ -14,17 +14,6 @@ import { MenuItem } from '../../models/menu-item.model';
 })
 export class BreadcrumbComponent {
   private navigationService = inject(NavigationService);
-  private router = inject(Router);
-
-  // Signal con la ruta actual
-  currentUrl = signal(this.router.url);
-
-  constructor() {
-    this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe((e) => this.currentUrl.set(e.urlAfterRedirects));
-  }
-
   // Computed signal para obtener la jerarquía de breadcrumb
   breadcrumbTrail = computed<MenuItem[]>(() => {
     const url = this.currentUrl();
@@ -41,4 +30,13 @@ export class BreadcrumbComponent {
     }
     return findTrail(this.navigationService.menuItems());
   });
+  private router = inject(Router);
+  // Signal con la ruta actual
+  currentUrl = signal(this.router.url);
+
+  constructor() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e) => this.currentUrl.set(e.urlAfterRedirects));
+  }
 }

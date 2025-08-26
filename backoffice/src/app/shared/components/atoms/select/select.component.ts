@@ -21,9 +21,6 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() options: SelectOption[] = [];
   @Input() errors: Record<string, string> = {};
-
-  onChange: (value: any) => void = () => {};
-  onTouched: () => void = () => {};
   isDisabled: boolean = false;
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
@@ -31,6 +28,14 @@ export class SelectComponent implements ControlValueAccessor {
       this.ngControl.valueAccessor = this;
     }
   }
+
+  get control(): FormControl {
+    return this.ngControl?.control as FormControl;
+  }
+
+  onChange: (value: any) => void = () => {};
+
+  onTouched: () => void = () => {};
 
   writeValue(value: any): void {
     // El control se encarga del valor a través de [formControl]
@@ -46,9 +51,5 @@ export class SelectComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-  }
-
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
   }
 }
