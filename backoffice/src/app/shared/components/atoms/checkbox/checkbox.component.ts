@@ -1,45 +1,33 @@
-import { Component, Input, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Optional, Self } from '@angular/core';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ControlValueAccessorBase } from '@shared/directives/control-value-accessor.directive';
 
 @Component({
   selector: 'app-checkbox',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatCheckboxModule, MatFormFieldModule],
-  templateUrl: './checkbox.component.html',
+  template: `
+    <div>
+      <mat-checkbox [formControl]="control" color="primary">
+        {{ label }}
+      </mat-checkbox>
+      @if (control?.invalid && (control?.touched || control?.dirty)) {
+        <mat-error class="text-xs mt-1 block">
+          @for (error of control.errors | keyvalue; track error.key) {
+            @if (errors[error.key]) {
+              <span>{{ errors[error.key] }}</span>
+            }
+          }
+        </mat-error>
+      }
+    </div>
+  `,
 })
-export class CheckboxComponent implements ControlValueAccessor {
-  @Input() label: string = '';
-  @Input() errors: Record<string, string> = {};
-  isDisabled: boolean = false;
-
-  constructor(@Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
-    }
-  }
-
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
-  }
-
-  onChange: (value: any) => void = () => {};
-
-  onTouched: () => void = () => {};
-
-  writeValue(obj: any): void {}
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+export class CheckboxComponent extends ControlValueAccessorBase {
+  constructor(@Optional() @Self() public override ngControl: NgControl) {
+    super(ngControl);
   }
 }

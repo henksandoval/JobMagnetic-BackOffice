@@ -1,60 +1,41 @@
 import { Component, Input, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-// --- Importaciones de Angular Material ---
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { ControlValueAccessorBase } from '@shared/directives/control-value-accessor.directive';
 
 @Component({
   selector: 'app-input',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
-  templateUrl: './input.component.html',
+  template: `
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>{{ label }}</mat-label>
+      <input [formControl]="control" [placeholder]="placeholder" [type]="type" matInput />
+      @if (icon) {
+        <mat-icon matSuffix>{{ icon }}</mat-icon>
+      }
+
+      @if (control?.invalid && (control?.touched || control?.dirty)) {
+        <mat-error>
+          @for (error of control.errors | keyvalue; track error.key) {
+            @if (errors[error.key]) {
+              <span>{{ errors[error.key] }}</span>
+            }
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+  `,
 })
-export class InputComponent implements ControlValueAccessor {
-  @Input() label: string = '';
+export class InputComponent extends ControlValueAccessorBase {
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
   @Input() icon: string | null = null;
-  @Input() errors: Record<string, string> = {};
-  value: string | number | null = null;
-  isDisabled: boolean = false;
 
-  constructor(@Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
-    }
-  }
-
-  // Helper para acceder al control desde la plantilla.
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
-  }
-
-  // Propiedades para ControlValueAccessor
-  onChange: (value: any) => void = () => {};
-
-  onTouched: () => void = () => {};
-
-  // Escribe un nuevo valor al elemento.
-  writeValue(value: any): void {
-    this.value = value;
-  }
-
-  // Registra un callback para ser llamado cuando el valor del control cambia en la UI.
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  // Registra un callback para ser llamado cuando el control se marca como 'touched'.
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  // Función llamada cuando el estado de 'disabled' del control cambia.
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+  constructor(@Optional() @Self() public override ngControl: NgControl) {
+    super(ngControl);
   }
 }

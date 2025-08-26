@@ -1,7 +1,8 @@
 import { Component, Input, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
+import { ControlValueAccessorBase } from '@shared/directives/control-value-accessor.directive';
 
 export interface RadioOption {
   value: string | number | boolean;
@@ -12,38 +13,21 @@ export interface RadioOption {
   selector: 'app-radio-group',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatRadioModule],
-  templateUrl: './radio-group.component.html',
+  template: `
+    <div class="flex flex-col">
+      <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300">{{ label }}</label>
+      <mat-radio-group [formControl]="control" class="flex flex-col sm:flex-row gap-4">
+        @for (option of options; track option.value) {
+          <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
+        }
+      </mat-radio-group>
+    </div>
+  `,
 })
-export class RadioGroupComponent implements ControlValueAccessor {
-  @Input() label: string = '';
+export class RadioGroupComponent extends ControlValueAccessorBase {
   @Input() options: RadioOption[] = [];
-  isDisabled: boolean = false;
 
-  constructor(@Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
-    }
-  }
-
-  get control(): FormControl {
-    return this.ngControl?.control as FormControl;
-  }
-
-  onChange: (value: any) => void = () => {};
-
-  onTouched: () => void = () => {};
-
-  writeValue(obj: any): void {}
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+  constructor(@Optional() @Self() public override ngControl: NgControl) {
+    super(ngControl);
   }
 }
