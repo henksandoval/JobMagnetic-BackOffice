@@ -1,6 +1,6 @@
 // @ts-check
 const eslint = require('@eslint/js');
-const tseslint = npm install --save-dev eslint typescript-eslint @angular-eslint/eslint-plugin @angular-eslint/template-parserrequire('typescript-eslint');
+const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const eslintConfigPrettier = require('eslint-config-prettier');
 
