@@ -13,7 +13,7 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   template: `
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>{{ label }}</mat-label>
-      <input [formControl]="control" [placeholder]="placeholder" [type]="type" matInput />
+      <input [formControl]="control" [type]="type" matInput />
       @if (icon) {
         <mat-icon matSuffix>{{ icon }}</mat-icon>
       }
