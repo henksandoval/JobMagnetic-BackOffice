@@ -1,7 +1,7 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from '../../models/menu-item.model';
-import { AppRoute } from 'src/app/core/models/app-route.model';
+import { AppRoute } from '@core/models/app-route.model';
 import { LayoutComponent } from '@layout/layout.component'; // Adjust the path to your model
 
 @Injectable({
