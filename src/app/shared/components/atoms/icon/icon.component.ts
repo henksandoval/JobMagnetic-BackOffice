@@ -29,9 +29,9 @@ export class IconComponent {
       'text-xl': this.size === 'lg',
       'text-2xl': this.size === 'xl',
 
-      'text-zinc-700 dark:text-zinc-300': this.color === 'default',
-      'text-zinc-500 dark:text-zinc-400': this.color === 'subtle',
-      'text-purple-700 dark:text-purple-400': this.color === 'primary',
+      'text-foreground': this.color === 'default',
+      'text-muted-foreground': this.color === 'subtle',
+      'text-primary': this.color === 'primary',
     };
   }
 }

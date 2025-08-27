@@ -35,8 +35,7 @@ import { MenuItemConfig } from '@layout/models/menu-item-config.model';
         display: block;
       }
       .active {
-        @apply font-semibold bg-purple-100 text-purple-700;
-        @apply dark:bg-purple-900/60 dark:text-purple-300;
+        @apply font-semibold bg-primary/10 text-primary;
       }
     `,
   ],

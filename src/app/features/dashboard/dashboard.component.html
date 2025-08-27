@@ -51,15 +51,15 @@
     </div>
   </div>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-6">
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-2 dark:bg-slate-800 md:p-6">
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-2 md:p-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the traffic chart section@@dashboard.charts.traffic">Traffic</h3>
-        <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+        <h3 class="text-lg font-semibold text-foreground" i18n="Title for the traffic chart section@@dashboard.charts.traffic">Traffic</h3>
+        <div class="flex items-center gap-4 text-sm text-muted-foreground">
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> UV</span>
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-400"></span> Download</span>
         </div>
       </div>
-      <div class="w-full h-64 text-slate-300 dark:text-slate-600">
+      <div class="w-full h-64 text-muted-foreground">
         <svg height="100%" preserveAspectRatio="none" viewBox="0 0 400 150" width="100%">
           <line stroke="currentColor" stroke-width="1" x1="0" x2="400" y1="130" y2="130"/>
           <line stroke="currentColor" stroke-dasharray="2,2" stroke-width="1" x1="0" x2="400" y1="100" y2="100"/>
@@ -76,9 +76,9 @@
         </svg>
       </div>
     </div>
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the weekly revenue chart@@dashboard.charts.weeklyRevenue">Weekly Revenue</h3>
-      <div class="flex items-center justify-center w-full h-64 text-slate-300 dark:text-slate-600">
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-1 md:p-6">
+      <h3 class="mb-4 text-lg font-semibold text-foreground" i18n="Title for the weekly revenue chart@@dashboard.charts.weeklyRevenue">Weekly Revenue</h3>
+      <div class="flex items-center justify-center w-full h-64 text-muted-foreground">
         <svg height="90%" viewBox="-10 -10 120 120" width="90%">
           <g transform="translate(50, 50)">
             <path d="M 50 0 L 25 43.3 L -25 43.3 L -50 0 L -25 -43.3 L 25 -43.3 Z" fill="none" stroke="currentColor"
@@ -101,17 +101,17 @@
     </div>
   </div>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-6">
-    <div class="overflow-hidden bg-white rounded-lg shadow-md lg:col-span-2 dark:bg-slate-800">
-      <div class="border-b border-slate-200 dark:border-slate-700">
+    <div class="overflow-hidden bg-card rounded-lg shadow-md lg:col-span-2">
+      <div class="border-b border">
         <nav aria-label="Tabs" class="flex -mb-px">
           <a
-            class="px-4 py-3 font-medium text-blue-600 border-b-2 border-blue-600 text-md dark:text-blue-400 dark:border-blue-400"
+            class="px-4 py-3 font-medium text-primary border-b-2 border-primary text-md"
             href="#" i18n="First tab label@@dashboard.tabs.first">First</a>
           <a
-            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
+            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-muted-foreground hover:text-foreground hover:border-muted"
             href="#" i18n="Second tab label@@dashboard.tabs.second">Second</a>
           <a
-            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
+            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-muted-foreground hover:text-foreground hover:border-muted"
             href="#" i18n="Third tab label@@dashboard.tabs.third">Third</a>
         </nav>
       </div>
@@ -122,30 +122,30 @@
              src="https://images.unsplash.com/photo-1541692376936-25389a474ce9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600">
       </div>
     </div>
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the avatar list section@@dashboard.widgets.avatarList">Avatar List</h3>
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-1 md:p-6">
+      <h3 class="mb-4 text-lg font-semibold text-foreground" i18n="Title for the avatar list section@@dashboard.widgets.avatarList">Avatar List</h3>
       <ul class="space-y-4">
         <li class="flex items-center gap-4">
           <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-red-500 rounded-full">H</div>
           <div class="flex-1">
-            <p class="font-medium text-slate-800 dark:text-slate-200">Hydrogen</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Cras sit amet nibh libero, in gravida nulla.</p>
+            <p class="font-medium text-foreground">Hydrogen</p>
+            <p class="text-sm text-muted-foreground">Cras sit amet nibh libero, in gravida nulla.</p>
           </div>
         </li>
         <li class="flex items-center gap-4">
           <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-purple-500 rounded-full">He
           </div>
           <div class="flex-1">
-            <p class="font-medium text-slate-800 dark:text-slate-200">Helium</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Nulla vel metus scelerisque ante sollicitudin.</p>
+            <p class="font-medium text-foreground">Helium</p>
+            <p class="text-sm text-muted-foreground">Nulla vel metus scelerisque ante sollicitudin.</p>
           </div>
         </li>
         <li class="flex items-center gap-4">
           <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-orange-500 rounded-full">Li
           </div>
           <div class="flex-1">
-            <p class="font-medium text-slate-800 dark:text-slate-200">Lithium</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Commodo cras sit amet nibh libero.</p>
+            <p class="font-medium text-foreground">Lithium</p>
+            <p class="text-sm text-muted-foreground">Commodo cras sit amet nibh libero.</p>
           </div>
         </li>
       </ul>

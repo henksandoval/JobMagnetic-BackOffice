@@ -1,24 +1,24 @@
 <nav
   aria-label="Breadcrumb"
-  class="breadcrumb-nav w-full px-4 py-2 bg-white/80 dark:bg-slate-800/80 border-b border-gray-200 dark:border-slate-700 shadow-sm flex items-center gap-2 z-10 relative">
+  class="breadcrumb-nav w-full px-4 py-2 bg-card/80 border-b border shadow-sm flex items-center gap-2 z-10 relative">
   <ng-container *ngIf="breadcrumbTrail().length > 0">
     <ng-container *ngFor="let crumb of breadcrumbTrail(); let last = last">
       <div class="flex items-center gap-2">
         <ng-container *ngIf="!last">
           <a [routerLink]="crumb.route"
-             class="breadcrumb-pill group flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-900 dark:hover:text-blue-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+             class="breadcrumb-pill group flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
              tabindex="0">
             <span *ngIf="crumb.icon"
-                  class="material-icons text-base opacity-70 group-hover:text-blue-500">{{ crumb.icon }}</span>
+                  class="material-icons text-base opacity-70 group-hover:text-primary">{{ crumb.icon }}</span>
             <span class="truncate" i18n="Breadcrumb label@@layout.breadcrumb.label">{{ crumb.label }}</span>
           </a>
-          <span class="mx-1 text-gray-400 dark:text-gray-500 text-lg select-none">
+          <span class="mx-1 text-muted-foreground text-lg select-none">
             <svg class="inline w-4 h-4 align-middle" fill="none" stroke="currentColor" stroke-width="2"
                  viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </ng-container>
         <span *ngIf="last"
-              class="breadcrumb-pill flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600 text-white dark:bg-blue-500 dark:text-white font-semibold shadow focus:outline-none focus:ring-2 focus:ring-blue-400">
+              class="breadcrumb-pill flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-primary-foreground font-semibold shadow focus:outline-none focus:ring-2 focus:ring-primary">
           <span *ngIf="crumb.icon" class="material-icons text-base opacity-90">{{ crumb.icon }}</span>
           <span class="truncate" i18n="Current breadcrumb label@@layout.breadcrumb.current">{{ crumb.label }}</span>
         </span>
