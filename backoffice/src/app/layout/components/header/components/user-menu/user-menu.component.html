@@ -6,29 +6,29 @@
       <app-icon iconName="person" size="md"></app-icon>
     </div>
   }
-  <span class="hidden md:inline" i18n>{{ currentUser?.name || 'Demo User' }}</span>
+  <span class="hidden md:inline" i18n="Label showing current user name@@layout.userMenu.currentUser">{{ currentUser?.name || 'Demo User' }}</span>
   <app-icon iconName="arrow_drop_down"></app-icon>
 </button>
 
 <mat-menu #userMenu="matMenu">
   <div class="user-info" disabled mat-menu-item>
     <div class="user-details">
-      <span class="user-name" i18n>{{ currentUser?.name || 'Demo User' }}</span>
+      <span class="user-name" i18n="User name display in menu@@layout.userMenu.userName">{{ currentUser?.name || 'Demo User' }}</span>
       <span class="user-email">{{ currentUser?.email || 'demo@admin.com' }}</span>
     </div>
   </div>
   <mat-divider></mat-divider>
   <button (click)="onProfileClick()" class="menu-item" mat-menu-item>
     <app-icon iconName="account_circle"></app-icon>
-    <span i18n>Profile</span>
+    <span i18n="Profile menu item label@@layout.userMenu.profile">Profile</span>
   </button>
   <button class="menu-item" mat-menu-item>
     <app-icon iconName="settings"></app-icon>
-    <span i18n>Settings</span>
+    <span i18n="Settings menu item label@@layout.userMenu.settings">Settings</span>
   </button>
   <mat-divider></mat-divider>
   <button (click)="onLogoutClick()" class="menu-item" mat-menu-item>
     <app-icon iconName="logout"></app-icon>
-    <span i18n>Logout</span>
+    <span i18n="Logout menu item label@@layout.userMenu.logout">Logout</span>
   </button>
 </mat-menu>

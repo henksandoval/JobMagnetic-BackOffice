@@ -35,7 +35,6 @@ import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slid
     SlideToggleComponent,
   ],
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
   userProfileForm!: FormGroup<{
@@ -52,14 +51,22 @@ export class FormComponent implements OnInit {
   isFormInvalid = computed(() => {
     return !this.userProfileForm || this.userProfileForm.invalid;
   });
-  readonly fullNameErrors = { required: 'Name is required.' };
-  readonly emailErrors = {
-    required: 'Email is required.',
-    email: 'Please enter a valid email address.',
+  readonly fullNameErrors = {
+    required: $localize`:Error message when full name is required@@validation.fullName.required:Name is required.`,
   };
-  readonly countryErrors = { required: 'You must select a country.' };
-  readonly dobErrors = { required: 'La fecha de nacimiento es requerida.' };
-  readonly termsErrors = { requiredTrue: 'Debes aceptar los términos para continuar.' };
+  readonly emailErrors = {
+    required: $localize`:Error message when email is required@@validation.email.required:Email is required.`,
+    email: $localize`:Error message when email format is invalid@@validation.email.format:Please enter a valid email address.`,
+  };
+  readonly countryErrors = {
+    required: $localize`:Error message when country selection is required@@validation.country.required:You must select a country.`,
+  };
+  readonly dobErrors = {
+    required: $localize`:Error message when date of birth is required@@validation.dob.required:Date of birth is required.`,
+  };
+  readonly termsErrors = {
+    requiredTrue: $localize`:Error message when terms acceptance is required@@validation.terms.required:You must accept the terms to continue.`,
+  };
   private fb = inject(FormBuilder);
   private formDataService = inject(FormDataService);
   subscriptionTypes = toSignal(this.formDataService.getSubscriptionTypes(), { initialValue: [] });
@@ -98,13 +105,17 @@ export class FormComponent implements OnInit {
     this.formDataService.saveProfile(this.userProfileForm.getRawValue()).subscribe({
       next: (response) => {
         if (response.success) {
-          alert('¡Perfil guardado con éxito!');
+          alert(
+            $localize`:Success message when profile is saved@@form.profile.saveSuccess:Profile saved successfully!`
+          );
           this.userProfileForm.markAsPristine();
         }
       },
       error: (err) => {
         console.error('Error al guardar el perfil:', err);
-        alert('Hubo un error al guardar.');
+        alert(
+          $localize`:Error message when profile save fails@@form.profile.saveError:There was an error saving the profile.`
+        );
       },
     });
   }

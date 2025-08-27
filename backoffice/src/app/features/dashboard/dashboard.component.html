@@ -3,11 +3,11 @@
 
     <div class="p-5 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
-        <p class="text-sm font-medium text-blue-100" i18n>Total Sales</p>
+        <p class="text-sm font-medium text-blue-100" i18n="Metric label for total sales card@@dashboard.metrics.totalSales">Total Sales</p>
       </div>
       <div class="mt-2">
         <p class="text-3xl font-bold">180,200</p>
-        <p class="text-sm text-blue-200" i18n>Monthly</p>
+        <p class="text-sm text-blue-200" i18n="Time period label for metrics@@dashboard.metrics.monthly">Monthly</p>
       </div>
       <div class="w-full h-1 mt-4 bg-white/30 rounded-full">
         <div class="w-3/4 h-full bg-blue-100 rounded-full"></div>
@@ -15,11 +15,11 @@
     </div>
     <div class="p-5 overflow-hidden text-white bg-indigo-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
-        <p class="text-sm font-medium text-indigo-100" i18n>Revenue</p>
+        <p class="text-sm font-medium text-indigo-100" i18n="Metric label for revenue card@@dashboard.metrics.revenue">Revenue</p>
       </div>
       <div class="mt-2">
         <p class="text-3xl font-bold">70,205</p>
-        <p class="text-sm text-indigo-200" i18n>Monthly</p>
+        <p class="text-sm text-indigo-200" i18n="Time period label for metrics@@dashboard.metrics.monthly">Monthly</p>
       </div>
       <div class="w-full h-1 mt-4 bg-white/30 rounded-full">
         <div class="w-1/2 h-full bg-indigo-100 rounded-full"></div>
@@ -27,11 +27,11 @@
     </div>
     <div class="p-5 overflow-hidden text-white bg-green-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
-        <p class="text-sm font-medium text-green-100" i18n>Traffic</p>
+        <p class="text-sm font-medium text-green-100" i18n="Metric label for traffic card@@dashboard.metrics.traffic">Traffic</p>
       </div>
       <div class="mt-2">
         <p class="text-3xl font-bold">1,291,922</p>
-        <p class="text-sm text-green-200" i18n>Monthly</p>
+        <p class="text-sm text-green-200" i18n="Time period label for metrics@@dashboard.metrics.monthly">Monthly</p>
       </div>
       <div class="w-full h-1 mt-4 bg-white/30 rounded-full">
         <div class="w-4/5 h-full bg-green-100 rounded-full"></div>
@@ -39,11 +39,11 @@
     </div>
     <div class="p-5 overflow-hidden text-white bg-teal-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
-        <p class="text-sm font-medium text-teal-100" i18n>New User</p>
+        <p class="text-sm font-medium text-teal-100" i18n="Metric label for new users card@@dashboard.metrics.newUsers">New Users</p>
       </div>
       <div class="mt-2">
         <p class="text-3xl font-bold">1,922</p>
-        <p class="text-sm text-teal-200" i18n>Monthly</p>
+        <p class="text-sm text-teal-200" i18n="Time period label for metrics@@dashboard.metrics.monthly">Monthly</p>
       </div>
       <div class="w-full h-1 mt-4 bg-white/30 rounded-full">
         <div class="w-2/5 h-full bg-teal-100 rounded-full"></div>
@@ -53,7 +53,7 @@
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-6">
     <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-2 dark:bg-slate-800 md:p-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" i18n>Traffic</h3>
+        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the traffic chart section@@dashboard.charts.traffic">Traffic</h3>
         <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> UV</span>
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-400"></span> Download</span>
@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n>Weekly Revenue</h3>
+      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the weekly revenue chart@@dashboard.charts.weeklyRevenue">Weekly Revenue</h3>
       <div class="flex items-center justify-center w-full h-64 text-slate-300 dark:text-slate-600">
         <svg height="90%" viewBox="-10 -10 120 120" width="90%">
           <g transform="translate(50, 50)">
@@ -106,23 +106,24 @@
         <nav aria-label="Tabs" class="flex -mb-px">
           <a
             class="px-4 py-3 font-medium text-blue-600 border-b-2 border-blue-600 text-md dark:text-blue-400 dark:border-blue-400"
-            href="#">First</a>
+            href="#" i18n="First tab label@@dashboard.tabs.first">First</a>
           <a
             class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
-            href="#">Second</a>
+            href="#" i18n="Second tab label@@dashboard.tabs.second">Second</a>
           <a
             class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
-            href="#">Third</a>
+            href="#" i18n="Third tab label@@dashboard.tabs.third">Third</a>
         </nav>
       </div>
       <div class="p-1">
-        <img alt="Ancient Greek ruins"
+        <img i18n-alt="Alternative text for the ancient Greek ruins image@@dashboard.image.ancientRuins"
+             alt="Ancient Greek ruins"
              class="object-cover w-full h-auto rounded-b-md"
              src="https://images.unsplash.com/photo-1541692376936-25389a474ce9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600">
       </div>
     </div>
     <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n>Avatar List</h3>
+      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the avatar list section@@dashboard.widgets.avatarList">Avatar List</h3>
       <ul class="space-y-4">
         <li class="flex items-center gap-4">
           <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-red-500 rounded-full">H</div>
