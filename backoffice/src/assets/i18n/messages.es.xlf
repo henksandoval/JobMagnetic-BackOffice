@@ -428,6 +428,24 @@
         </context-group>
         <note priority="1" from="description">Label for enterprise subscription type</note>
       </trans-unit>
+      <trans-unit id="showcase.index.title" datatype="html">
+        <source> Component Showcase </source>
+        <target> Demostración de Componentes </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/showcase.component.ts</context>
+          <context context-type="linenumber">15,18</context>
+        </context-group>
+        <note priority="1" from="description">Title for the index showcase</note>
+      </trans-unit>
+      <trans-unit id="showcase.index.description" datatype="html">
+        <source> This is a nested layout. The specific content of the sub-route (e.g. the form) is rendered below. </source>
+        <target> Este es un diseño anidado. El contenido específico de la subruta (por ejemplo, el formulario) se muestra a continuación. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/showcase.component.ts</context>
+          <context context-type="linenumber">21,25</context>
+        </context-group>
+        <note priority="1" from="description">Description for the index showcase</note>
+      </trans-unit>
       <trans-unit id="layout.breadcrumb.label" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ crumb.label }}"/></source>
         <target><x id="INTERPOLATION" equiv-text="{{ crumb.label }}"/></target>
