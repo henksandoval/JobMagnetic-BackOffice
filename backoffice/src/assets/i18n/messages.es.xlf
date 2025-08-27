@@ -226,6 +226,38 @@
           <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="2078785402028999261" datatype="html">
+        <source>Forms</source>
+        <target>Formularios</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/pages/index/index.component.ts</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8301777214832704509" datatype="html">
+        <source> Example of a reactive form built with Angular Material and styled with Tailwind CSS. </source>
+        <target> Ejemplo de un formulario reactivo construido con Angular Material y estilizado con Tailwind CSS. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/pages/index/index.component.ts</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6331257752772891035" datatype="html">
+        <source> Tables (Coming Soon) </source>
+        <target> Tablas (Próximamente) </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/pages/index/index.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4915005582029018362" datatype="html">
+        <source> Example of a data table with pagination and filters. </source>
+        <target> Ejemplo de una tabla de datos con paginación y filtros. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/showcase/pages/index/index.component.ts</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ crumb.label }}"/></source>
         <target><x id="INTERPOLATION"/></target>
