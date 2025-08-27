@@ -43,9 +43,9 @@ export class FormDataService {
 
   getSubscriptionTypes(): Observable<SubscriptionOption[]> {
     const subscriptionTypes: SubscriptionOption[] = [
-      { label: 'Free', value: 'free' },
-      { label: 'Premium', value: 'premium' },
-      { label: 'Enterprise', value: 'enterprise' },
+      { label: $localize`:Label for free subscription type@@global.subscriptionTypes.free:Free`, value: 'free' },
+      { label: $localize`:Label for premium subscription type@@global.subscriptionTypes.premium:Premium`, value: 'premium' },
+      { label: $localize`:Label for enterprise subscription type@@global.subscriptionTypes.enterprise:Enterprise`, value: 'enterprise' },
     ];
     return of(subscriptionTypes);
   }

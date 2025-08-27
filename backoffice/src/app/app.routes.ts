@@ -10,7 +10,7 @@ export const routes: AppRoute[] = [
       {
         path: 'dashboard',
         data: {
-          label: $localize`:@@navigation.dashboard:Dashboard`,
+          label: $localize`:Label for the main dashboard link in the navigation menu@@navigation.dashboard:Dashboard`,
           icon: 'dashboard',
         },
         loadComponent: () =>
@@ -21,14 +21,14 @@ export const routes: AppRoute[] = [
         loadComponent: () =>
           import('./features/showcase/showcase.component').then((m) => m.ShowcaseComponent),
         data: {
-          label: $localize`:@@navigation.showcase:Showcase`,
+          label: $localize`:Label for the showcase section in the navigation menu@@navigation.showcase:Showcase`,
           icon: 'inventory',
         },
         children: [
           {
             path: '',
             data: {
-              label: $localize`:@@navigation.showcase.index:Home`,
+              label: $localize`:Label for the showcase home page in the navigation menu@@navigation.showcase.index:Home`,
               icon: 'home',
             },
             loadComponent: () =>
@@ -37,7 +37,7 @@ export const routes: AppRoute[] = [
           {
             path: 'form',
             data: {
-              label: $localize`:@@navigation.showcase.form:Form`,
+              label: $localize`:Label for the form example page in the navigation menu@@navigation.showcase.form:Form`,
               icon: 'edit_note',
             },
             loadComponent: () =>

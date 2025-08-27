@@ -1,5 +1,5 @@
 <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100" i18n>User Profile</h2>
+  <h2 class="text-xl font-semibold mb-6 text-gray-800 dark:text-gray-100" i18n="Page title for the user profile form@@form.profile.title">User Profile</h2>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -7,16 +7,20 @@
         [errors]="fullNameErrors"
         formControlName="fullName"
         icon="person"
-        label="Full Name" i18n-label
-        placeholder="e.g. John Doe" i18n-placeholder
+        i18n-label="Label for the full name input field@@global.terms.fullName"
+        label="Full Name"
+        i18n-placeholder="Placeholder text for the full name input@@form.profile.fullName.placeholder"
+        placeholder="e.g. John Doe"
       ></app-input>
 
       <app-input
         [errors]="emailErrors"
         formControlName="email"
         icon="email"
-        label="Email" i18n-label
-        placeholder="example@email.com" i18n-placeholder
+        i18n-label="Label for the email input field@@global.terms.email"
+        label="Email"
+        i18n-placeholder="Placeholder text for the email input@@global.placeholders.email"
+        placeholder="example@email.com"
         type="email"
       ></app-input>
 
@@ -24,38 +28,45 @@
         [errors]="countryErrors"
         [options]="countriesForSelect()"
         formControlName="country"
-        label="Country of Residence" i18n-label
+        i18n-label="Label for the country selection field@@form.profile.country.label"
+        label="Country of Residence"
       ></app-select>
 
       <app-date-picker
         [errors]="dobErrors"
         formControlName="dob"
-        label="Date of Birth" i18n-label
+        i18n-label="Label for the date of birth field@@form.profile.dob.label"
+        label="Date of Birth"
       ></app-date-picker>
 
       <div class="md:col-span-2">
         <app-text-area
           formControlName="bio"
-          label="Biography" i18n-label
-          placeholder="Tell us a bit about yourself..." i18n-placeholder
+          i18n-label="Label for the biography text area@@form.profile.bio.label"
+          label="Biography"
+          i18n-placeholder="Placeholder text for the biography text area@@form.profile.bio.placeholder"
+          placeholder="Tell us a bit about yourself..."
         ></app-text-area>
       </div>
 
       <app-radio-group
         [options]="subscriptionTypes()"
         formControlName="subscriptionType"
-        label="Subscription Type" i18n-label
+        i18n-label="Label for the subscription type selection@@form.profile.subscriptionType.label"
+        label="Subscription Type"
       ></app-radio-group>
 
       <div class="flex flex-col justify-center gap-4">
         <app-checkbox
           formControlName="wantsNewsletter"
-          label="I want to receive the newsletter" i18n-label
+          i18n-label="Label for the newsletter subscription checkbox@@form.profile.newsletter.label"
+          label="I want to receive the newsletter"
         ></app-checkbox>
 
         <app-slide-toggle
           formControlName="pushNotifications"
-          label="Enable push notifications" i18n-label
+          i18n-label="Label for the push notifications toggle@@form.profile.pushNotifications.label"
+          label="Enable push notifications"
         ></app-slide-toggle>
       </div>
     </div>
@@ -64,20 +75,23 @@
       <app-checkbox
         [errors]="termsErrors"
         formControlName="agreesToTerms"
-        label="I have read and accept the terms and conditions of service." i18n-label
+        i18n-label="Label for the terms and conditions acceptance checkbox@@form.profile.terms.label"
+        label="I have read and accept the terms and conditions of service."
       ></app-checkbox>
     </div>
 
     <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
       <app-button
         (action)="resetForm()"
-        label="Clear" i18n-label
+        i18n-label="Label for the clear form button@@global.actions.clear"
+        label="Clear"
         variant="stroked"
       ></app-button>
       <app-button
         [disabled]="isFormInvalid()"
         color="primary"
-        label="Save Profile" i18n-label
+        i18n-label="Label for the save profile button@@global.actions.saveProfile"
+        label="Save Profile"
         type="submit"
         variant="flat"
       ></app-button>
