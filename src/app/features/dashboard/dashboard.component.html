@@ -13,6 +13,7 @@
         <div class="w-3/4 h-full bg-blue-100 rounded-full"></div>
       </div>
     </div>
+
     <div class="p-5 overflow-hidden text-white bg-indigo-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
         <p class="text-sm font-medium text-indigo-100" i18n="Metric label for revenue card@@dashboard.metrics.revenue">Revenue</p>
@@ -25,6 +26,7 @@
         <div class="w-1/2 h-full bg-indigo-100 rounded-full"></div>
       </div>
     </div>
+
     <div class="p-5 overflow-hidden text-white bg-green-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
         <p class="text-sm font-medium text-green-100" i18n="Metric label for traffic card@@dashboard.metrics.traffic">Traffic</p>
@@ -37,6 +39,7 @@
         <div class="w-4/5 h-full bg-green-100 rounded-full"></div>
       </div>
     </div>
+
     <div class="p-5 overflow-hidden text-white bg-teal-500 rounded-lg shadow-md">
       <div class="flex items-center justify-between">
         <p class="text-sm font-medium text-teal-100" i18n="Metric label for new users card@@dashboard.metrics.newUsers">New Users</p>
@@ -50,8 +53,9 @@
       </div>
     </div>
   </div>
+
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-6">
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-2 dark:bg-slate-800 md:p-6">
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-2 md:p-6">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the traffic chart section@@dashboard.charts.traffic">Traffic</h3>
         <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
@@ -59,71 +63,55 @@
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-400"></span> <span i18n="Download chart legend label@@dashboard.charts.legend.download">Download</span></span>
         </div>
       </div>
-      <div class="w-full h-64 text-slate-300 dark:text-slate-600">
+      <div class="w-full h-64 text-muted-foreground">
         <svg height="100%" preserveAspectRatio="none" viewBox="0 0 400 150" width="100%">
           <line stroke="currentColor" stroke-width="1" x1="0" x2="400" y1="130" y2="130"/>
           <line stroke="currentColor" stroke-dasharray="2,2" stroke-width="1" x1="0" x2="400" y1="100" y2="100"/>
           <line stroke="currentColor" stroke-dasharray="2,2" stroke-width="1" x1="0" x2="400" y1="70" y2="70"/>
           <line stroke="currentColor" stroke-dasharray="2,2" stroke-width="1" x1="0" x2="400" y1="40" y2="40"/>
-          <path d="M 0 110 C 50 90, 100 95, 150 115 S 250 120, 300 80 S 380 40, 400 50 L 400 130 Z"
-                fill="rgb(96 165 250 / 0.3)"></path>
-          <path d="M 0 110 C 50 90, 100 95, 150 115 S 250 120, 300 80 S 380 40, 400 50" fill="none" stroke="#60a5fa"
-                stroke-width="2"></path>
-          <path d="M 0 120 C 50 110, 100 105, 150 100 S 250 110, 300 105 S 380 90, 400 95 L 400 130 Z"
-                fill="rgb(45 212 191 / 0.3)"></path>
-          <path d="M 0 120 C 50 110, 100 105, 150 100 S 250 110, 300 105 S 380 90, 400 95" fill="none" stroke="#2dd4bf"
-                stroke-width="2"></path>
+          <path d="M 0 110 C 50 90, 100 95, 150 115 S 250 120, 300 80 S 380 40, 400 50 L 400 130 Z" fill="rgb(96 165 250 / 0.3)"></path>
+          <path d="M 0 110 C 50 90, 100 95, 150 115 S 250 120, 300 80 S 380 40, 400 50" fill="none" stroke="#60a5fa" stroke-width="2"></path>
+          <path d="M 0 120 C 50 110, 100 105, 150 100 S 250 110, 300 105 S 380 90, 400 95 L 400 130 Z" fill="rgb(45 212 191 / 0.3)"></path>
+          <path d="M 0 120 C 50 110, 100 105, 150 100 S 250 110, 300 105 S 380 90, 400 95" fill="none" stroke="#2dd4bf" stroke-width="2"></path>
         </svg>
       </div>
     </div>
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the weekly revenue chart@@dashboard.charts.weeklyRevenue">Weekly Revenue</h3>
-      <div class="flex items-center justify-center w-full h-64 text-slate-300 dark:text-slate-600">
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-1 md:p-6">
+      <h3 class="mb-4 text-lg font-semibold text-foreground" i18n="Title for the weekly revenue chart@@dashboard.charts.weeklyRevenue">Weekly Revenue</h3>
+      <div class="flex items-center justify-center w-full h-64 text-muted-foreground">
         <svg height="90%" viewBox="-10 -10 120 120" width="90%">
           <g transform="translate(50, 50)">
-            <path d="M 50 0 L 25 43.3 L -25 43.3 L -50 0 L -25 -43.3 L 25 -43.3 Z" fill="none" stroke="currentColor"
-                  stroke-width="1"/>
-            <path d="M 37.5 0 L 18.75 32.47 L -18.75 32.47 L -37.5 0 L -18.75 -32.47 L 18.75 -32.47 Z" fill="none"
-                  stroke="currentColor" stroke-width="0.5"/>
-            <path d="M 25 0 L 12.5 21.65 L -12.5 21.65 L -25 0 L -12.5 -21.65 L 12.5 -21.65 Z" fill="none"
-                  stroke="currentColor" stroke-width="0.5"/>
+            <path d="M 50 0 L 25 43.3 L -25 43.3 L -50 0 L -25 -43.3 L 25 -43.3 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+            <path d="M 37.5 0 L 18.75 32.47 L -18.75 32.47 L -37.5 0 L -18.75 -32.47 L 18.75 -32.47 Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+            <path d="M 25 0 L 12.5 21.65 L -12.5 21.65 L -25 0 L -12.5 -21.65 L 12.5 -21.65 Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="50" y1="0" y2="0"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="25" y1="0" y2="43.3"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="-25" y1="0" y2="43.3"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="-50" y1="0" y2="0"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="-25" y1="0" y2="-43.3"/>
             <line stroke="currentColor" stroke-width="0.5" x1="0" x2="25" y1="0" y2="-43.3"/>
-            <path d="M 40 0 L 10 35 L -30 20 L -25 -10 L 5 -35 L 30 -20 Z" fill="rgb(239 68 68 / 0.4)" stroke="#ef4444"
-                  stroke-width="1.5"/>
+            <path d="M 40 0 L 10 35 L -30 20 L -25 -10 L 5 -35 L 30 -20 Z" fill="rgb(239 68 68 / 0.4)" stroke="#ef4444" stroke-width="1.5"/>
           </g>
         </svg>
       </div>
     </div>
   </div>
+
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:gap-6">
-    <div class="overflow-hidden bg-white rounded-lg shadow-md lg:col-span-2 dark:bg-slate-800">
-      <div class="border-b border-slate-200 dark:border-slate-700">
+    <div class="overflow-hidden bg-card rounded-lg shadow-md lg:col-span-2">
+      <div class="border-b border">
         <nav aria-label="Tabs" class="flex -mb-px">
-          <a
-            class="px-4 py-3 font-medium text-blue-600 border-b-2 border-blue-600 text-md dark:text-blue-400 dark:border-blue-400"
-            href="#" i18n="First tab label@@dashboard.tabs.first">First</a>
-          <a
-            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
-            href="#" i18n="Second tab label@@dashboard.tabs.second">Second</a>
-          <a
-            class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200"
-            href="#" i18n="Third tab label@@dashboard.tabs.third">Third</a>
+          <a class="px-4 py-3 font-medium text-primary border-b-2 border-primary text-md" href="#" i18n="First tab label@@dashboard.tabs.first">First</a>
+          <a class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-muted-foreground hover:text-foreground hover:border-muted" href="#" i18n="Second tab label@@dashboard.tabs.second">Second</a>
+          <a class="px-4 py-3 font-medium border-b-2 border-transparent text-md text-muted-foreground hover:text-foreground hover:border-muted" href="#" i18n="Third tab label@@dashboard.tabs.third">Third</a>
         </nav>
       </div>
       <div class="p-1">
-        <img i18n-alt="Alternative text for the ancient Greek ruins image@@dashboard.image.ancientRuins"
-             alt="Ancient Greek ruins"
-             class="object-cover w-full h-auto rounded-b-md"
-             src="https://images.unsplash.com/photo-1541692376936-25389a474ce9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600">
+        <img i18n-alt="Alternative text for the ancient Greek ruins image@@dashboard.image.ancientRuins" alt="Ancient Greek ruins" class="object-cover w-full h-auto rounded-b-md" src="https://images.unsplash.com/photo-1541692376936-25389a474ce9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600">
       </div>
     </div>
-    <div class="p-4 bg-white rounded-lg shadow-md lg:col-span-1 dark:bg-slate-800 md:p-6">
-      <h3 class="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-200" i18n="Title for the avatar list section@@dashboard.widgets.avatarList">Avatar List</h3>
+    <div class="p-4 bg-card rounded-lg shadow-md lg:col-span-1 md:p-6">
+      <h3 class="mb-4 text-lg font-semibold text-foreground" i18n="Title for the avatar list section@@dashboard.widgets.avatarList">Avatar List</h3>
       <ul class="space-y-4">
         <li class="flex items-center gap-4">
           <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-red-500 rounded-full">H</div>
@@ -133,16 +121,14 @@
           </div>
         </li>
         <li class="flex items-center gap-4">
-          <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-purple-500 rounded-full">He
-          </div>
+          <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-purple-500 rounded-full">He</div>
           <div class="flex-1">
             <p class="font-medium text-slate-800 dark:text-slate-200" i18n="Helium element name@@dashboard.widgets.elements.helium">Helium</p>
             <p class="text-sm text-slate-500 dark:text-slate-400" i18n="Helium element description@@dashboard.widgets.elements.helium.description">Nulla vel metus scelerisque ante sollicitudin.</p>
           </div>
         </li>
         <li class="flex items-center gap-4">
-          <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-orange-500 rounded-full">Li
-          </div>
+          <div class="flex items-center justify-center w-10 h-10 font-bold text-white bg-orange-500 rounded-full">Li</div>
           <div class="flex-1">
             <p class="font-medium text-slate-800 dark:text-slate-200" i18n="Lithium element name@@dashboard.widgets.elements.lithium">Lithium</p>
             <p class="text-sm text-slate-500 dark:text-slate-400" i18n="Lithium element description@@dashboard.widgets.elements.lithium.description">Commodo cras sit amet nibh libero.</p>
