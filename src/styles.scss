@@ -1,28 +1,24 @@
-@use '@angular/material' as mat;
-
-@include mat.core();
+@use './theme' as theme;
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @layer base {
   :root {
-    --background: 0 0% 96.1%; /* Light Gray #F5F5F5 */
-    --foreground: 0 0% 20%; /* Dark Gray #333333 */
-    --card: 0 0% 100%; /* White #FFFFFF */
+    --background: 0 0% 96.1%;
+    --foreground: 0 0% 20%;
+    --card: 0 0% 100%;
     --card-foreground: 0 0% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
-    --primary: 233 47% 50%; /* Blue-violet #4758B8 */
+    --primary: 233 47% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 33% 85%; /* Desaturated grayish blue #D0D8E6 */
+    --secondary: 220 33% 85%;
     --secondary-foreground: 0 0% 20%;
-    --muted: 0 0% 90%; /* Lighter Gray #E5E5E5 */
+    --muted: 0 0% 90%;
     --muted-foreground: 0 0% 40%;
-    --accent: 160 100% 42%; /* Mint Green #00D69D */
+    --accent: 160 100% 42%;
     --accent-foreground: 0 0% 20%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -33,11 +29,11 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 8%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 8%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 95%;
-    --popover: 0 0% 8%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
     --primary: 233 47% 58%;
     --primary-foreground: 0 0% 10%;
@@ -49,8 +45,8 @@
     --accent-foreground: 0 0% 10%;
     --destructive: 0 72.2% 50.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
     --ring: 233 47% 58%;
   }
 }
@@ -58,33 +54,45 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 body {
-  margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// Personalizar los componentes de Material para usar tus variables CSS
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-container-color: transparent;
+  --mdc-outlined-text-field-outline-color: hsl(var(--border));
+  --mdc-outlined-text-field-input-text-color: hsl(var(--foreground));
+  --mdc-outlined-text-field-label-text-color: hsl(var(--muted-foreground));
+  --mdc-outlined-text-field-hover-outline-color: hsl(var(--accent));
+  --mdc-outlined-text-field-focus-outline-color: hsl(var(--primary));
+  --mdc-outlined-text-field-focus-label-text-color: hsl(var(--primary));
 }
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #475569 #1e293b;
+  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted));
 
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: hsl(var(--muted));
     border-radius: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #475569;
+    background-color: hsl(var(--muted-foreground));
     border-radius: 10px;
-    border: 1px solid #1e293b;
 
     &:hover {
-      background-color: #64748b;
+      background-color: hsl(var(--foreground));
     }
   }
 }

@@ -1,0 +1,212 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+// Definir la paleta primaria basada en tu Blue-violet #4758B8
+$primary-palette: (
+  50: #eaecf7,
+  100: #cad0eb,
+  200: #a7b1de,
+  300: #8492d1,
+  400: #697ac7,
+  500: #4758b8, // Tu color primario exacto
+  600: #4150b0,
+  700: #3847a7,
+  800: #303d9f,
+  900: #222d90,
+  A100: #c5cbff,
+  A200: #929fff,
+  A400: #5f73ff,
+  A700: #465bff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+// Definir la paleta accent basada en tu Mint Green #00D69D
+$accent-palette: (
+  50: #e0f9f3,
+  100: #b3f0e1,
+  200: #80e6cd,
+  300: #4ddcb9,
+  400: #26d5aa,
+  500: #00d69d, // Tu color accent exacto
+  600: #00c795,
+  700: #00b18b,
+  800: #009c81,
+  900: #00796f,
+  A100: #d6ffee,
+  A200: #a3ffd9,
+  A400: #70ffc5,
+  A700: #57ffbb,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+// Definir la paleta secundaria basada en tu Desaturated grayish blue #D0D8E6
+$secondary-palette: (
+  50: #f8f9fb,
+  100: #eef1f5,
+  200: #e3e7ef,
+  300: #d0d8e6, // Tu color secundario exacto (lo uso como 300 para tener variantes)
+  400: #b8c4db,
+  500: #9fafd0,
+  600: #869bc5,
+  700: #6d86ba,
+  800: #5472af,
+  900: #3b5ea4,
+  A100: #ffffff,
+  A200: #dde6ff,
+  A400: #aac3ff,
+  A700: #91b1ff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+// Crear el tema light
+$light-primary: mat.m2-define-palette($primary-palette, 500);
+$light-accent: mat.m2-define-palette($accent-palette, 500);
+$light-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Configuración de tipografía que respeta tus fuentes
+$custom-typography: mat.m2-define-typography-config(
+  $font-family: 'Roboto, Arial, Helvetica, sans-serif',
+  $headline-1: mat.m2-define-typography-level(96px, 96px, 300, 'Inter, Arial, Helvetica, sans-serif', -1.5px),
+  $headline-2: mat.m2-define-typography-level(60px, 60px, 300, 'Inter, Arial, Helvetica, sans-serif', -0.5px),
+  $headline-3: mat.m2-define-typography-level(48px, 50px, 400, 'Inter, Arial, Helvetica, sans-serif', 0px),
+  $headline-4: mat.m2-define-typography-level(34px, 40px, 400, 'Inter, Arial, Helvetica, sans-serif', 0.25px),
+  $headline-5: mat.m2-define-typography-level(24px, 32px, 400, 'Inter, Arial, Helvetica, sans-serif', 0px),
+  $headline-6: mat.m2-define-typography-level(20px, 32px, 500, 'Inter, Arial, Helvetica, sans-serif', 0.15px),
+  $body-1: mat.m2-define-typography-level(16px, 24px, 400, 'Roboto, Arial, Helvetica, sans-serif', 0.5px),
+  $body-2: mat.m2-define-typography-level(14px, 20px, 400, 'Roboto, Arial, Helvetica, sans-serif', 0.25px),
+);
+
+$light-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+    warn: $light-warn,
+  ),
+  typography: $custom-typography,
+  density: 0,
+));
+
+// Crear el tema dark ajustando los tonos para el modo oscuro
+$dark-primary: mat.m2-define-palette($primary-palette, 400, 300, 600); // Más claro en dark mode
+$dark-accent: mat.m2-define-palette($accent-palette, 400, 300, 600); // Más claro en dark mode
+$dark-warn: mat.m2-define-palette(mat.$m2-red-palette, 400);
+
+$dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  ),
+  typography: $custom-typography,
+  density: 0,
+));
+
+// Incluir los estilos base de Material
+@include mat.core();
+
+// Aplicar el tema light por defecto
+@include mat.all-component-themes($light-theme);
+
+// Aplicar el tema dark cuando se use la clase .dark
+.dark {
+  @include mat.all-component-colors($dark-theme);
+}
+
+// Personalización adicional para que los componentes de Material respeten tus colores exactos
+:root {
+  // Sobrescribir algunas variables CSS de Material para usar tus colores exactos
+  --mdc-theme-primary: #4758b8;
+  --mdc-theme-secondary: #00d69d;
+
+  // Para los inputs y form fields
+  --mdc-outlined-text-field-outline-color: hsl(0 0% 89.8%);
+  --mdc-outlined-text-field-hover-outline-color: #00d69d;
+  --mdc-outlined-text-field-focus-outline-color: #4758b8;
+  --mdc-outlined-text-field-label-text-color: hsl(0 0% 40%);
+  --mdc-outlined-text-field-input-text-color: hsl(0 0% 20%);
+
+  // Para los botones
+  --mdc-filled-button-container-color: #4758b8;
+  --mdc-outlined-button-outline-color: #4758b8;
+  --mdc-text-button-label-text-color: #4758b8;
+}
+
+.dark {
+  --mdc-theme-primary: #6e7dce; // Versión más clara del primary para dark mode
+  --mdc-theme-secondary: #00e6ab; // Versión más clara del accent para dark mode
+
+  // Para los inputs y form fields en dark mode
+  --mdc-outlined-text-field-outline-color: hsl(0 0% 14.9%);
+  --mdc-outlined-text-field-hover-outline-color: #00e6ab;
+  --mdc-outlined-text-field-focus-outline-color: #6e7dce;
+  --mdc-outlined-text-field-label-text-color: hsl(0 0% 63.9%);
+  --mdc-outlined-text-field-input-text-color: hsl(0 0% 95%);
+
+  // Para los botones en dark mode
+  --mdc-filled-button-container-color: #6e7dce;
+  --mdc-outlined-button-outline-color: #6e7dce;
+  --mdc-text-button-label-text-color: #6e7dce;
+}
+
+// Estilos adicionales para asegurar que los componentes respeten el tema
+.mat-mdc-form-field {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+// Asegurar que los títulos usen Inter
+h1, h2, h3, h4, h5, h6,
+.mat-h1, .mat-h2, .mat-h3, .mat-h4, .mat-h5, .mat-h6,
+.mat-headline-1, .mat-headline-2, .mat-headline-3, .mat-headline-4, .mat-headline-5, .mat-headline-6 {
+  font-family: Inter, Arial, Helvetica, sans-serif !important;
+}

@@ -37,7 +37,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": [],
             "i18nMissingTranslation": "error",
             "optimization": {
@@ -111,7 +113,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         }
