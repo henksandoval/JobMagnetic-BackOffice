@@ -17,6 +17,7 @@ import { CheckboxComponent } from '@shared/components/atoms/checkbox/checkbox.co
 import { ButtonComponent } from '@shared/components/atoms/button/button.component';
 import { TextAreaComponent } from '@shared/components/atoms/text-area/text-area.component';
 import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slide-toggle.component';
+import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 
 @Component({
   selector: 'app-form',
@@ -33,6 +34,9 @@ import { SlideToggleComponent } from '@shared/components/atoms/slide-toggle/slid
     ButtonComponent,
     TextAreaComponent,
     SlideToggleComponent,
+    MatFormField,
+    MatLabel,
+    MatInput,
   ],
   templateUrl: './form.component.html',
 })

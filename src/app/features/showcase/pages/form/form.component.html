@@ -1,45 +1,61 @@
-<div class="bg-card p-6 md:p-8 rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold mb-6 text-foreground" i18n="Page title for the user profile form@@form.profile.title">User Profile</h2>
+<div class="bg-card p-6 md:p-8 rounded-lg shadow-sm border border-border/50">
+  <h2 class="text-2xl font-semibold mb-8 text-foreground font-inter" i18n="Page title for the user profile form@@form.profile.title">User Profile</h2>
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-      <app-input
-        [errors]="fullNameErrors"
-        formControlName="fullName"
-        icon="person"
-        i18n-label="Label for the full name input field@@global.terms.fullName"
-        label="Full Name"
-        i18n-placeholder="Placeholder text for the full name input@@form.profile.fullName.placeholder"
-        placeholder="e.g. John Doe"
-      ></app-input>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Favorite food</mat-label>
+      <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
 
-      <app-input
-        [errors]="emailErrors"
-        formControlName="email"
-        icon="email"
-        i18n-label="Label for the email input field@@global.terms.email"
-        label="Email"
-        i18n-placeholder="Placeholder text for the email input@@global.placeholders.email"
-        placeholder="example@email.com"
-        type="email"
-      ></app-input>
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+  </form>
 
-      <app-select
-        [errors]="countryErrors"
-        [options]="countriesForSelect()"
-        formControlName="country"
-        i18n-label="Label for the country selection field@@form.profile.country.label"
-        label="Country of Residence"
-      ></app-select>
+  <form (ngSubmit)="onSubmit()" [formGroup]="userProfileForm" class="space-y-8">
+    <!-- Información Personal -->
+    <div class="space-y-6">
+      <h3 class="text-lg font-medium text-foreground/80 mb-4">Personal Information</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <app-input
+          [errors]="fullNameErrors"
+          formControlName="fullName"
+          icon="person"
+          i18n-label="Label for the full name input field@@global.terms.fullName"
+          label="Full Name"
+          i18n-placeholder="Placeholder text for the full name input@@form.profile.fullName.placeholder"
+          placeholder="e.g. John Doe"
+        ></app-input>
 
-      <app-date-picker
-        [errors]="dobErrors"
-        formControlName="dob"
-        i18n-label="Label for the date of birth field@@form.profile.dob.label"
-        label="Date of Birth"
-      ></app-date-picker>
+        <app-input
+          [errors]="emailErrors"
+          formControlName="email"
+          icon="email"
+          i18n-label="Label for the email input field@@global.terms.email"
+          label="Email"
+          i18n-placeholder="Placeholder text for the email input@@global.placeholders.email"
+          placeholder="example@email.com"
+          type="email"
+        ></app-input>
 
-      <div class="md:col-span-2">
+        <app-select
+          [errors]="countryErrors"
+          [options]="countriesForSelect()"
+          formControlName="country"
+          i18n-label="Label for the country selection field@@form.profile.country.label"
+          label="Country of Residence"
+        ></app-select>
+
+        <app-date-picker
+          [errors]="dobErrors"
+          formControlName="dob"
+          i18n-label="Label for the date of birth field@@form.profile.dob.label"
+          label="Date of Birth"
+        ></app-date-picker>
+      </div>
+
+      <div class="mt-6">
         <app-text-area
           formControlName="bio"
           i18n-label="Label for the biography text area@@form.profile.bio.label"
@@ -48,39 +64,50 @@
           placeholder="Tell us a bit about yourself..."
         ></app-text-area>
       </div>
+    </div>
 
-      <app-radio-group
-        [options]="subscriptionTypes()"
-        formControlName="subscriptionType"
-        i18n-label="Label for the subscription type selection@@form.profile.subscriptionType.label"
-        label="Subscription Type"
-      ></app-radio-group>
+    <!-- Preferencias -->
+    <div class="space-y-6">
+      <h3 class="text-lg font-medium text-foreground/80 mb-4">Preferences</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <app-radio-group
+            [options]="subscriptionTypes()"
+            formControlName="subscriptionType"
+            i18n-label="Label for the subscription type selection@@form.profile.subscriptionType.label"
+            label="Subscription Type"
+          ></app-radio-group>
+        </div>
 
-      <div class="flex flex-col justify-center gap-4">
-        <app-checkbox
-          formControlName="wantsNewsletter"
-          i18n-label="Label for the newsletter subscription checkbox@@form.profile.newsletter.label"
-          label="I want to receive the newsletter"
-        ></app-checkbox>
+        <div class="space-y-4">
+          <app-checkbox
+            formControlName="wantsNewsletter"
+            i18n-label="Label for the newsletter subscription checkbox@@form.profile.newsletter.label"
+            label="I want to receive the newsletter"
+          ></app-checkbox>
 
-        <app-slide-toggle
-          formControlName="pushNotifications"
-          i18n-label="Label for the push notifications toggle@@form.profile.pushNotifications.label"
-          label="Enable push notifications"
-        ></app-slide-toggle>
+          <app-slide-toggle
+            formControlName="pushNotifications"
+            i18n-label="Label for the push notifications toggle@@form.profile.pushNotifications.label"
+            label="Enable push notifications"
+          ></app-slide-toggle>
+        </div>
       </div>
     </div>
 
-    <div class="mt-8">
+    <!-- Términos -->
+    <div class="pt-6 border-t border-border">
       <app-checkbox
         [errors]="termsErrors"
         formControlName="agreesToTerms"
         i18n-label="Label for the terms and conditions acceptance checkbox@@form.profile.terms.label"
         label="I have read and accept the terms and conditions of service."
+        class="text-sm"
       ></app-checkbox>
     </div>
 
-    <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+    <!-- Acciones -->
+    <div class="flex justify-end gap-4 pt-6 border-t border-border">
       <app-button
         (action)="resetForm()"
         i18n-label="Label for the clear form button@@global.actions.clear"

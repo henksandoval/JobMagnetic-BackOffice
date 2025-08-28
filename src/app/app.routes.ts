@@ -43,6 +43,15 @@ export const routes: AppRoute[] = [
             loadComponent: () =>
               import('./features/showcase/pages/form/form.component').then((m) => m.FormComponent),
           },
+          {
+            path: 'form-base',
+            data: {
+              label: $localize`:Label for the form example page in the navigation menu@@navigation.showcase.form:Form`,
+              icon: 'edit_note',
+            },
+            loadComponent: () =>
+              import('./features/showcase/pages/form-base/form-base.component').then((m) => m.FormBaseComponent),
+          },
         ],
       },
       {

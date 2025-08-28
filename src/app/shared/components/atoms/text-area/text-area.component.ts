@@ -21,14 +21,25 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
         [placeholder]="placeholder"
         cdkTextareaAutosize
         matInput
+        class="resize-none"
       ></textarea>
+
+      @if (control?.invalid && (control?.touched || control?.dirty)) {
+        <mat-error>
+          @for (error of control.errors | keyvalue; track error.key) {
+            @if (errors[error.key]) {
+              <span>{{ errors[error.key] }}</span>
+            }
+          }
+        </mat-error>
+      }
     </mat-form-field>
   `,
 })
 export class TextAreaComponent extends ControlValueAccessorBase {
   @Input() placeholder: string = '';
-  @Input() minRows: number = 3;
-  @Input() maxRows: number = 5;
+  @Input() minRows: number = 4;  // Aumentado de 3 a 4
+  @Input() maxRows: number = 8;  // Aumentado de 5 a 8
 
   constructor(@Optional() @Self() public override ngControl: NgControl) {
     super(ngControl);

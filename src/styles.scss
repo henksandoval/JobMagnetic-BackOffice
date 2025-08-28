@@ -67,6 +67,8 @@ body {
 
 // Form field refinements - Light theme
 .mat-mdc-form-field {
+  margin-bottom: 0;
+
   --mdc-outlined-text-field-container-color: transparent;
   --mdc-outlined-text-field-outline-color: hsl(var(--border));
   --mdc-outlined-text-field-hover-outline-color: hsl(var(--primary) / 0.3);
@@ -86,9 +88,47 @@ body {
   .mdc-notched-outline__trailing {
     border-width: 1.5px;
   }
-
   // Transiciones suaves
   transition: all 0.2s ease-in-out;
+  &.mat-form-field-appearance-outline {
+    .mat-mdc-text-field-wrapper {
+      padding-top: 0;
+    }
+  }
+}
+
+.mat-mdc-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mat-mdc-radio-button {
+  margin-bottom: 0;
+}
+
+// Checkbox alignment
+.mat-mdc-checkbox {
+  .mdc-form-field {
+    align-items: center;
+  }
+}
+
+// Slide toggle alignment
+.mat-mdc-slide-toggle {
+  .mdc-form-field {
+    align-items: center;
+  }
+}
+
+.mat-mdc-form-field-appearance-outline {
+  .mdc-notched-outline--notched {
+    .mdc-notched-outline__notch {
+      max-width: 0.01px !important;
+      border-left: transparent;
+      border-right: transparent;
+    }
+  }
 }
 
 // Dark theme adjustments

@@ -7,6 +7,10 @@ export abstract class ControlValueAccessorBase implements ControlValueAccessor {
   @Input() errors: Record<string, string> = {};
   isDisabled: boolean = false;
 
+  // Agregar estas propiedades
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
   protected constructor(@Optional() @Self() public ngControl: NgControl) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
@@ -17,11 +21,18 @@ export abstract class ControlValueAccessorBase implements ControlValueAccessor {
     return this.ngControl?.control as FormControl;
   }
 
-  public writeValue(obj: any): void {}
+  public writeValue(value: any): void {
+    // Este método se llama cuando el FormControl cambia
+    // No hacer nada aquí permite que el input maneje su propio valor
+  }
 
-  public registerOnChange(fn: any): void {}
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
 
-  public registerOnTouched(fn: any): void {}
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;

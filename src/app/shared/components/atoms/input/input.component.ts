@@ -14,15 +14,22 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   template: `
     <mat-form-field
       appearance="outline"
-      class="w-full transition-all duration-300 hover:scale-[1.01]"
-      [class.mat-form-field-invalid]="control?.invalid && (control?.touched || control?.dirty)">
+      class="w-full"
+      [class.mat-form-field-invalid]="control?.invalid && control?.touched">
       <mat-label>{{ label }}</mat-label>
-      <input [formControl]="control" [placeholder]="placeholder" [type]="type" matInput />
+      <input
+        [value]="control?.value || ''"
+        (input)="onInputChange($event)"
+        (blur)="onTouched()"
+        [placeholder]="placeholder"
+        [type]="type"
+        [disabled]="isDisabled"
+        matInput />
       @if (icon) {
         <mat-icon matSuffix>{{ icon }}</mat-icon>
       }
 
-      @if (control?.invalid && (control?.touched || control?.dirty)) {
+      @if (control?.invalid && control?.touched) {
         <mat-error>
           @for (error of control.errors | keyvalue; track error.key) {
             @if (errors[error.key]) {
@@ -41,5 +48,10 @@ export class InputComponent extends ControlValueAccessorBase {
 
   constructor(@Optional() @Self() public override ngControl: NgControl) {
     super(ngControl);
+  }
+
+  onInputChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.onChange(value);
   }
 }
