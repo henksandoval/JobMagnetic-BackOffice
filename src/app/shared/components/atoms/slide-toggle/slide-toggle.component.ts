@@ -1,4 +1,4 @@
-import { Component, Input, Optional, Self } from '@angular/core';
+import { Component, Input, Optional, Self, ViewEncapsulation } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -10,6 +10,8 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   selector: 'app-slide-toggle',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatSlideToggleModule, MatError],
+  styleUrls: ['./slide-toggle.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div>
       <mat-slide-toggle [color]="color" [formControl]="control">

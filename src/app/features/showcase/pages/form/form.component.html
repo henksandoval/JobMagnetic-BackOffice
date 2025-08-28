@@ -85,15 +85,14 @@
         (action)="resetForm()"
         i18n-label="Label for the clear form button@@global.actions.clear"
         label="Clear"
-        variant="stroked"
+        intent="outline"
       ></app-button>
       <app-button
         [disabled]="isFormInvalid()"
-        color="primary"
         i18n-label="Label for the save profile button@@global.actions.saveProfile"
         label="Save Profile"
         type="submit"
-        variant="flat"
+        intent="primary"
       ></app-button>
     </div>
   </form>

@@ -1,4 +1,4 @@
-import { Component, Input, Optional, Self } from '@angular/core';
+import { Component, Input, Optional, Self, ViewEncapsulation } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,8 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   selector: 'app-input',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
+  styleUrls: ['./input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>{{ label }}</mat-label>
