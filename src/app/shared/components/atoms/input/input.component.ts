@@ -12,7 +12,10 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <mat-form-field appearance="outline" class="w-full">
+    <mat-form-field
+      appearance="outline"
+      class="w-full transition-all duration-300 hover:scale-[1.01]"
+      [class.mat-form-field-invalid]="control?.invalid && (control?.touched || control?.dirty)">
       <mat-label>{{ label }}</mat-label>
       <input [formControl]="control" [placeholder]="placeholder" [type]="type" matInput />
       @if (icon) {
