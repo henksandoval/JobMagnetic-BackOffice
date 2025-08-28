@@ -28,9 +28,9 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   `,
 })
 export class TextAreaComponent extends ControlValueAccessorBase {
-  @Input() placeholder: string = '';
-  @Input() minRows: number = 3;
-  @Input() maxRows: number = 5;
+  @Input() placeholder = '';
+  @Input() minRows = 3;
+  @Input() maxRows = 5;
 
   constructor(@Optional() @Self() public override ngControl: NgControl) {
     super(ngControl);

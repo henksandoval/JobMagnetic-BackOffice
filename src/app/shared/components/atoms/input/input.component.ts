@@ -33,8 +33,8 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   `,
 })
 export class InputComponent extends ControlValueAccessorBase {
-  @Input() placeholder: string = '';
-  @Input() type: string = 'text';
+  @Input() placeholder = '';
+  @Input() type = 'text';
   @Input() icon: string | null = null;
 
   constructor(@Optional() @Self() public override ngControl: NgControl) {

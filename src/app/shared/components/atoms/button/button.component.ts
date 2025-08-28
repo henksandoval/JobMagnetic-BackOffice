@@ -12,11 +12,11 @@ type ButtonSize = 'sm' | 'md' | 'lg';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() label: string = 'Button';
+  @Input() label = 'Button';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() intent: ButtonIntent = 'primary';
   @Input() size: ButtonSize = 'md';
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   @Output() action = new EventEmitter<void>();
 
   onClick(): void {
