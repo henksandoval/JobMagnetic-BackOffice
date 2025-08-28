@@ -1,4 +1,4 @@
-import { Component, Input, Optional, Self, ViewEncapsulation } from '@angular/core';
+import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
@@ -17,7 +17,7 @@ export interface RadioOption {
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="flex flex-col">
-      <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300">{{ label }}</label>
+      <span class="mb-3 font-medium text-sm" style="color: hsl(var(--foreground))">{{ label }}</span>
       <mat-radio-group [formControl]="control" class="flex flex-col sm:flex-row gap-4">
         @for (option of options; track option.value) {
           <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
@@ -28,8 +28,5 @@ export interface RadioOption {
 })
 export class RadioGroupComponent extends ControlValueAccessorBase {
   @Input() options: RadioOption[] = [];
-
-  constructor(@Optional() @Self() public override ngControl: NgControl) {
-    super(ngControl);
-  }
+  public override ngControl = inject(NgControl, { optional: true, self: true });
 }

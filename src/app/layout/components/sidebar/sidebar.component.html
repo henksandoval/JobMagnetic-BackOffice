@@ -1,12 +1,26 @@
 <aside
   [class.w-20]="uiStateService.sidenavIsCollapsed()"
   [class.w-64]="!uiStateService.sidenavIsCollapsed()"
-  class="relative z-30 flex h-full flex-col bg-card shadow-lg transition-all duration-300">
-  <div class="flex h-16 flex-shrink-0 items-center justify-between border-b px-4 border">
+  class="relative z-30 flex h-full flex-col shadow-lg transition-all duration-300"
+  style="background-color: hsl(var(--sidebar-background))"
+>
+  <div
+    class="flex h-16 flex-shrink-0 items-center justify-between border-b px-4"
+    style="border-color: hsl(var(--sidebar-border))"
+  >
     @if (!uiStateService.sidenavIsCollapsed()) {
-      <span class="text-xl font-bold text-foreground" i18n="Admin panel title in sidebar@@layout.sidebar.title">Admin Panel</span>
+      <span
+        class="text-xl font-bold"
+        style="color: hsl(var(--sidebar-foreground))"
+        i18n="Admin panel title in sidebar@@layout.sidebar.title"
+        >Admin Panel</span
+      >
     }
-    <button (click)="uiStateService.toggleSidenavVisibility()" mat-icon-button>
+    <button
+      (click)="uiStateService.toggleSidenavVisibility()"
+      mat-icon-button
+      style="color: hsl(var(--sidebar-foreground))"
+    >
       <mat-icon>visibility_off</mat-icon>
     </button>
   </div>
