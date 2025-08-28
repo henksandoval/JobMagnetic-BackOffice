@@ -1,0 +1,41 @@
+// Radix/Shadcn styling for mat-form-field in input component
+.mat-mdc-form-field {
+  @apply flex rounded-md border border-input bg-background text-sm ring-offset-background;
+
+  // Remove Material's default outline
+  .mdc-notched-outline {
+    @apply border-none;
+  }
+
+  // Remove Material's outline notch elements
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    @apply border-none;
+  }
+
+  // Style the input field
+  .mat-mdc-input-element {
+    @apply w-full p-2 placeholder:text-muted-foreground focus-visible:outline-none;
+  }
+
+  // Focus state
+  &.mat-focused {
+    @apply ring-2 ring-ring ring-offset-2;
+  }
+
+  // Disabled state
+  &.mat-form-field-disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  // Label styling to match Radix/Shadcn
+  .mat-mdc-floating-label {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+
+  // Error styling
+  .mat-mdc-form-field-error {
+    @apply text-destructive text-xs;
+  }
+}

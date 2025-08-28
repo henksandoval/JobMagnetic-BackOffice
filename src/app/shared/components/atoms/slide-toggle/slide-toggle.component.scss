@@ -1,0 +1,30 @@
+// Radix/Shadcn styling for mat-slide-toggle
+.mat-mdc-slide-toggle {
+  // Track styling for checked state
+  .mdc-switch--selected .mdc-switch__track {
+    background-color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+  }
+
+  // Thumb styling for checked state
+  .mdc-switch--selected .mdc-switch__handle .mdc-switch__icon {
+    color: hsl(var(--primary-foreground));
+  }
+
+  .mdc-switch--selected .mdc-switch__handle {
+    background-color: hsl(var(--primary-foreground));
+  }
+
+  // Focus ring styling
+  .mdc-switch__ripple {
+    &:before, &:after {
+      background-color: hsl(var(--primary));
+    }
+  }
+
+  // Label styling
+  .mdc-form-field > label {
+    @apply text-sm font-medium leading-none;
+    color: hsl(var(--foreground));
+  }
+}

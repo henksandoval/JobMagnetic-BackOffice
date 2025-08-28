@@ -1,0 +1,30 @@
+// Radix/Shadcn styling for mat-radio-group
+.mat-mdc-radio-button {
+  // Primary color for checked state
+  .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary));
+  }
+
+  .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: hsl(var(--primary));
+  }
+
+  // Focus ring styling
+  .mdc-radio__ripple {
+    &:before, &:after {
+      background-color: hsl(var(--primary));
+    }
+  }
+
+  // Label styling
+  .mdc-form-field > label {
+    @apply text-sm font-medium leading-none;
+    color: hsl(var(--foreground));
+  }
+
+  // Radio button spacing
+  .mdc-radio {
+    @apply mr-2;
+  }
+}

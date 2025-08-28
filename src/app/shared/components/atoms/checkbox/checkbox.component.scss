@@ -1,0 +1,26 @@
+// Radix/Shadcn styling for mat-checkbox
+.mat-mdc-checkbox {
+  // Primary color for checked state
+  .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary));
+  }
+
+  // Checkmark color
+  .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
+    color: hsl(var(--primary-foreground));
+  }
+
+  // Focus ring styling
+  .mdc-checkbox__ripple {
+    &:before, &:after {
+      background-color: hsl(var(--primary));
+    }
+  }
+
+  // Label styling
+  .mdc-form-field > label {
+    @apply text-sm font-medium leading-none;
+    color: hsl(var(--foreground));
+  }
+}
