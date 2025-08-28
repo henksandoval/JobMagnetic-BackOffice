@@ -12,7 +12,7 @@ export class UiStateService {
   public readonly sidenavIsHidden = signal<boolean>(
     this.getInitialState(StorageKey.SidenavHidden, 'false') === 'true'
   );
-  public readonly currentTheme = signal<Theme>(this.getInitialState(StorageKey.Theme, Theme.Light) as Theme);
+  public readonly currentTheme = signal<Theme>(this.getInitialState(StorageKey.Theme, Theme.Dark) as Theme);
 
   constructor() {
     effect(() => {

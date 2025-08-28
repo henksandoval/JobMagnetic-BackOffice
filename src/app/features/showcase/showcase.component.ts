@@ -7,15 +7,17 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: `
     <div class="w-full">
-      <header class="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+      <header class="mb-6 pb-4 border-b" style="border-color: hsl(var(--border))">
         <h1
-          class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100"
+          class="text-2xl md:text-3xl font-bold"
+          style="color: hsl(var(--primary))"
           i18n="Title for the index showcase@@showcase.index.title"
         >
           Component Showcase
         </h1>
         <p
-          class="mt-2 text-base text-gray-600 dark:text-gray-400"
+          class="mt-2 text-base"
+          style="color: hsl(var(--foreground))"
           i18n="Description for the index showcase@@showcase.index.description"
         >
           This is a nested layout. The specific content of the sub-route (e.g. the form) is rendered below.

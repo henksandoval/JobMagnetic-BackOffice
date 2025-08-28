@@ -1,4 +1,4 @@
-import { Component, Optional, Self } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +18,7 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  styleUrls: ['./date-picker.component.scss'],
   template: `
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>{{ label }}</mat-label>
@@ -38,7 +39,5 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   `,
 })
 export class DatePickerComponent extends ControlValueAccessorBase {
-  constructor(@Optional() @Self() public override ngControl: NgControl) {
-    super(ngControl);
-  }
+  public override ngControl = inject(NgControl, { optional: true, self: true });
 }
