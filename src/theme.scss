@@ -8,7 +8,7 @@ $primary-palette: (
   200: #a7b1de,
   300: #8492d1,
   400: #697ac7,
-  500: #4758b8, // Tu color primario exacto
+  500: #4758b8,
   600: #4150b0,
   700: #3847a7,
   800: #303d9f,
@@ -42,7 +42,7 @@ $accent-palette: (
   200: #80e6cd,
   300: #4ddcb9,
   400: #26d5aa,
-  500: #00d69d, // Tu color accent exacto
+  500: #00d69d,
   600: #00c795,
   700: #00b18b,
   800: #009c81,
@@ -51,40 +51,6 @@ $accent-palette: (
   A200: #a3ffd9,
   A400: #70ffc5,
   A700: #57ffbb,
-  contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: rgba(black, 0.87),
-    400: rgba(black, 0.87),
-    500: rgba(black, 0.87),
-    600: rgba(black, 0.87),
-    700: white,
-    800: white,
-    900: white,
-    A100: rgba(black, 0.87),
-    A200: rgba(black, 0.87),
-    A400: rgba(black, 0.87),
-    A700: rgba(black, 0.87),
-  )
-);
-
-// Definir la paleta secundaria basada en tu Desaturated grayish blue #D0D8E6
-$secondary-palette: (
-  50: #f8f9fb,
-  100: #eef1f5,
-  200: #e3e7ef,
-  300: #d0d8e6, // Tu color secundario exacto (lo uso como 300 para tener variantes)
-  400: #b8c4db,
-  500: #9fafd0,
-  600: #869bc5,
-  700: #6d86ba,
-  800: #5472af,
-  900: #3b5ea4,
-  A100: #ffffff,
-  A200: #dde6ff,
-  A400: #aac3ff,
-  A700: #91b1ff,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
@@ -131,9 +97,9 @@ $light-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-// Crear el tema dark ajustando los tonos para el modo oscuro
-$dark-primary: mat.m2-define-palette($primary-palette, 400, 300, 600); // Más claro en dark mode
-$dark-accent: mat.m2-define-palette($accent-palette, 400, 300, 600); // Más claro en dark mode
+// Crear el tema dark
+$dark-primary: mat.m2-define-palette($primary-palette, 400, 300, 600);
+$dark-accent: mat.m2-define-palette($accent-palette, 400, 300, 600);
 $dark-warn: mat.m2-define-palette(mat.$m2-red-palette, 400);
 
 $dark-theme: mat.m2-define-dark-theme((
@@ -155,53 +121,6 @@ $dark-theme: mat.m2-define-dark-theme((
 // Aplicar el tema dark cuando se use la clase .dark
 .dark {
   @include mat.all-component-colors($dark-theme);
-}
-
-// Personalización adicional para que los componentes de Material respeten tus colores exactos
-:root {
-  // Sobrescribir algunas variables CSS de Material para usar tus colores exactos
-  --mdc-theme-primary: #4758b8;
-  --mdc-theme-secondary: #00d69d;
-
-  // Para los inputs y form fields
-  --mdc-outlined-text-field-outline-color: hsl(0 0% 89.8%);
-  --mdc-outlined-text-field-hover-outline-color: #00d69d;
-  --mdc-outlined-text-field-focus-outline-color: #4758b8;
-  --mdc-outlined-text-field-label-text-color: hsl(0 0% 40%);
-  --mdc-outlined-text-field-input-text-color: hsl(0 0% 20%);
-
-  // Para los botones
-  --mdc-filled-button-container-color: #4758b8;
-  --mdc-outlined-button-outline-color: #4758b8;
-  --mdc-text-button-label-text-color: #4758b8;
-}
-
-.dark {
-  --mdc-theme-primary: #6e7dce; // Versión más clara del primary para dark mode
-  --mdc-theme-secondary: #00e6ab; // Versión más clara del accent para dark mode
-
-  // Para los inputs y form fields en dark mode
-  --mdc-outlined-text-field-outline-color: hsl(0 0% 14.9%);
-  --mdc-outlined-text-field-hover-outline-color: #00e6ab;
-  --mdc-outlined-text-field-focus-outline-color: #6e7dce;
-  --mdc-outlined-text-field-label-text-color: hsl(0 0% 63.9%);
-  --mdc-outlined-text-field-input-text-color: hsl(0 0% 95%);
-
-  // Para los botones en dark mode
-  --mdc-filled-button-container-color: #6e7dce;
-  --mdc-outlined-button-outline-color: #6e7dce;
-  --mdc-text-button-label-text-color: #6e7dce;
-}
-
-// Estilos adicionales para asegurar que los componentes respeten el tema
-.mat-mdc-form-field {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-}
-
-.mat-mdc-button,
-.mat-mdc-raised-button,
-.mat-mdc-outlined-button {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
 // Asegurar que los títulos usen Inter

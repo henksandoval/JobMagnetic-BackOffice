@@ -51,60 +51,6 @@
   }
 }
 
-@layer components {
-  // Input fields con efecto hover similar
-  .mat-mdc-form-field {
-    @apply transition-all duration-300;
-
-    &:hover:not(.mat-form-field-disabled) {
-      .mdc-notched-outline__leading,
-      .mdc-notched-outline__notch,
-      .mdc-notched-outline__trailing {
-        @apply border-primary/30;
-      }
-    }
-
-    &.mat-focused {
-      .mdc-notched-outline__leading,
-      .mdc-notched-outline__notch,
-      .mdc-notched-outline__trailing {
-        @apply border-primary;
-      }
-    }
-  }
-
-  // Cards con efecto hover
-  .mat-mdc-card {
-    @apply transition-all duration-300 hover:shadow-lg;
-
-    &:hover {
-      @apply border-primary/30;
-      transform: scale(1.01);
-    }
-  }
-
-  // Botones con transiciones suaves
-  .mat-mdc-button,
-  .mat-mdc-raised-button,
-  .mat-mdc-outlined-button {
-    @apply transition-all duration-300;
-
-    &:hover:not([disabled]) {
-      @apply shadow-md;
-      transform: translateY(-1px);
-    }
-  }
-
-  // Checkboxes y Radio buttons con transiciones
-  .mat-mdc-checkbox,
-  .mat-mdc-radio-button {
-    .mdc-checkbox,
-    .mdc-radio {
-      @apply transition-all duration-200;
-    }
-  }
-}
-
 html,
 body {
   height: 100%;
@@ -115,57 +61,212 @@ body {
 
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+// Form field refinements - Light theme
 .mat-mdc-form-field {
   --mdc-outlined-text-field-container-color: transparent;
   --mdc-outlined-text-field-outline-color: hsl(var(--border));
-  --mdc-outlined-text-field-hover-outline-color: hsl(var(--primary) / 0.5);
+  --mdc-outlined-text-field-hover-outline-color: hsl(var(--primary) / 0.3);
   --mdc-outlined-text-field-focus-outline-color: hsl(var(--primary));
+  --mdc-outlined-text-field-disabled-outline-color: hsl(var(--border) / 0.5);
   --mdc-outlined-text-field-label-text-color: hsl(var(--muted-foreground));
   --mdc-outlined-text-field-input-text-color: hsl(var(--foreground));
   --mdc-outlined-text-field-focus-label-text-color: hsl(var(--primary));
+  --mdc-outlined-text-field-error-label-text-color: hsl(var(--destructive));
+  --mdc-outlined-text-field-error-outline-color: hsl(var(--destructive));
+  --mdc-outlined-text-field-error-hover-outline-color: hsl(var(--destructive) / 0.8);
+  --mdc-outlined-text-field-error-focus-outline-color: hsl(var(--destructive));
+
+  // Mejorar bordes para mejor visibilidad
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-width: 1.5px;
+  }
+
+  // Transiciones suaves
+  transition: all 0.2s ease-in-out;
 }
 
+// Dark theme adjustments
 .dark {
+  // Form fields en dark mode
   .mat-mdc-form-field {
-    --mdc-outlined-text-field-outline-color: hsl(var(--border));
-    --mdc-outlined-text-field-hover-outline-color: hsl(var(--accent) / 0.7);
+    --mdc-outlined-text-field-outline-color: hsl(var(--border) / 0.7);
+    --mdc-outlined-text-field-hover-outline-color: hsl(var(--accent) / 0.5);
     --mdc-outlined-text-field-focus-outline-color: hsl(var(--accent));
     --mdc-outlined-text-field-label-text-color: hsl(var(--muted-foreground));
     --mdc-outlined-text-field-input-text-color: hsl(var(--foreground));
     --mdc-outlined-text-field-focus-label-text-color: hsl(var(--accent));
+
+    // Mejorar contraste de backgrounds
+    .mdc-text-field--filled {
+      background-color: hsl(var(--card) / 0.3);
+    }
   }
 
-  // Ajustar el fondo del dropdown para mejor contraste
+  // Select dropdown con mejor contraste
   .mat-mdc-select-panel {
     background-color: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
 
   .mat-mdc-option {
+    color: hsl(var(--card-foreground));
+
     &:hover:not(.mat-mdc-option-disabled) {
-      background-color: hsl(var(--accent) / 0.1);
+      background-color: hsl(var(--accent) / 0.15);
     }
 
     &.mat-mdc-option-active {
+      background-color: hsl(var(--accent) / 0.25);
+      color: hsl(var(--accent-foreground));
+    }
+
+    &.mdc-list-item--selected {
       background-color: hsl(var(--primary) / 0.2);
     }
   }
 }
 
-.mat-mdc-form-field {
-  .mat-mdc-form-field-required-marker {
-    color: hsl(var(--destructive));
+// Fix para el asterisco rojo en campos requeridos
+.mat-mdc-form-field-required-marker {
+  color: hsl(var(--destructive)) !important;
+}
+
+// Breadcrumb styling
+.breadcrumb,
+nav[aria-label="breadcrumb"] {
+  @apply flex items-center space-x-2 text-sm;
+
+  a, .breadcrumb-item {
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  &.mat-form-field-invalid {
-    .mat-mdc-form-field-required-marker {
-      color: hsl(var(--destructive));
+  .separator,
+  .breadcrumb-separator {
+    @apply text-muted-foreground/50 mx-2;
+  }
+
+  .active,
+  .breadcrumb-item.active {
+    @apply text-foreground font-medium;
+  }
+}
+
+// Botones mejorados
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-flat-button {
+  @apply transition-all duration-200;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+
+  &:hover:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.25);
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(0);
+  }
+}
+
+// Cards mejoradas
+.mat-mdc-card {
+  @apply transition-all duration-300;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+
+  &:hover {
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.1);
+  }
+}
+
+// Checkbox y Radio con transiciones
+.mat-mdc-checkbox,
+.mat-mdc-radio-button {
+  .mdc-checkbox__background,
+  .mdc-radio__background {
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    .mdc-checkbox__background,
+    .mdc-radio__background {
+      transform: scale(1.1);
     }
   }
 }
 
+// Select mejorado
+.mat-mdc-select {
+  .mat-mdc-select-trigger {
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover:not(.mat-mdc-select-disabled) {
+    .mat-mdc-select-trigger {
+      background-color: hsl(var(--muted) / 0.1);
+    }
+  }
+}
+
+// Tooltips
+.mat-mdc-tooltip {
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  font-size: 12px;
+}
+
+// Snackbar
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: hsl(var(--card));
+  --mdc-snackbar-supporting-text-color: hsl(var(--card-foreground));
+
+  .mat-mdc-button {
+    --mdc-text-button-label-text-color: hsl(var(--primary));
+  }
+}
+
+// Custom scrollbar
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.5) transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+
+    &:hover {
+      background-color: hsl(var(--muted-foreground) / 0.7);
+    }
+  }
+}
+
+// Utilidades para efectos glow
 @layer utilities {
   .shadow-primary-glow {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
@@ -178,27 +279,18 @@ body {
   .hover\:shadow-primary-glow:hover {
     box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
   }
+
+  .hover\:shadow-accent-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--accent) / 0.4);
+  }
 }
 
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted));
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: hsl(var(--muted));
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--muted-foreground));
-    border-radius: 10px;
-
-    &:hover {
-      background-color: hsl(var(--foreground));
-    }
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
 }
