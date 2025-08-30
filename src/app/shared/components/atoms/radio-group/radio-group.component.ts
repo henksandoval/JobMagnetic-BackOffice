@@ -1,4 +1,4 @@
-import { Component, Input, Optional, Self } from '@angular/core';
+import { Component, Input, Optional, Self, ViewEncapsulation } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
@@ -13,6 +13,8 @@ export interface RadioOption {
   selector: 'app-radio-group',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatRadioModule],
+  styleUrls: ['./radio-group.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div class="flex flex-col">
       <label class="mb-3 font-medium text-sm text-gray-700 dark:text-gray-300">{{ label }}</label>

@@ -1,4 +1,4 @@
-import { Component, Optional, Self } from '@angular/core';
+import { Component, Optional, Self, ViewEncapsulation } from '@angular/core';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -9,6 +9,8 @@ import { ControlValueAccessorBase } from '@shared/directives/control-value-acces
   selector: 'app-checkbox',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatCheckboxModule, MatFormFieldModule],
+  styleUrls: ['./checkbox.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div>
       <mat-checkbox [formControl]="control" color="primary">
